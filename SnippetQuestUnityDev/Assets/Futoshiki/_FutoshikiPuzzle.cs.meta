@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b13a3048269c05044bc8d620e15ed101
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - answerButtonPrefab: {fileID: 2421570898130727649, guid: 8711bf60a10394b459be843ea2de0c2c, type: 3}
+  - clueButtonPrefab: {fileID: 7709496211636059223, guid: b17fbb53afd3e714ea7a446883118ec3, type: 3}
+  - conditionsMetText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
