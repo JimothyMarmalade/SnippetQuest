@@ -37,14 +37,7 @@ public class GameController : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown("escape"))
-        {
-            if (!GameObject.FindGameObjectWithTag("Player").GetComponent<AdvancedThirdPersonMovement>().PlayerIsInSerenePlace)
-            {
-                Debug.Log("Terminating Application");
-                Application.Quit();
-            }
-        }
+        
     }
 
 }
