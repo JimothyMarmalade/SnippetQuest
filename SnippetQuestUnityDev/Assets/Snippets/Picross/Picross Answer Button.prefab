@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -145,7 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1284ebbe30741248962829f3e910b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XText: {fileID: 1379839530764236853}
+  markerText: {fileID: 6875247548460163788}
+  currentValue: 0
 --- !u!1 &1379839530764236853
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +160,7 @@ GameObject:
   - component: {fileID: 203223695828439392}
   - component: {fileID: 6875247548460163788}
   m_Layer: 0
-  m_Name: X
+  m_Name: Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

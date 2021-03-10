@@ -74,7 +74,7 @@ public class _PicrossPuzzle : MonoBehaviour
                                                         (gridWidth / 2) - ((row + 1) * gapWidth) - (row * answerButtonWidth) - (answerButtonWidth / 2));
 
                 //Calls the button's script to set its place in the board and a reference to this as the puzzle it is being used to solve
-                bLogic.SetPuzzleControllerReference(this);
+                //bLogic.SetPuzzleControllerReference(this);
 
 
                 answerButtonsArray[row, col] = b;
@@ -117,7 +117,7 @@ public class _PicrossPuzzle : MonoBehaviour
 
                 //Calls the button's script to set its place in the board and a reference to this as the puzzle it is being used to solve
 
-                bLogic.SetPuzzleControllerReference(this);
+                //bLogic.SetPuzzleControllerReference(this);
 
 
                 clueButtonsArrayHorizontal[row, col] = b;
@@ -145,7 +145,7 @@ public class _PicrossPuzzle : MonoBehaviour
 
                 //Calls the button's script to set its place in the board and a reference to this as the puzzle it is being used to solve
 
-                bLogic.SetPuzzleControllerReference(this);
+                //bLogic.SetPuzzleControllerReference(this);
 
 
                 clueButtonsArrayVertical[row, col] = b;
@@ -171,7 +171,7 @@ public class _PicrossPuzzle : MonoBehaviour
 
 
         //Starting out, we know the maximum amount of clues that can exist for any given puzzle based off of the gridSize,
-        //And all the buttons have already been built. So we need to determine what
+        //And all the buttons have already been built. So we need to determine what goes in each button.
 
         //Start with vertical clues
         for (int col = 0; col < gridSize; col++)
@@ -342,16 +342,6 @@ public class _PicrossPuzzle : MonoBehaviour
             {
                 _PicrossAnswerButton bLogic = answerButtonsArray[row, col].GetComponent<_PicrossAnswerButton>();
 
-                int bState;
-                if (bLogic.GetToggle())
-                    bState = 1;
-                else
-                    bState = 0;
-
-                if (puzzleSolution[row, col] != bState)
-                {
-                    puzzleCleared = false;
-                }
 
             }
         }

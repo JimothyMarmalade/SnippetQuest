@@ -7,7 +7,7 @@ using TMPro;
 public class _PicrossClueButton : MonoBehaviour
 {
     private int clue;
-    private _PicrossPuzzle controller;
+    private PicrossSnippetBoard controller;
     public TMP_Text clueText;
 
     public void SetButtonText(int s)
@@ -19,7 +19,7 @@ public class _PicrossClueButton : MonoBehaviour
 
 
 
-    public void SetPuzzleControllerReference(_PicrossPuzzle c)
+    public void SetPuzzleControllerReference(PicrossSnippetBoard c)
     {
         controller = c;
     }

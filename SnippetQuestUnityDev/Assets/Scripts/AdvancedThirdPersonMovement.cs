@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/*
+ * Created by Logan Edmund, 3/2/21
+ * Last Modified by Logan Edmund, 3/7/21
+ * 
+ * Holds all data and methods relevant to the Player character;
+ * 
+ * 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
@@ -6,19 +15,25 @@ using Cinemachine;
 public class AdvancedThirdPersonMovement : MonoBehaviour
 {
     //References to Components/other objects
+    [Header("Character Controller Reference")]
     public CharacterController Controller;
 
-    public UIController UIControllerReference;
+    [Header("Game Controller References")]
+    public NewUIController NewUIControllerReference;
 
+    [Header("Camera References")]
     public CinemachineFreeLook CinemachineBrain;
     private string CMInputAxisNameX;
     private string CMInputAxisNameY;
-
     public Transform Cam;
 
+    [Header("Movement/Interaction References")]
     public Transform GroundCheck;
     public float GroundDistance = 0.2f;
     public LayerMask groundMask;
+
+    public LayerMask interactableMask;
+    public Interactable focusedInteractable;
     //--------------------
     //Variables to be changed by the Developer
     public float Speed = 6;
@@ -30,57 +45,66 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
     Vector3 PlayerVelocity;
     float SmoothTurnVelocity;
 
-    bool PlayerIsGrounded;
-    bool PlayerHasFreeMovement;
-    bool PlayerIsInMenu;
-    public bool PlayerIsInSerenePlace;
+    bool isGrounded;
+    bool hasFreeMovement;
+    bool isInMenu;
+    public bool isInSerenePlace;
+    bool canInteract;
 
 
     private void Awake()
     {
-        PlayerHasFreeMovement = true;
-        PlayerIsInMenu = false;
-        PlayerIsInSerenePlace = false;
+        hasFreeMovement = true;
+        isInMenu = false;
+        isInSerenePlace = false;
 
 
         CMInputAxisNameX = CinemachineBrain.m_XAxis.m_InputAxisName;
         CMInputAxisNameY = CinemachineBrain.m_YAxis.m_InputAxisName;
+
+        NewUIControllerReference = FindObjectOfType<NewUIController>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Update");
         //Camera should be disabled while Player is in a menu
-        CinemachineBrain.m_XAxis.m_InputAxisName = !PlayerIsInMenu ? CMInputAxisNameX : "";
-        CinemachineBrain.m_YAxis.m_InputAxisName = !PlayerIsInMenu ? CMInputAxisNameY : "";
+        CinemachineBrain.m_XAxis.m_InputAxisName = !isInMenu ? CMInputAxisNameX : "";
+        CinemachineBrain.m_YAxis.m_InputAxisName = !isInMenu ? CMInputAxisNameY : "";
 
-        PlayerIsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, groundMask);
 
         //Softlock gravity applied to player while grounded
-        if (PlayerIsGrounded && PlayerVelocity.y < 0)
+        if (isGrounded && PlayerVelocity.y < 0)
         {
             PlayerVelocity.y = -2f;
         }
 
         //-----Checking for Deliberate Player Actions-------------
         //Player WASD Movement Availability Check
-        if (PlayerHasFreeMovement)
+        if (hasFreeMovement)
+        {
             CheckPlayerMovement();
+        }
 
-        if (!PlayerIsInMenu)
-            CheckEnterSnippetMenu();
-        else
-            CheckExitSnippetMenu();
+        CheckForInteractables();
+        //"Interact Key Pressed" Heiarchy -- begin by checking if an interactable is being focused on
+        if (Input.GetKeyDown("e"))
+        {
+            if (focusedInteractable != null)
+            {
+                InteractWith(focusedInteractable);
+            }
+        }
+        
 
         //-----End Deliberate Action Check------------------------
 
         //Gravity
         PlayerVelocity.y += ForceGravity * Time.deltaTime;
         Controller.Move(PlayerVelocity * Time.deltaTime);
-
-        //Debug stuff -- shouldn't be active in final submission
-        DEBUGPlayerMenuStatusToggle();
 
 
     }
@@ -102,43 +126,52 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
             Controller.Move(moveDirection.normalized * Speed * Time.deltaTime);
         }
         //Jump
-        if (Input.GetButtonDown("Jump") && PlayerIsGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             PlayerVelocity.y = Mathf.Sqrt(JumpHeight * -2f * ForceGravity);
         }
     }
 
-    private void CheckEnterSnippetMenu()
+    private void EnterSnippetMenu()
     {
-        if (Input.GetKeyDown("e"))
-            if (PlayerIsInSerenePlace)
-            {
-                //Lock player movement/Camera, display menu
-                TogglePlayerMovement(false);
-                TogglePlayerInMenu(true);
-                UIControllerReference.ShowPanel(1);
-            }
+
     }
 
-    private void CheckExitSnippetMenu()
+    private void CheckForInteractables()
     {
-        if (Input.GetKeyDown("escape"))
+        //Debug.Log("Running CheckForInteractables");
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 3))
         {
-            //unlock player movement/Camera, display menu
-            TogglePlayerMovement(true);
-            TogglePlayerInMenu(false);
-            UIControllerReference.ShowPanel(0);
+            //Debug.Log("Raycast hit gameobject: " + hit.collider.name);
+            Interactable interactable = hit.collider.GetComponentInParent<Interactable>();
+            if (interactable != null)
+            {
+                SetFocus(interactable);
+            }
+        }
+        else
+        {
+            //Debug.Log("No Interactables detected");
+            if (focusedInteractable != null)
+                RemoveFocus();
         }
     }
 
-    private void TogglePlayerMovement(bool status)
+    //----------Checking with Interactables
+    private void SetFocus(Interactable i)
     {
-        PlayerHasFreeMovement = status;
+        focusedInteractable = i;
     }
-
-    private void TogglePlayerInMenu(bool status)
+    private void RemoveFocus()
     {
-        PlayerIsInMenu = status;
+        focusedInteractable = null;
+    }
+    private void InteractWith(Interactable i)
+    {
+        i.Interact();
     }
     
 
@@ -153,13 +186,7 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
         if (other.tag == "SerenePlace")
         {
             Debug.Log("Entered Triggerzone for a Serene Place");
-            PlayerIsInSerenePlace = true;
-        }
-
-        if (other.tag == "MessageZone")
-        {
-            Debug.Log("Entered Triggerzone for a MessagePopup");
-            UIControllerReference.UpdateHUDMessage(other.GetComponent<MessagePopup>().Message);
+            isInSerenePlace = true;
         }
 
     }
@@ -169,37 +196,11 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
         if (other.tag == "SerenePlace")
         {
             Debug.Log("Exited Triggerzone for a Serene Place");
-            PlayerIsInSerenePlace = false;
-        }
-        else if (other.tag == "MessageZone")
-        {
-            Debug.Log("Exited Triggerzone for a MessagePopup");
-            UIControllerReference.UpdateHUDMessage("");
+            isInSerenePlace = false;
         }
     }
 
     //Debug Stuff
-    private void DEBUGPlayerMenuStatusToggle()
-    {
-        if (Input.GetKeyDown("p"))
-        {
-            if (PlayerIsInMenu)
-                PlayerIsInMenu = false;
-            else if (!PlayerIsInMenu)
-                PlayerIsInMenu = true;
-            else
-                PlayerIsInMenu = true;
-
-            if (PlayerHasFreeMovement)
-                PlayerHasFreeMovement = false;
-            else if (!PlayerHasFreeMovement)
-                PlayerHasFreeMovement = true;
-            else
-                PlayerHasFreeMovement = true;
-        }
-    }
-
-
 
 
 
