@@ -98,7 +98,7 @@ public class _PicrossAnswerButton : MonoBehaviour
                 currentState = ButtonState.Crossed;
                 break;
         }
-        controller.CheckWinCondition();
+        //controller.CheckWinCondition();
 
     }
 
@@ -135,7 +135,7 @@ public class _PicrossAnswerButton : MonoBehaviour
                 currentState = ButtonState.Crossed;
                 break;
         }
-        controller.CheckWinCondition();
+        //controller.CheckWinCondition();
 
     }
 
