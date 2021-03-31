@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/4/21
- * Last Modified by Logan Edmund, 3/8/21
+ * Last Modified by Logan Edmund, 3/14/21
  * 
  * Function of NewUIController.cs is to handle all UI elements in Snippetquest, most notably the HUD during on-foot exploration and the
  * Snippet menu during Snippet interaction and selection. 
@@ -38,7 +38,14 @@ public class NewUIController : MonoBehaviour
     public Animator picrossGameplayAnimator;
     public PicrossSnippetBoard picrossBoard;
     public PicrossSnippet testPicrossData;
-    public GameObject futoshikiGameplayPanel;
+
+    public Animator futoshikiGameplayAnimator;
+    public FutoshikiSnippetBoard futoshikiBoard;
+    public FutoshikiSnippet testFutoshikiData;
+
+    public Animator crosswordGameplayAnimator;
+    public CrosswordSnippetBoard crosswordBoard;
+    public CrosswordSnippet testCrosswordData;
 
     [Header("Dialog Panels")]
     public GameObject dialoguePanel;
@@ -67,9 +74,6 @@ public class NewUIController : MonoBehaviour
 
         snippetSelectionPanels.Add(picrossSelectionPanel);      //ID 0
         snippetSelectionPanels.Add(futoshikiSelectionPanel);    //ID 1
-
-        //snippetGameplayPanels.Add(picrossGameplayPanel);        //ID 0
-        //snippetGameplayPanels.Add(futoshikiGameplayPanel);      //ID 1
 
     }
 
@@ -102,6 +106,35 @@ public class NewUIController : MonoBehaviour
         snippetPanelAnimator.SetBool("IsOpen", true);
     }
 
+    public void ChangeSelectionPanel(int i)
+    {
+        //No panel == 0, Picross == 1, Futoshiki == 2
+        //Deactivate old Panel
+        Debug.Log("Running changeselection panel with i=" + i);
+
+        if (activeSnippetSelectionPanelID != -1)
+        {
+            Debug.Log("SelectionID != -1");
+            //If there's no active panel, do nothing
+            if (activeSnippetSelectionPanelID == 1)
+                snippetPanelAnimator.SetBool("ShowPicross", false);
+            else if (activeSnippetSelectionPanelID == 2)
+                snippetPanelAnimator.SetBool("ShowFutoshiki", false);
+            else if (activeSnippetSelectionPanelID == 3)
+                snippetPanelAnimator.SetBool("ShowCrossword", false);
+
+        }
+        //Activate new panel
+        if (i == 1)
+            snippetPanelAnimator.SetBool("ShowPicross", true);
+        else if (i == 2)
+            snippetPanelAnimator.SetBool("ShowFutoshiki", true);
+        else if (i == 3)
+            snippetPanelAnimator.SetBool("ShowCrossword", true);
+
+        activeSnippetSelectionPanelID = i;
+    }
+
     public void DeactivateSnippetSelectionPanel()
     {
         ChangeActiveMasterPanel(0);
@@ -118,6 +151,28 @@ public class NewUIController : MonoBehaviour
     public void LeavePicrossGame()
     {
         picrossGameplayAnimator.SetBool("IsOpen", false);
+    }
+
+    public void LoadFutoshikiGame(int futoshikiID)
+    {
+        futoshikiGameplayAnimator.SetBool("IsOpen", true);
+        futoshikiGameplayAnimator.SetBool("PuzzleLoaded", futoshikiBoard.TryBuildFutoshikiBoard(testFutoshikiData));
+    }
+
+    public void LeaveFutoshikiGame()
+    {
+        futoshikiGameplayAnimator.SetBool("IsOpen", false);
+    }
+
+    public void LoadCrosswordGame(int crosswordID)
+    {
+        crosswordGameplayAnimator.SetBool("IsOpen", true);
+        crosswordGameplayAnimator.SetBool("PuzzleLoaded", crosswordBoard.TryBuildCrosswordBoard(testCrosswordData));
+    }
+
+    public void LeaveCrosswordGame()
+    {
+        crosswordGameplayAnimator.SetBool("IsOpen", false);
     }
 
 

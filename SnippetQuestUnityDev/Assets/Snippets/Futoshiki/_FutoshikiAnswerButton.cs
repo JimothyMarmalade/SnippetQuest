@@ -9,31 +9,21 @@ public class _FutoshikiAnswerButton : MonoBehaviour
     //refers to the self
     public Button button;
     public TMP_Text buttonText;
-    public _FutoshikiPuzzle controllerReference;
+    public FutoshikiSnippetBoard controllerReference;
     public bool markedIncorrect = false;
+    public int maxNum = 1;
+    public int currentVal;
 
-    //Stores the button's location on the game board in relation to other answer buttons
-    public int gridSpaceX;
-    public int gridSpaceY;
 
-    //If presetAnswer is true, then the button has a pre-determined answer inside of it and cannot be modified.
-    public bool hasPresetAnswer;
-    public int presetAnswer;
-
-    //NOTE: START METHOD MAY NOT BE NEEDED
-    private void Start()
-    {
-        if (hasPresetAnswer)
-            setNumberPermanent(presetAnswer);
-        else
-            buttonText.text = " ";
-    }
-
-    public void SetPuzzleControllerReference(_FutoshikiPuzzle controller)
+    public void SetPuzzleControllerReference(FutoshikiSnippetBoard controller, int m)
     {
         controllerReference = controller;
+        maxNum = m;
+        buttonText.text = "1";
+        currentVal = 1;
     }
 
+    /*
     //Increments the number in the answerspace
     public void SetNumber()
     {
@@ -93,8 +83,24 @@ public class _FutoshikiAnswerButton : MonoBehaviour
         gridSpaceX = x;
         gridSpaceY = y;
     }
-
+    */
     //Returns the string in the button as an int
+    
+    public void SetNumber()
+    {
+        if (currentVal != maxNum)
+        {
+            currentVal++;
+            buttonText.text = currentVal.ToString();
+        }
+        else if (currentVal >= maxNum)
+        {
+            currentVal = 1;
+            buttonText.text = currentVal.ToString();
+        }
+        controllerReference.CheckWinCondition();
+    }
+    
     public int GetAnswerInt()
     {
         if (buttonText.text == " ")

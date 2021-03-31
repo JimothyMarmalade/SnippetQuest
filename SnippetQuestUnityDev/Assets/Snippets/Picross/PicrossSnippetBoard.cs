@@ -45,7 +45,7 @@ public class PicrossSnippetBoard : MonoBehaviour
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    //Builds the buttons needed for the puzzle based on the GridSize
+    //Ensures all necessary data is accurate, then runs BuildPicrossBoard().
     public bool TryBuildPicrossBoard(PicrossSnippet s)
     {
         picrossPuzzleData = null;
@@ -378,4 +378,12 @@ public class PicrossSnippetBoard : MonoBehaviour
     {
         Debug.Log("OnPuzzleSolved ran in PicrossSnippetBoard");
     }
+
+    //UnloadSnippet unloads all the buttons from the gameplay panel so they do not use resources. 
+    public void UnloadSnippet()
+    {
+
+    }
 }
+
+

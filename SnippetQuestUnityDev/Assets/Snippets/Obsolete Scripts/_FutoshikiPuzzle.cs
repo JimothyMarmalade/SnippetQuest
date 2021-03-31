@@ -29,7 +29,7 @@ public class _FutoshikiPuzzle : MonoBehaviour
     private bool puzzleSolved = false;
 
     //Used for randomly-generated puzzles to keep track of how many have been solved
-    private int timesPuzzleSolved = 0;
+    //private int timesPuzzleSolved = 0;
 
     //---------------------------------------------------------
 
@@ -75,12 +75,12 @@ public class _FutoshikiPuzzle : MonoBehaviour
                                                   (gameboardDimensionX/2) - ((i+1)*emptySpaceLength) - (i*answerButtonLength) - (answerButtonLength/2));
 
                 //Calls the button's script to set its place in the board and a reference to this as the puzzle it is being used to solve
-                bLogic.setGridSpace(j, i);
-                bLogic.SetPuzzleControllerReference(this);
+                //bLogic.setGridSpace(j, i);
+                //bLogic.SetPuzzleControllerReference(this);
 
                 //If the button has a preset clue, marks it on the board
-                if (presetAnswerKey[i, j] != 0)
-                    bLogic.setNumberPermanent(presetAnswerKey[i, j]);
+                //if (presetAnswerKey[i, j] != 0)
+                    //bLogic.setNumberPermanent(presetAnswerKey[i, j]);
 
                 //Sets a reference to this button on AnswerButtonsArray
                 answerButtonsArray[i, j] = b;
@@ -144,8 +144,8 @@ public class _FutoshikiPuzzle : MonoBehaviour
     {
         foreach (Button b in answerButtonsArray)
         {
-            if (b != null)
-                b.GetComponent<_FutoshikiAnswerButton>().SetPuzzleControllerReference(puzzleData);
+          //  if (b != null)
+               // b.GetComponent<_FutoshikiAnswerButton>().SetPuzzleControllerReference(puzzleData);
         }
     }
 

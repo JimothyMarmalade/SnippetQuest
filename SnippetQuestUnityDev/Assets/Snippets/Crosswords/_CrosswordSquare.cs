@@ -9,7 +9,7 @@ using TMPro;
 
 public class _CrosswordSquare : MonoBehaviour
 {
-    public _CrosswordPuzzle CrosswordPuzzleReference;
+    public CrosswordSnippetBoard CrosswordPuzzleReference;
     public TMP_InputField CWInputField;
     public TMP_Text NumDisplay;
 
@@ -155,7 +155,7 @@ public class _CrosswordSquare : MonoBehaviour
         }
     }
 
-    public void SetPuzzleControllerReference(_CrosswordPuzzle c)
+    public void SetPuzzleControllerReference(CrosswordSnippetBoard c)
     {
         CrosswordPuzzleReference = c;
     }

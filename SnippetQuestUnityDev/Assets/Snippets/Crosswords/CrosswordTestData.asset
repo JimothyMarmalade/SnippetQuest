@@ -10,12 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7d5b047a63594f4ea7afa798f6de8e6, type: 3}
-  m_Name: Test Puzzle
+  m_Name: CrosswordTestData
   m_EditorClassIdentifier: 
-  PuzzleName: Test Puzzle
+  snippetType: Crossword
+  snippetName: Test Data
+  masterID: 0
+  typeID: 0
+  snippetSolved: 0
+  numTimesSolved: 0
+  bestTime: 0
   PuzzleDescription: A puzzle taken from my crossword book to see if I can get crosswords
     working.
-  PuzzleID: -1
   WordsAcross:
   - NUN
   - ALDA
