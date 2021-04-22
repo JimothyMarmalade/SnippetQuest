@@ -15,9 +15,24 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager Instance { get; set; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else if (Instance == null && Instance != this)
+        {
+            Instance = this;
+        }
+    }
+
+    [Header("Speaker/Text Data")]
     public TMP_Text nameText;
     public TMP_Text dialogueText;
 
+    [Header("Animator Reference")]
     public Animator animator;
 
 

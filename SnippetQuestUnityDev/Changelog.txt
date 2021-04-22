@@ -1,0 +1,6 @@
+4/21/21 Version
+- Last pushed update before Snippet Database and Data restructuring
+- Added singleton functionality to the DialogueManager.cs class, updated DialogueTrigger.cs accordingly
+- Began implementing Quest functionality
+- Moved the scripting for the player to interact with world objects from AdvancedThirdPersonMovement.cs to the new script WorldInteraction.cs
+- Relocated the animation data for character faces

@@ -1,8 +1,8 @@
 ﻿/*
  * Created by Logan Edmund, 3/2/21
- * Last Modified by Logan Edmund, 3/7/21
+ * Last Modified by Logan Edmund, 4/21/21
  * 
- * Holds all data and methods relevant to the Player character;
+ * Holds all data/methods/variables needed to physically move the player (and handle the camera?)
  * 
  * 
  */
@@ -20,6 +20,7 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
 
     [Header("Game Controller References")]
     public NewUIController NewUIControllerReference;
+    public QuestLog playerQuestLog;
 
     [Header("Camera References")]
     public CinemachineFreeLook CinemachineBrain;
@@ -32,8 +33,8 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
     public float GroundDistance = 0.2f;
     public LayerMask groundMask;
 
-    public LayerMask interactableMask;
-    public Interactable focusedInteractable;
+    //public LayerMask interactableMask;
+    //public Interactable focusedInteractable;
     //--------------------
     //Variables to be changed by the Developer
     public float Speed = 6;
@@ -49,7 +50,7 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
     bool hasFreeMovement;
     bool isInMenu;
     public bool isInSerenePlace;
-    bool canInteract;
+    //bool canInteract;
 
 
     private void Awake()
@@ -89,6 +90,7 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
             CheckPlayerMovement();
         }
 
+        /*
         CheckForInteractables();
         //"Interact Key Pressed" Heiarchy -- begin by checking if an interactable is being focused on
         if (Input.GetKeyDown("e"))
@@ -98,6 +100,7 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
                 InteractWith(focusedInteractable);
             }
         }
+        */
         
 
         //-----End Deliberate Action Check------------------------
@@ -137,6 +140,7 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
 
     }
 
+    /*
     private void CheckForInteractables()
     {
         //Debug.Log("Running CheckForInteractables");
@@ -160,6 +164,7 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
         }
     }
 
+
     //----------Checking with Interactables
     private void SetFocus(Interactable i)
     {
@@ -173,7 +178,8 @@ public class AdvancedThirdPersonMovement : MonoBehaviour
     {
         i.Interact();
     }
-    
+    */
+
 
     private void OnTriggerEnter(Collider other)
     {

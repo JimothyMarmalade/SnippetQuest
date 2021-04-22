@@ -1,8 +1,9 @@
 /*
  * Created by Logan Edmund, 3/2/21
- * Last Modified by Logan Edmund, 3/7/21
+ * Last Modified by Logan Edmund, 4/21/21
  * 
- * Holds dialog data for the DialogTrigger monobehavior including a casual identifier, speaker name, and spoken text.
+ * Holds dialog data for the DialogTrigger monobehavior including a casual identifier, speaker name, and spoken text. Can also hold Quest information
+ * that can be given to the player based on dialogue choices
  * 
  * 
  */
@@ -15,6 +16,9 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
+    //Holds information for a quest that can be given to the player at the end of a dialog tree
+    public Quest quest;
+
     //Used as a casual Identifier for dialog triggers for programmers to keep track of what's what
     public string dialogIdentifier;
 
