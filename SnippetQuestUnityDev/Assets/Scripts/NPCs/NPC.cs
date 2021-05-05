@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/2/21
- * Last Modified by Logan Edmund, 3/7/21
+ * Last Modified by Logan Edmund, 4/27/21
  * 
  * Extends from the Interactable class and holds all methods and data required for NPCs.
  * 
@@ -15,17 +15,34 @@ public class NPC : Interactable
 {
     //Uses an NPCData class to hold all the data associated with the NPC - name, quest distribution, dialog trees
     public NPCData npcData;
+    [SerializeField]
+    public DialogueTrigger DT { get; set; }
+
+    private void Start()
+    {
+        if (npcData == null)
+        {
+            Debug.LogError("Missing NPCData for " + gameObject.name);
+        }
+        DT = gameObject.GetComponent<DialogueTrigger>();
+        if (DT == null)
+        {
+            Debug.LogError("Missing DialogueTrigger component on " + gameObject.name);
+        }
+    }
 
     //Interact runs when the player approaches an NPC and makes a conscious choice to interact with them by pressing the Use button.
     public override void Interact()
     {
-        Debug.Log("Called Interact from NPC, name: " + name);
         if (npcData != null)
         {
-            Debug.Log("name from npcData: " + npcData.characterName);
-            if (transform.gameObject.GetComponent<DialogueTrigger>() != null)
+            if (DT != null)
             {
-                transform.gameObject.GetComponent<DialogueTrigger>().TriggerDialogue();
+                DT.TriggerDialogue();
+            }
+            else
+            {
+                Debug.LogError("Missing DialogueTrigger component on " + gameObject.name);
             }
         }
         else

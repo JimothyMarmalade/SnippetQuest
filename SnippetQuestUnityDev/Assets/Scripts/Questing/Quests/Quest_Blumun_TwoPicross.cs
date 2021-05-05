@@ -2,24 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Quest_Blumun_Test : Quest
+public class Quest_Blumun_TwoPicross : Quest
 {
     private void Start()
     {
-        QuestName = "Blumun's Challenge";
-        Description = "Demonstrate your awesome puzzling skills!";
+        QuestName = "Blumun's Amount Challenge";
+        Description = "Demonstrate your twice awesome puzzling skills!";
         SnippetReward = null;
 
         inProgressDialogue.speakerName = "Blumun";
         inProgressDialogue.sentences = new string[] 
-        {"Still working on it, huh? Don't worry. What's important is that you take your time and " +
-            "figure it out on your own. That's where the real reward is."
+        {"Hey, good work. Think you can solve it twice?"
         };
 
         rewardDialogue.speakerName = "Blumun";
         rewardDialogue.sentences = new string[]
         {
-            "Hey, look at that! You did it! Great job!",
+            "Hey, look at that! You did it twice! Great job!",
             "A reward? Sorry, maybe in the next demo."
         };
 
@@ -30,7 +29,7 @@ public class Quest_Blumun_Test : Quest
         };
 
 
-        Goals.Add(new SnippetSolvedGoal(this, "Picross_TestHeart", "Solve the Picross puzzle Blumun gave you", false, 0, 1));
+        Goals.Add(new AmountSolvedGoal(this, "Picross", "Solve the Picross puzzle Blumun gave you twice", false, 0, 2));
 
         Goals.ForEach(g => g.Init());
     }

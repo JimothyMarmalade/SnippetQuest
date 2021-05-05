@@ -1,0 +1,488 @@
+﻿[
+  {
+    "snippetSlug": "Crossword_TestPuzzle",
+    "snippetType": "Crossword",
+    "snippetName": "Test Puzzle",
+    "masterID": -2,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1,
+    "currentSolution": "",
+    "PuzzleDescription": "A puzzle taken from my crossword book to see if I can get crosswords working.",
+    "GridLength": 13,
+    "WordsAcross": [
+      "NUN",
+      "ALDA",
+      "SAGA",
+      "ERE",
+      "SEEP",
+      "USED",
+      "EGG",
+      "SNAP",
+      "RIND",
+      "DELI",
+      "ALL",
+      "FATS",
+      "ERR",
+      "AWE",
+      "EMCEE",
+      "HURRIES",
+      "LET",
+      "ASIDE",
+      "MOE",
+      "INSECTS",
+      "CHANT",
+      "AHA",
+      "KEG",
+      "CHAR",
+      "YET",
+      "RICE",
+      "REIN",
+      "IVAN",
+      "NOD",
+      "AIDE",
+      "NICE",
+      "EVE",
+      "BRAD",
+      "GLOW",
+      "DEN"
+    ],
+    "CluesAcross": [
+      "Convent sister",
+      "\"M*A*S*H\" star Alan",
+      "Heroic epic",
+      "before, in verse",
+      "leak slowly",
+      "put to work",
+      "it may be hard boiled",
+      "clothing fastener",
+      "orange peel",
+      "pastrami shop",
+      "everything there is",
+      "high calorie substances",
+      "commit a mistake",
+      "reverent feeling",
+      "revue host",
+      "rushes around",
+      "\"___ me go!\"",
+      "Stage whisper",
+      "aggressive stooge",
+      "beetles and fireflies",
+      "intone in unison",
+      "cry of recognition",
+      "beer barrel",
+      "blacken with flames",
+      "still",
+      "paddy crop",
+      "horse's leash",
+      "\"Terrible\" Russian ruler",
+      "affirmative head gesture",
+      "helpful assistant",
+      "agreeable",
+      "celebratory night",
+      "Slender nail",
+      "look radiant",
+      "Animal Lair"
+    ],
+    "WordsAcrossLoc": [
+      {
+        "x": 0,
+        "y": 0
+      },
+
+      {
+        "x": 4,
+        "y": 0
+      },
+
+      {
+        "x": 9,
+        "y": 0
+      },
+
+      {
+        "x": 0,
+        "y": 1
+      },
+
+      {
+        "x": 4,
+        "y": 1
+      },
+
+      {
+        "x": 9,
+        "y": 1
+      },
+
+      {
+        "x": 0,
+        "y": 2
+      },
+
+      {
+        "x": 4,
+        "y": 2
+      },
+
+      {
+        "x": 9,
+        "y": 2
+      },
+
+      {
+        "x": 0,
+        "y": 3
+      },
+
+      {
+        "x": 5,
+        "y": 3
+      },
+
+      {
+        "x": 9,
+        "y": 3
+      },
+
+      {
+        "x": 2,
+        "y": 4
+      },
+
+      {
+        "x": 7,
+        "y": 4
+      },
+
+      {
+        "x": 0,
+        "y": 5
+      },
+
+      {
+        "x": 6,
+        "y": 5
+      },
+
+      {
+        "x": 0,
+        "y": 6
+      },
+
+      {
+        "x": 4,
+        "y": 6
+      },
+
+      {
+        "x": 10,
+        "y": 6
+      },
+
+      {
+        "x": 0,
+        "y": 7
+      },
+
+      {
+        "x": 8,
+        "y": 7
+      },
+
+      {
+        "x": 3,
+        "y": 8
+      },
+
+      {
+        "x": 8,
+        "y": 8
+      },
+
+      {
+        "x": 0,
+        "y": 9
+      },
+
+      {
+        "x": 5,
+        "y": 9
+      },
+
+      {
+        "x": 9,
+        "y": 9
+      },
+
+      {
+        "x": 0,
+        "y": 10
+      },
+
+      {
+        "x": 5,
+        "y": 10
+      },
+
+      {
+        "x": 10,
+        "y": 10
+      },
+
+      {
+        "x": 0,
+        "y": 11
+      },
+
+      {
+        "x": 5,
+        "y": 11
+      },
+
+      {
+        "x": 10,
+        "y": 11
+      },
+
+      {
+        "x": 0,
+        "y": 12
+      },
+
+      {
+        "x": 5,
+        "y": 12
+      },
+
+      {
+        "x": 10,
+        "y": 12
+      }
+    ],
+    "WordsDown": [
+      "NEED",
+      "URGE",
+      "NEGLECTS",
+      "ASS",
+      "LENA",
+      "DEAL",
+      "APPLAUD",
+      "SURFER",
+      "ASIA",
+      "GENT",
+      "ADDS",
+      "IRE",
+      "REACH",
+      "WRECK",
+      "ELI",
+      "MEN",
+      "HIS",
+      "IMAGINED",
+      "EON",
+      "SET",
+      "STAYING",
+      "EARNED",
+      "HER",
+      "CRAB",
+      "HEIR",
+      "AIDA",
+      "EVIL",
+      "TACO",
+      "COVE",
+      "EDEN",
+      "NEW"
+    ],
+    "CluesDown": [
+      "Lack",
+      "intense inner drive",
+      "fails to care for",
+      "wild donkey",
+      "Tuneful home",
+      "give out (cards)",
+      "Clap approvingly",
+      "wave-riding beachgoer",
+      "China's continent",
+      "Distinguished chap",
+      "Comments further",
+      "Deep fury",
+      "attain as a goal",
+      "total (a car)",
+      "Cotton-gin inventor Whitney",
+      "Grown boys",
+      "towel monogram",
+      "dreamed up",
+      "geologic span",
+      "matched pair",
+      "remaining",
+      "made (a salary)",
+      "That lass",
+      "Clawed crustacean",
+      "One named in a will",
+      "Opera title role",
+      "Morally wicked",
+      "Filled tortilla treat",
+      "Small secluded bay",
+      "Biblical garden",
+      "freshly created"
+    ],
+    "WordsDownLoc": [
+       
+      {
+        "x": 0,
+        "y": 0
+      },
+       
+      {
+        "x": 1,
+        "y": 0
+      },
+       
+      {
+        "x": 2,
+        "y": 0
+      },
+       
+      {
+        "x": 4,
+        "y": 0
+      },
+       
+      {
+        "x": 5,
+        "y": 0
+      },
+       
+      {
+        "x": 6,
+        "y": 0
+      },
+       
+      {
+        "x": 7,
+        "y": 0
+      },
+       
+      {
+        "x": 9,
+        "y": 0
+      },
+       
+      {
+        "x": 10,
+        "y": 0
+      },
+       
+      {
+        "x": 11,
+        "y": 0
+      },
+       
+      {
+        "x": 12,
+        "y": 0
+      },
+       
+      {
+        "x": 3,
+        "y": 3
+      },
+       
+      {
+        "x": 4,
+        "y": 4
+      },
+       
+      {
+        "x": 8,
+        "y": 4
+      },
+       
+      {
+        "x": 0,
+        "y": 5
+      },
+       
+      {
+        "x": 1,
+        "y": 5
+      },
+       
+      {
+        "x": 6,
+        "y": 5
+      },
+       
+      {
+        "x": 10,
+        "y": 5
+      },
+       
+      {
+        "x": 11,
+        "y": 5
+      },
+       
+      {
+        "x": 12,
+        "y": 5
+      },
+       
+      {
+        "x": 5,
+        "y": 6
+      },
+       
+      {
+        "x": 3,
+        "y": 7
+      },
+       
+      {
+        "x": 9,
+        "y": 7
+      },
+       
+      {
+        "x": 0,
+        "y": 9
+      },
+       
+      {
+        "x": 1,
+        "y": 9
+      },
+       
+      {
+        "x": 2,
+        "y": 9
+      },
+       
+      {
+        "x": 6,
+        "y": 9
+      },
+       
+      {
+        "x": 7,
+        "y": 9
+      },
+       
+      {
+        "x": 11,
+        "y": 9
+      },
+       
+      {
+        "x": 12,
+        "y": 9
+      },
+       
+      {
+        "x": 8,
+        "y": 10
+      }
+    ]
+  }
+]

@@ -16,14 +16,11 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
-    //Holds information for a quest that can be given to the player at the end of a dialog tree
-    public Quest quest;
-
     //Used as a casual Identifier for dialog triggers for programmers to keep track of what's what
-    public string dialogIdentifier;
+    public string dialogIdentifier = "";
 
     //Name of the person speaking in this dialog segment
-    public string speakerName;
+    public string speakerName = "";
 
     //The sentences that will be spoken
     [TextArea(3, 10)]

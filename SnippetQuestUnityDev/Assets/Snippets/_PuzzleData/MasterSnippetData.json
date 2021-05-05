@@ -1,0 +1,34 @@
+//used to store the common variables used by all Snippets
+
+[
+  {
+    "snippetSlug": "Picross_TestHeart",
+    "snippetType": "Picross",
+    "snippetName": "Test Puzzle",
+    "masterID": -1,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1,
+  },
+  {
+    "snippetSlug": "Futoshiki_TestPuzzle",
+    "snippetType": "Futoshiki",
+    "snippetName": "Test Puzzle",
+    "masterID": -2,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1,
+  },
+  {
+    "snippetSlug": "Crossword_TestPuzzle",
+    "snippetType": "Crossword",
+    "snippetName": "Test Puzzle",
+    "masterID": -3,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1
+  }
+] 

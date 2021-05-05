@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-//Last edited by Logan Edmund, 3/14/21
+//Last edited by Logan Edmund, 5/4/21
 
 
 public class CrosswordSnippetBoard : MonoBehaviour
@@ -22,9 +22,14 @@ public class CrosswordSnippetBoard : MonoBehaviour
 
     [Header("Board Generation Variables")]
     public CrosswordSnippet crosswordPuzzleData;
+    public string crosswordSlug;
 
     [Header("Puzzle Handling Variables")]
+    private List<string> cluesDown;
+    private List<string> cluesAcross;
     private GameObject[,] inputs;
+
+    private CrosswordSnippet CurrentSnippetData;
 
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,12 +40,14 @@ public class CrosswordSnippetBoard : MonoBehaviour
         if (s.CheckCriticalInformation())
         {
             crosswordPuzzleData = s;
+            crosswordSlug = s.snippetSlug;
             BuildCrosswordBoard();
+            CurrentSnippetData = s;
             return true;
         }
         else
         {
-            Debug.LogError(s.name + " failed CheckCriticalInformation! Terminating build attempt.");
+            Debug.LogError(s.snippetSlug + " failed CheckCriticalInformation! Terminating build attempt.");
             return false;
         }
     }
@@ -148,8 +155,21 @@ public class CrosswordSnippetBoard : MonoBehaviour
             }
         }
         //After the cleanup, the initial building of the board is complete.
-
         TitleText.text = crosswordPuzzleData.snippetName;
+
+
+        //Offload the puzzle's clues into the local arrays
+        string[] cap = SnippetDatabase.Instance.GetCrosswordSnippet(crosswordSlug).CluesAcross;
+        string[] cdp = SnippetDatabase.Instance.GetCrosswordSnippet(crosswordSlug).CluesDown;
+        cluesAcross = new List<string>();
+        cluesDown = new List<string>();
+
+        for (int z = 0; z < cap.Length; z++)
+            cluesAcross.Add(cap[z]);
+
+
+        for (int z = 0; z < cdp.Length; z++)
+            cluesDown.Add(cdp[z]);
     }
 
     public void CheckForCorrectAnswer()
@@ -174,7 +194,19 @@ public class CrosswordSnippetBoard : MonoBehaviour
 
     public void DisplayClues(int across, int down)
     {
-        AcrossClueText.text = "Across: " + crosswordPuzzleData.CluesAcross[across-1];
-        DownClueText.text = "Down: " + crosswordPuzzleData.CluesDown[down-1];
+        AcrossClueText.text = "Across: " + cluesAcross[across-1];
+        DownClueText.text = "Down: " + cluesDown[down-1];
+    }
+
+
+    //UnloadSnippet unloads all the buttons from the gameplay panel so they do not use resources. 
+    public void UnloadSnippet()
+    {
+        foreach (GameObject b in inputs)
+            Destroy(b);
+
+        cluesDown.Clear();
+        cluesAcross.Clear();
+        
     }
 }
