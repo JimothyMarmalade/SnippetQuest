@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/8/21
- * Last Modified by Logan Edmund, 3/9/21
+ * Last Modified by Logan Edmund, 5/4/21
  * 
  * Used to generate UI picross boards on the fly when fed SnippetData of type Picross. Holds all methods needed to handle gameplay and 
  * data modification/updating.
@@ -24,6 +24,7 @@ public class PicrossSnippetBoard : MonoBehaviour
 
     [Header("Picross Data")]
     public PicrossSnippet picrossPuzzleData;
+    public string picrossSlug;
 
     [Header("Size Data and Button Storage")]
     float gridWidth;
@@ -49,16 +50,18 @@ public class PicrossSnippetBoard : MonoBehaviour
     public bool TryBuildPicrossBoard(PicrossSnippet s)
     {
         picrossPuzzleData = null;
+        picrossSlug = "";
         //Check to ensure the inserted Picross Snippet has all necessary information for the build, then loads the puzzle from data.
         if (s.CheckCriticalInformation())
         {
             picrossPuzzleData = s;
+            picrossSlug = s.snippetSlug;
             BuildPicrossBoard();
             return true;
         }
         else
         {
-            Debug.LogError(s.name + " failed CheckCriticalInformation! Terminating build attempt.");
+            Debug.LogError(s.snippetSlug + " failed CheckCriticalInformation! Terminating build attempt.");
             return false;
         }
     }
@@ -370,6 +373,7 @@ public class PicrossSnippetBoard : MonoBehaviour
             }
         }
 
+        //If this is the first time completing the puzzle, run OnPuzzleSolved. Else, run OnPuzzleComplete.
         OnPuzzleSolved();
     }
 
@@ -377,12 +381,20 @@ public class PicrossSnippetBoard : MonoBehaviour
     public virtual void OnPuzzleSolved()
     {
         Debug.Log("OnPuzzleSolved ran in PicrossSnippetBoard");
+        SnippetEvents.Instance.SnippetSolved(picrossSlug);        
     }
 
-    //UnloadSnippet unloads all the buttons from the gameplay panel so they do not use resources. 
+    //UnloadSnippet unloads all the buttons from the gameplay panel so they do not hog resources. 
     public void UnloadSnippet()
     {
-
+        foreach (_PicrossAnswerButton b in answerButtons)
+            Destroy(b.gameObject);
+        foreach (_PicrossClueButton b in clueButtonsHorizontal)
+            if (b != null)
+                Destroy(b.gameObject);
+        foreach (_PicrossClueButton b in clueButtonsVertical)
+            if (b != null)
+                Destroy(b.gameObject);
     }
 }
 

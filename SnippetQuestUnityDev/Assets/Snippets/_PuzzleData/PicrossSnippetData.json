@@ -1,0 +1,18 @@
+//Used to store complex data for all picross puzzles
+
+[
+  {
+    "snippetSlug": "Picross_TestHeart",
+    "snippetType": "Picross",
+    "snippetName": "Test Puzzle",
+    "masterID": -1,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1,
+    "currentSolution": "",
+    "snippetSolution": "0101010111010100010010101",
+    "horizontalGridSize": 5,
+    "verticalGridSize": 5
+  }
+]

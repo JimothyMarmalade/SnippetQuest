@@ -37,7 +37,7 @@ public class ExpressionController : MonoBehaviour
         while (true)
         {
             int delay = Random.Range(0, 8);
-            Debug.Log("ExpressionController>calcBlink: delay = " + delay);
+            //Debug.Log("ExpressionController>calcBlink: delay = " + delay);
             yield return new WaitForSeconds(delay);
             eyesAnimator.SetTrigger("DoEyeblink");
         }

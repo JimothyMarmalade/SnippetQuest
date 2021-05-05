@@ -1,5 +1,20 @@
+5/4/21 Version
+- Fixed the bug where Crossword puzzle clues would fail to load during gameplay (bug caused by implementing the new Snippet data loading system)
+- Implemented UnloadSnippet() in CrosswordSnippetBoard.cs to conserve resources when leaving the Crossword game board.
+- Implemented UnloadSnippet() in FutoshikiSnippetBoard.cs to conserve resources when leaving the Futoshiki game board.
+- Implemented UnloadSnippet() in PicrossSnippetBoard.cs to conserve resources when leaving the Picross game board.
+- Added the QuestTree.cs class, which can allow NPCs to have multiple quests that are assigned in succession upon completion.
+- Relocated player's Jumping functionality into Jump.cs
+- Added SnippetEvents.cs (Holds methods to be called when starting/finishing a Snippet Puzzle)
+- Added Situational conversations to QuestGiver NPCs
+- Added Quest Log Functionality (no UI Graphics)
+- Added Basic Quest Tracking (Quest, QuestGoals)
+- Relocated player camera controls and functionality into PlayerCameraController.cs
+- Modified Snippet Data saving/loading to be done through the use of JSON files
+- Added NewtonSoft's JSonNet package to the project
+---------------------------------------------------------
 4/21/21 Version
-- Last pushed update before Snippet Database and Data restructuring
+- Last pushed update before attempted Snippet Database and Data restructuring
 - Added singleton functionality to the DialogueManager.cs class, updated DialogueTrigger.cs accordingly
 - Began implementing Quest functionality
 - Moved the scripting for the player to interact with world objects from AdvancedThirdPersonMovement.cs to the new script WorldInteraction.cs

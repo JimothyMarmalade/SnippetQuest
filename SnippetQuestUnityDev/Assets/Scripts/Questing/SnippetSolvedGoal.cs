@@ -12,30 +12,30 @@ using UnityEngine;
 
 public class SnippetSolvedGoal : QuestGoal
 {
-    public int SnippetID { get; set; }
+    public string SnippetSlug { get; set; }
 
-    public SnippetSolvedGoal(int snippetID, string description, bool completed, int currentAmount, int requiredAmount)
+    public SnippetSolvedGoal(Quest quest, string snippetSlug, string description, bool completed, int currentAmount, int requiredAmount)
     {
-        this.SnippetID = snippetID;
+        this.AssignedQuest = quest;
+        this.SnippetSlug = snippetSlug;
         this.Description = description;
         this.Completed = completed;
         this.CurrentAmount = currentAmount;
         this.RequiredAmount = requiredAmount;
     }
-
     public override void Init()
     {
         base.Init();
-        //CombatEvents.OnEnemyDeath
-        //-- Look at GameGrind's tutorial series for guidance on how to handle event handlers
+        SnippetEvents.OnSnippetSolved += SnippetSolved;
     }
 
-    void SnippetSolved(Snippet snippet)
+    void SnippetSolved(string snippetSlug)
     {
-        if (snippet.masterID == this.SnippetID)
+        if (snippetSlug == this.SnippetSlug)
         {
             this.CurrentAmount++;
-            Evaluate();
+            if (Evaluate())
+                SnippetEvents.OnSnippetSolved -= SnippetSolved;
         }
     }
 

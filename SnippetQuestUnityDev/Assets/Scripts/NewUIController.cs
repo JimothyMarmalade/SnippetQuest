@@ -37,15 +37,12 @@ public class NewUIController : MonoBehaviour
     [Header("Snippet Gameplay Panels")]
     public Animator picrossGameplayAnimator;
     public PicrossSnippetBoard picrossBoard;
-    public PicrossSnippet testPicrossData;
 
     public Animator futoshikiGameplayAnimator;
     public FutoshikiSnippetBoard futoshikiBoard;
-    public FutoshikiSnippet testFutoshikiData;
 
     public Animator crosswordGameplayAnimator;
     public CrosswordSnippetBoard crosswordBoard;
-    public CrosswordSnippet testCrosswordData;
 
     [Header("Dialog Panels")]
     public GameObject dialoguePanel;
@@ -74,7 +71,6 @@ public class NewUIController : MonoBehaviour
 
         snippetSelectionPanels.Add(picrossSelectionPanel);      //ID 0
         snippetSelectionPanels.Add(futoshikiSelectionPanel);    //ID 1
-
     }
 
     //----------Methods for activating master panels
@@ -145,7 +141,7 @@ public class NewUIController : MonoBehaviour
     {
         picrossGameplayAnimator.SetBool("IsOpen", true);
         //Run the necessary methods that load the picross puzzle into the game board, then set bool "puzzleLoaded" to true
-        picrossGameplayAnimator.SetBool("PuzzleLoaded", picrossBoard.TryBuildPicrossBoard(testPicrossData));
+        picrossGameplayAnimator.SetBool("PuzzleLoaded", picrossBoard.TryBuildPicrossBoard(SnippetDatabase.Instance.GetPicrossSnippet("Picross_TestHeart")));
     }
 
     public void LeavePicrossGame()
@@ -156,7 +152,7 @@ public class NewUIController : MonoBehaviour
     public void LoadFutoshikiGame(int futoshikiID)
     {
         futoshikiGameplayAnimator.SetBool("IsOpen", true);
-        futoshikiGameplayAnimator.SetBool("PuzzleLoaded", futoshikiBoard.TryBuildFutoshikiBoard(testFutoshikiData));
+        futoshikiGameplayAnimator.SetBool("PuzzleLoaded", futoshikiBoard.TryBuildFutoshikiBoard(SnippetDatabase.Instance.GetFutoshikiSnippet("Futoshiki_TestPuzzle")));
     }
 
     public void LeaveFutoshikiGame()
@@ -167,7 +163,7 @@ public class NewUIController : MonoBehaviour
     public void LoadCrosswordGame(int crosswordID)
     {
         crosswordGameplayAnimator.SetBool("IsOpen", true);
-        crosswordGameplayAnimator.SetBool("PuzzleLoaded", crosswordBoard.TryBuildCrosswordBoard(testCrosswordData));
+        crosswordGameplayAnimator.SetBool("PuzzleLoaded", crosswordBoard.TryBuildCrosswordBoard(SnippetDatabase.Instance.GetCrosswordSnippet("Crossword_TestPuzzle")));
     }
 
     public void LeaveCrosswordGame()
