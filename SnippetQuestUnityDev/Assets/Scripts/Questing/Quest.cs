@@ -22,6 +22,7 @@ public class Quest : MonoBehaviour
     public bool IsActive { get; set; }
     public bool IsCompleted { get; set; }
 
+    public Dialogue givePlayerQuestDialogue = new Dialogue();
     public Dialogue inProgressDialogue = new Dialogue();
     public Dialogue rewardDialogue = new Dialogue();
     public Dialogue completedDialogue = new Dialogue();
@@ -51,7 +52,7 @@ public class Quest : MonoBehaviour
         }
         else
         {
-            Debug.LogError("SnippetReward for this activeQuest is null!");
+            Debug.LogError("Give Rewards ran successfully, but the SnippetReward for this activeQuest is null!");
         }
     }
 

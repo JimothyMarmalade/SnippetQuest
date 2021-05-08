@@ -15,6 +15,8 @@ public class QuestGiver : NPC
     public bool AssignedQuest { get; set; }
     public bool CompletedQuest { get; set; }
 
+    public bool MetPlayer { get; set; }
+
     [SerializeField]
     private GameObject questLogReference;
     [SerializeField]
@@ -25,7 +27,7 @@ public class QuestGiver : NPC
     public Quest activeQuest;
     public QuestTree questTree;
 
-    private void Start()
+    private void Awake()
     {
         if (npcData == null)
         {
@@ -41,6 +43,8 @@ public class QuestGiver : NPC
         this.questTree = (QuestTree)gameObject.AddComponent(System.Type.GetType(questTreeType));
         if (questTree = null)
             Debug.LogError("There is no attached QuestTree on NPC " + npcData.characterName);
+
+
     }
 
     public override void Interact()
@@ -49,12 +53,11 @@ public class QuestGiver : NPC
         if (questTree == null)
             questTree = gameObject.GetComponent<QuestTree>();
 
-
         if (!AssignedQuest && !CompletedQuest)
         {
             //Assign the First Quest
             DT.TriggerDialogue(questTree.FirstEncounterDialogue);
-            AssignQuest();
+            AssignQuest(); 
         }
         else if (AssignedQuest && !CompletedQuest)
         {
@@ -68,6 +71,9 @@ public class QuestGiver : NPC
             if (questTree.CheckNewQuestExists())
             {
                 AssignQuest();
+                Debug.LogError("Quest Successfully assigned, but quest-giving dialogue could not be loaded.");
+                Debug.LogError("Implement Dialogue existing for the assignment of quests past the first in a QuestTree. " +
+                    "Current Dialogue problems are caused by a loading error -- WILL NEED to overhaul Quest system down the line.");
             }
             //If not, then display the end-of-quest dialogue.
             else
@@ -81,7 +87,7 @@ public class QuestGiver : NPC
     {
         //Get the next quest to undertake from the QuestTree
         AssignedQuest = true;
-        CompletedQuest = false;
+        CompletedQuest = false; 
         activeQuest = (Quest)questLogReference.AddComponent(System.Type.GetType(questTree.GetActiveQuest()));
         QuestLog.Instance.AddQuestToLog(activeQuest);
     }

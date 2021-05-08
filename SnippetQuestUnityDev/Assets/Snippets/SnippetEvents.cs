@@ -31,9 +31,6 @@ public class SnippetEvents : MonoBehaviour
         }
     }
 
-
-
-
     //SnippetSolved runs when a snippet puzzle is completed successfully FOR THE FIRST TIME
     public void SnippetSolved(string snippetSlug)
     {
@@ -46,7 +43,7 @@ public class SnippetEvents : MonoBehaviour
         }
         else
         {
-            Debug.Log("OnSnippetSolved event listener did not run");
+            Debug.Log("OnSnippetSolved event listener had no active events and did not run");
         }
     }
 
@@ -63,7 +60,7 @@ public class SnippetEvents : MonoBehaviour
         }
         else
         {
-            Debug.Log("OnSnippetCompleted event listener did not run");
+            Debug.Log("OnSnippetCompleted event listener had no active events and did not run");
         }
     }
 

@@ -10,83 +10,32 @@ public class _FutoshikiAnswerButton : MonoBehaviour
     public Button button;
     public TMP_Text buttonText;
     public FutoshikiSnippetBoard controllerReference;
-    public bool markedIncorrect = false;
-    public int maxNum = 1;
-    public int currentVal;
+    private bool conflicting = false;
+    private bool locked = false;
+    public int maxNum;
+    private int currentVal = 0;
 
 
-    public void SetPuzzleControllerReference(FutoshikiSnippetBoard controller, int m)
+    public void InstAnswerButton(FutoshikiSnippetBoard controller, int m)
     {
         controllerReference = controller;
         maxNum = m;
-        buttonText.text = "1";
-        currentVal = 1;
-    }
-
-    /*
-    //Increments the number in the answerspace
-    public void SetNumber()
-    {
-        if (!hasPresetAnswer)
-        {
-            if (buttonText.text == "1")
-            {
-                buttonText.text = "2";
-            }
-            else if (buttonText.text == "2")
-            {
-                buttonText.text = "3";
-            }
-            else if (buttonText.text == "3")
-            {
-                buttonText.text = "4";
-            }
-            else if (buttonText.text == "4")
-            {
-                buttonText.text = "5";
-            }
-            else if (buttonText.text == "5")
-            {
-                buttonText.text = "6";
-            }
-            else if (buttonText.text == "6" || buttonText.text == " ")
-            {
-                buttonText.text = "1";
-            }
-            else
-                buttonText.text = " ";
-
-            Debug.Log("Clicked button at " + gridSpaceX + ", " + gridSpaceY);
-
-            //Calls the puzzle controller to check if the puzzle has been solved
-            controllerReference.checkWinConditions();
-        }
+        buttonText.text = "";
     }
 
     //Sets the value held to a permanent, developer-defined thing
-    public void setNumberPermanent(int value)
+    public void SetValuePermanent(int value)
     {
         //Disables button so user cannot interact with it
         button.interactable = false;
 
         //Locks button as one with a preset value
-        hasPresetAnswer = true;
+        locked = true;
 
-        //Sets the presetAnswer to the input value and updates buttonText with the value
-        presetAnswer = value;
-        buttonText.text = value.ToString();
+        SetCurrentValue(value);
     }
-
-    //Sets the x and y of the button in the grid
-    public void setGridSpace(int x, int y)
-    {
-        gridSpaceX = x;
-        gridSpaceY = y;
-    }
-    */
-    //Returns the string in the button as an int
     
-    public void SetNumber()
+    public void SetCurrentValue()
     {
         if (currentVal != maxNum)
         {
@@ -95,31 +44,47 @@ public class _FutoshikiAnswerButton : MonoBehaviour
         }
         else if (currentVal >= maxNum)
         {
-            currentVal = 1;
-            buttonText.text = currentVal.ToString();
+            currentVal = 0;
+            buttonText.text = "";
         }
         controllerReference.CheckWinCondition();
     }
-    
-    public int GetAnswerInt()
+
+    public void SetCurrentValue(int i)
     {
-        if (buttonText.text == " ")
-            return 0;
+        if (i <= maxNum && i > 0)
+        {
+            currentVal = i;
+            buttonText.text = currentVal.ToString();
+        }
         else
         {
-            char rawchar = buttonText.text[0];
-            int answerInt = (int)char.GetNumericValue(rawchar);
-
-            return answerInt;
+            Debug.LogError("Warning: value " + i + " is out of bounds for this futoshiki puzzle");
         }
-
     }
 
-    public void SetTextColor()
+    public int GetCurrentVal()
     {
-        if (markedIncorrect)
-            buttonText.color = Color.red;
-        else if (!markedIncorrect)
-            buttonText.color = Color.black;
+        return currentVal;
+    }
+
+    public void SetConflicting(bool b)
+    {
+        conflicting = b;
+    }
+
+    public bool GetConflicting()
+    {
+        return conflicting;
+    }
+    
+    public bool GetLocked()
+    {
+        return locked;
+    }
+
+    public void SetTextColor(Color c)
+    {
+        buttonText.color = c;
     }
 }

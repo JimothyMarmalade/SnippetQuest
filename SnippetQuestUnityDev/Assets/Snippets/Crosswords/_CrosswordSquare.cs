@@ -24,10 +24,9 @@ public class _CrosswordSquare : MonoBehaviour
 
     private bool DontThinkTwice = false;
 
-    public void Start()
+    public void AutoAnswer()
     {
-        //Debug Testing
-        //SetWordNum(WordNum);
+        SetCWInputField(AnswerChar.ToString());
     }
 
 

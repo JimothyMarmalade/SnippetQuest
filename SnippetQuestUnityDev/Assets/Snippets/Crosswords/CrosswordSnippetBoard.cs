@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-//Last edited by Logan Edmund, 5/4/21
+//Last edited by Logan Edmund, 5/7/21
 
 
 public class CrosswordSnippetBoard : MonoBehaviour
@@ -31,6 +31,13 @@ public class CrosswordSnippetBoard : MonoBehaviour
 
     private CrosswordSnippet CurrentSnippetData;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+            foreach (GameObject g in inputs)
+                if (g != null && g.GetComponent<_CrosswordSquare>() != null)
+                    g.GetComponent<_CrosswordSquare>().AutoAnswer();
+    }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public bool TryBuildCrosswordBoard(CrosswordSnippet s)
@@ -189,7 +196,8 @@ public class CrosswordSnippetBoard : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Puzzle Solved: " + PuzzleSolved);
+        if (PuzzleSolved)
+            EndGame();
     }
 
     public void DisplayClues(int across, int down)
@@ -198,6 +206,25 @@ public class CrosswordSnippetBoard : MonoBehaviour
         DownClueText.text = "Down: " + cluesDown[down-1];
     }
 
+    public void EndGame()
+    {
+        foreach (GameObject g in inputs)
+            if (g != null && g.GetComponentInChildren<TMP_InputField>() != null)
+                g.GetComponentInChildren<TMP_InputField>().interactable = false;
+
+        OnPuzzleSolved();
+    }
+
+    public void OnPuzzleSolved()
+    {
+        Debug.Log("OnPuzzleSolved ran in CrosswordSnippetBoard with slug: " + crosswordPuzzleData.snippetSlug);
+        SnippetEvents.Instance.SnippetSolved(crosswordPuzzleData.snippetSlug);
+    }
+
+    public void OnPuzzleCompleted()
+    {
+
+    }
 
     //UnloadSnippet unloads all the buttons from the gameplay panel so they do not use resources. 
     public void UnloadSnippet()

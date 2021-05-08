@@ -1,4 +1,20 @@
+5/11/21 Version
+- Added givePlayerQuestDialogue Dialogue variable to Quest.cs for more refined conversations (NOT IMPLEMENTED)
+- Picross puzzles will now auto-clear non-filled squares (Marked and Crossed) upon puzzle completion
+- Updated DialogueManager.cs to incorporate an EventListener, allowing the manager to trigger methods upon closing a conversation (OnDialogueOver)
+- Updated Dialogue.cs to hold values for eye, mouth, and body animations, one per conversation
+- Updated ExpressionController.cs with methods to trigger eye/mouth animations based on string input, and a method to revert back to the default animation
+- Updated DialogueTrigger.cs to trigger facial expressions when Dialogue is sent to the DialogueManager.
+- Added a hotkey (F) that will auto-complete Crossword Puzzles for testing purposes
+- Improved Futoshiki Puzzles
+-- Added indicators of faulty solutions
+-- Changed answer buttons so they can spawn in blank instead of the puzzle filling with ones
+-- Added a hotkey (F) that will auto-complete the puzzle for testing purposes
+-- Modified _FutoshikiSnippet (and test puzzle data) so that a puzzle can have pre-filled answers and partially-visible clues.
+- Set title of Picross Puzzle to appear onscreen when Picross puzzles are solved and revert to blank when unloading
+---------------------------------------------------------
 5/4/21 Version
+- Moved some Assets around
 - Fixed the bug where Crossword puzzle clues would fail to load during gameplay (bug caused by implementing the new Snippet data loading system)
 - Implemented UnloadSnippet() in CrosswordSnippetBoard.cs to conserve resources when leaving the Crossword game board.
 - Implemented UnloadSnippet() in FutoshikiSnippetBoard.cs to conserve resources when leaving the Futoshiki game board.

@@ -204,6 +204,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &187266766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8840673244196501998, guid: d9c2ded588c1d014c8d886c698ebb1e5, type: 3}
+  m_PrefabInstance: {fileID: 1781716161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed97a231c42da4468467d2a18284c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &221930445
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +341,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221930445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.7350273, y: 0.22452378, z: -51.292908}
+  m_LocalPosition: {x: -6.7135367, y: 0.22452378, z: -51.260544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 521552011}
@@ -1132,7 +1143,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 521552009}
-  m_LocalRotation: {x: -0.061195623, y: -0.06343078, z: -0.0038968804, w: 0.99610066}
+  m_LocalRotation: {x: -0.061195668, y: -0.06343084, z: -0.0038968867, w: 0.99610066}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5706,7 +5717,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458699496}
-  m_LocalRotation: {x: -0.07930406, y: -0.0633494, z: -0.0050500096, w: 0.99482274}
+  m_LocalRotation: {x: -0.07930411, y: -0.063349456, z: -0.005050017, w: 0.99482274}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5953,7 +5964,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513089626}
-  m_LocalRotation: {x: -0.09733854, y: -0.06324734, z: -0.0061984253, w: 0.9932203}
+  m_LocalRotation: {x: -0.09733858, y: -0.063247435, z: -0.006198438, w: 0.9932203}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6779,12 +6790,16 @@ MonoBehaviour:
   dialogue:
     dialogIdentifier: Debug Room Test dialog
     speakerName: Blumun
+    eyesExpression: 
+    mouthExpression: 
+    bodyAnimation: 
     sentences:
     - Howdy there, pardner! Mah name's Blumun!
     - You may notice how I got that name due to my incurable hypothermia. That's
       a tale, I tell you what.
     - But hey, you don't wanna hear all that. For now, why don't you interact with
       that bench over there and try to solve that Picross puzzle I gave you?
+  faceReference: {fileID: 187266766}
 --- !u!114 &1732620978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6800,7 +6815,7 @@ MonoBehaviour:
   npcData:
     characterName: Blumun
   questLogReference: {fileID: 1592033984}
-  questType: Quest_Blumun_Test
+  questType: 
   questTreeType: QuestTree_Blumun
   activeQuest: {fileID: 0}
   questTree: {fileID: 0}
@@ -7614,8 +7629,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015043483}
-  m_LocalRotation: {x: -0.08829865, y: -0.06330113, z: -0.0056227758, w: 0.99406475}
-  m_LocalPosition: {x: -6.7350273, y: 0.22452378, z: -51.292908}
+  m_LocalRotation: {x: -0.08829869, y: -0.06330123, z: -0.005622787, w: 0.99406475}
+  m_LocalPosition: {x: -6.7135367, y: 0.22452378, z: -51.260544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9247,15 +9262,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5132545456196823426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.44, y: 0.91, z: -45.78}
+  m_LocalRotation: {x: -0, y: -0.9989381, z: -0, w: 0.046074215}
+  m_LocalPosition: {x: -7.4185095, y: 0.91, z: -45.74764}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5132545456713169466}
   - {fileID: 5132545456132481293}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -174.718, z: 0}
 --- !u!1 &5132545456196823426
 GameObject:
   m_ObjectHideFlags: 0
@@ -9310,7 +9325,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
-  JumpHeight: 2
+  JumpHeight: 1.5
   ForceGravity: -9.81
   isGrounded: 0
 --- !u!136 &5132545456196823438

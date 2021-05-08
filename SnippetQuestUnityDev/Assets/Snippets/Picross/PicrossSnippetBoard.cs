@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/8/21
- * Last Modified by Logan Edmund, 5/4/21
+ * Last Modified by Logan Edmund, 5/8/21
  * 
  * Used to generate UI picross boards on the fly when fed SnippetData of type Picross. Holds all methods needed to handle gameplay and 
  * data modification/updating.
@@ -368,10 +368,14 @@ public class PicrossSnippetBoard : MonoBehaviour
         {
             if (b.transform.GetComponent<Button>() != null)
             {
-                //b.SetState("Blank");
+                if (b.currentValue != '1')
+                    b.SetState("Blank");
+
                 b.transform.GetComponent<Button>().interactable = false;
             }
         }
+
+        PuzzleHeader.text = picrossPuzzleData.snippetName;
 
         //If this is the first time completing the puzzle, run OnPuzzleSolved. Else, run OnPuzzleComplete.
         OnPuzzleSolved();
@@ -395,6 +399,8 @@ public class PicrossSnippetBoard : MonoBehaviour
         foreach (_PicrossClueButton b in clueButtonsVertical)
             if (b != null)
                 Destroy(b.gameObject);
+
+        PuzzleHeader.text = "[Puzzle Title Not Displaying]";
     }
 }
 

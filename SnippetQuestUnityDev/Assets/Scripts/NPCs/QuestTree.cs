@@ -23,8 +23,6 @@ public class QuestTree : MonoBehaviour
     public Dialogue FirstEncounterDialogue = new Dialogue();
     public Dialogue AllQuestsCompleteDialogue = new Dialogue();
 
-    //Start() method is reserved for child classes
-
 
     //Method for shifting the reference for the active quest to the next quest in the list
     public void TrySetNextQuestActive()
@@ -56,5 +54,12 @@ public class QuestTree : MonoBehaviour
         else return true;
     }
 
-
+    public void LoadQuestData()
+    {
+        Debug.Log("Loading Quest data for " + name);
+        foreach (string s in questTypes)
+        {
+            QuestList.Enqueue((Quest)gameObject.AddComponent(System.Type.GetType(s)));        
+        }
+    }
 }

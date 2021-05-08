@@ -149,6 +149,7 @@ public class _FutoshikiPuzzle : MonoBehaviour
         }
     }
 
+    /*
     //Checks the board after a button has been pressed to determine if the puzzle has been solved
     public void checkWinConditions()
     {
@@ -462,7 +463,11 @@ public class _FutoshikiPuzzle : MonoBehaviour
         }
 
     }
-
+    */
+    
+    
+    
+    
     //Updates the conditionsMetText to show how many conditions the player has satisfied
     public void UpdateConditionsMetText(bool emptyButtonFound, bool duplicateAnswerFound, bool failedConditionFound)
     {

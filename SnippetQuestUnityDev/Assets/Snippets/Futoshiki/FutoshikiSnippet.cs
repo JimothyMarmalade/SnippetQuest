@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/12/21
- * Last Modified by Logan Edmund, 4/21/21
+ * Last Modified by Logan Edmund, 5/7/21
  * 
  * Function of FutoshikiSnippet.cs is to hold data for each individual Futoshiki Snippet that can be inserted into puzzle boards.
  * This data and inheriting classes are NOT INTENDED for gameplay purposes such as if it has been collected by the player or position in the world.
@@ -19,6 +19,10 @@ public class FutoshikiSnippet : Snippet
     public string currentSolution;
     //Futoshiki SnippetSolutions are stored as a string of numbers from top left, going right, then repeating for each row.
     public string snippetSolution;
+    //visibleClues and visibleAnswers are FEN-esque strings used to denote which lesserthan clues are visible at the start of the puzzle
+    //and which answer boxes are pre-filled. 0 indicates it is not shown, 1 indicates it is shown.
+    public string visibleAnswers;
+    public string visibleClues;
     //Futoshikis are always a perfect square, meaning they only need one variable for gridSize
     public int gridSize;
 
@@ -37,6 +41,17 @@ public class FutoshikiSnippet : Snippet
         if (snippetSolution.Length != gridSize * gridSize)
         {
             Debug.LogError("FutoshikiSnippet " + snippetSlug + " has invalid solution/gridSize!");
+            return false;
+        }
+        if (visibleAnswers.Length != gridSize*gridSize)
+        {
+            Debug.LogError("FutoshikiSnippet " + snippetSlug + " has invalid visibleAnswers/gridSize!");
+            return false;
+        }
+        if (visibleClues.Length != (2 * ((gridSize * gridSize) - gridSize)))
+        {
+            Debug.LogError("FutoshikiSnippet " + snippetSlug + " has invalid visibleClues/gridSize!");
+            Debug.LogError("visibleClues.length = " + visibleClues.Length + ", should be " + (2 * ((gridSize * gridSize) - gridSize)));
             return false;
         }
 

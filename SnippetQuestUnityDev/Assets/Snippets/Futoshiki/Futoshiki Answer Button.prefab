@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -123,7 +124,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7480526544408580661}
         m_TargetAssemblyTypeName: _FutoshikiAnswerButton, Assembly-CSharp
-        m_MethodName: SetNumber
+        m_MethodName: SetCurrentValue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -148,10 +149,7 @@ MonoBehaviour:
   button: {fileID: 2421570898130727649}
   buttonText: {fileID: 2421570898192549817}
   controllerReference: {fileID: 0}
-  gridSpaceX: 0
-  gridSpaceY: 0
-  hasPresetAnswer: 0
-  presetAnswer: 0
+  maxNum: 0
 --- !u!1 &2421570898192549823
 GameObject:
   m_ObjectHideFlags: 0

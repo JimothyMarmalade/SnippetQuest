@@ -16,6 +16,11 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; set; }
+
+    public delegate void DialogueEvent();
+    public static event DialogueEvent OnDialogueOver;
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -85,8 +90,11 @@ public class DialogueManager : MonoBehaviour
     {
         //Debug.Log("End of Conversation");
         animator.SetBool("IsOpen", false);
-        //nameText.text = "";
-        //sentences.Clear();
+
+        if (OnDialogueOver != null)
+        {
+            OnDialogueOver();
+        }
 
     }
 

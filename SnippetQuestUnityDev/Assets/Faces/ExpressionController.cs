@@ -155,4 +155,81 @@ public class ExpressionController : MonoBehaviour
 
     }
 
+    //Hard-wipes the face animator to stop any current non-default expressions
+    public void ClearExpression()
+    {
+        if (isExpressing)
+        {
+            foreach (AnimatorControllerParameter parameter in eyesAnimator.parameters)
+            {
+                if (parameter.type == AnimatorControllerParameterType.Bool)
+                    eyesAnimator.SetBool(parameter.name, false);
+            }
+            foreach (AnimatorControllerParameter parameter in mouthAnimator.parameters)
+            {
+                if (parameter.type == AnimatorControllerParameterType.Bool)
+                    mouthAnimator.SetBool(parameter.name, false);
+            }
+
+            isExpressing = false;
+        }
+    }
+
+    //turns on the associated expression
+    public void ChangeExpression(string eyesEX, string mouthEX, string source)
+    {
+        //If either of the passed expression "slugs" exist, then clear the current expression and run the new one.
+        AnimatorControllerParameter eyes = null;
+        AnimatorControllerParameter mouth = null;
+        bool eyePassed = false;
+        bool mouthPassed = false;
+
+        //Check the eyes Expression
+        if (eyesEX != "none")
+        {
+            eyePassed = true;
+            foreach (AnimatorControllerParameter parameter in eyesAnimator.parameters)
+            {
+                if (parameter.name == eyesEX)
+                {
+                    eyes = parameter;
+                    break;
+                }
+            }
+        }
+        //Check the mouth Expression
+        if (mouthEX != "none")
+        {
+            mouthPassed = true;
+            foreach (AnimatorControllerParameter parameter in mouthAnimator.parameters)
+            {
+                if (parameter.name == mouthEX)
+                {
+                    mouth = parameter;
+                    break;
+                }
+            }
+        }
+
+        //If either input parameter is valid, clear expression and emote new one.
+        if (eyes != null || mouth != null)
+        {
+            ClearExpression();
+
+            if (eyes != null)
+                eyesAnimator.SetBool(eyes.name, true);
+            else if (eyePassed)
+                Debug.LogError("Warning: eye input from " + source + " failed.");
+
+            if (mouth != null)
+                mouthAnimator.SetBool(mouth.name, true);
+            else if (mouthPassed)
+                Debug.LogError("Warning: mouth input from " + source + " failed.");
+
+            isExpressing = true;
+        }
+        else
+            Debug.LogError("Warning: both inputs from " + source + " are blank.");
+    }
+
 }
