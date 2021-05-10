@@ -100,6 +100,16 @@ public class NewUIController : MonoBehaviour
     {
         ChangeActiveMasterPanel(1);
         snippetPanelAnimator.SetBool("IsOpen", true);
+        PlayerController.Instance.DisableAllMovement();
+        PlayerController.Instance.DisablePlayerCameraControl();
+    }
+
+    public void DeactivateSnippetSelectionPanel()
+    {
+        ChangeActiveMasterPanel(0);
+        snippetPanelAnimator.SetBool("IsOpen", false);
+        PlayerController.Instance.EnableAllMovement();
+        PlayerController.Instance.EnablePlayerCameraControl();
     }
 
     public void ChangeSelectionPanel(int i)
@@ -131,11 +141,7 @@ public class NewUIController : MonoBehaviour
         activeSnippetSelectionPanelID = i;
     }
 
-    public void DeactivateSnippetSelectionPanel()
-    {
-        ChangeActiveMasterPanel(0);
-        snippetPanelAnimator.SetBool("IsOpen", false);
-    }
+    
 
     public void LoadPicrossGame(int picrossID)
     {

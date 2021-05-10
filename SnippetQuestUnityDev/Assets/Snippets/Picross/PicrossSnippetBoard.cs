@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/8/21
- * Last Modified by Logan Edmund, 5/8/21
+ * Last Modified by Logan Edmund, 5/10/21
  * 
  * Used to generate UI picross boards on the fly when fed SnippetData of type Picross. Holds all methods needed to handle gameplay and 
  * data modification/updating.
@@ -45,6 +45,22 @@ public class PicrossSnippetBoard : MonoBehaviour
     int maxNumVerticalClues;
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    private void Update()
+    {
+        //Auto-complete
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            for (int i = 0; i < picrossPuzzleData.snippetSolution.Length; i++)
+            {
+                if (picrossPuzzleData.snippetSolution[i] == '1')
+                {
+                    answerButtons[i].SetState("Filled");
+                }
+            }
+            CheckWinCondition();
+        }
+    }
 
     //Ensures all necessary data is accurate, then runs BuildPicrossBoard().
     public bool TryBuildPicrossBoard(PicrossSnippet s)

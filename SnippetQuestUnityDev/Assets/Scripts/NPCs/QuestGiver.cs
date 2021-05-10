@@ -75,7 +75,7 @@ public class QuestGiver : NPC
                 Debug.LogError("Implement Dialogue existing for the assignment of quests past the first in a QuestTree. " +
                     "Current Dialogue problems are caused by a loading error -- WILL NEED to overhaul Quest system down the line.");
             }
-            //If not, then display the end-of-quest dialogue.
+            //If not, then display the end-of-questTree dialogue.
             else
             {
                 DT.TriggerDialogue(questTree.AllQuestsCompleteDialogue);

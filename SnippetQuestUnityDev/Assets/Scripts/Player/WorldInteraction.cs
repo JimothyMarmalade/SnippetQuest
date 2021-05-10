@@ -11,7 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldInteraction : MonoBehaviour
+public class WorldInteraction : PlayerAction
 {
     public List<string> acceptedTags = new List<string>();
     public bool canDoNewInteract;
@@ -26,7 +26,7 @@ public class WorldInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && canDoNewInteract)
+        if (Input.GetKeyDown(KeyCode.E) && canPerform)
             GetInteraction();
     }
 
@@ -52,4 +52,16 @@ public class WorldInteraction : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("OnTriggerEnter called from " + gameObject.name);
+
+        if (other.gameObject.GetComponent<FieldPickup>() != null)
+        {
+            Debug.Log("FieldPickup");
+            other.GetComponent<FieldPickup>().CollectPickup();
+        }
+    }
+
 }

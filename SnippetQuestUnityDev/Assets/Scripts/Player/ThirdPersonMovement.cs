@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class ThirdPersonMovement : MonoBehaviour
+public class ThirdPersonMovement : PlayerAction
 {
     //References to Components/other objects
     [Header("Character Controller Reference")]
@@ -26,19 +26,12 @@ public class ThirdPersonMovement : MonoBehaviour
     public float TurnSmoothTime = 0.1f;
 
     float SmoothTurnVelocity;
-    bool hasFreeMovement;
-
-
-    private void Awake()
-    {
-        hasFreeMovement = true;
-    }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (hasFreeMovement)
+        if (canPerform)
         {
             CheckPlayerMovement();
         }

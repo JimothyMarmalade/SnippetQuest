@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/7/21
- * Last Modified by Logan Edmund, 3/8/21
+ * Last Modified by Logan Edmund, 5/10/21
  * 
  * Script for SerenePlaces used to trigger related events such as pulling up the Snippet menu. Can (opefully) be applied to anything in order to turn it into
  * a Serene Place.

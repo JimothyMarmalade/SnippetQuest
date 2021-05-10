@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/2/21
- * Last Modified by Logan Edmund, 5/7/21
+ * Last Modified by Logan Edmund, 5/10/21
  * 
  * A DialogueTrigger is simply a container that stores a Dialogue pack and sends it to the DialogueManager when necessary to display it onscreen.
  * 
@@ -26,12 +26,18 @@ public class DialogueTrigger : MonoBehaviour
     public void TriggerDialogue(Dialogue d)
     {
         DialogueManager.OnDialogueOver += DialogueOver;
+        DialogueManager.OnDialogueOver += PlayerController.Instance.EnableAllMovement;
+
+
+        PlayerController.Instance.DisableAllMovement();
         DialogueManager.Instance.StartDialogue(d);
         faceReference.ChangeExpression(d.eyesExpression, d.mouthExpression, d.dialogIdentifier);
     }
     public void DialogueOver()
     {
         faceReference.ClearExpression();
+
+        DialogueManager.OnDialogueOver -= PlayerController.Instance.EnableAllMovement;
         DialogueManager.OnDialogueOver -= DialogueOver;
     }
 }

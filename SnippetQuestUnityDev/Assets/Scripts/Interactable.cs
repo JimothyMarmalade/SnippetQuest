@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 2/28/21
- * Last Modified by Logan Edmund, 4/21/21
+ * Last Modified by Logan Edmund, 5/10/21
  * 
  * Base script/methods that all interactable objects will inherit from.
  * 
@@ -20,6 +20,16 @@ public class Interactable : MonoBehaviour
     //Handles moving the player to a specific spot before the interaction takes place.
     //Will most obviously be used for Serene Places to make animation transition smoother.
     public virtual void MoveToInteraction()
+    {
+
+    }
+
+    public void StartInteraction()
+    {
+
+    }
+
+    public void EndInteraction()
     {
 
     }

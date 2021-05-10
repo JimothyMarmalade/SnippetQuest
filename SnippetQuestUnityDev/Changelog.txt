@@ -1,4 +1,17 @@
-5/11/21 Version
+------------------------------------------------------------------------------------------------------------------------
+5/10/21 Version
+- Added methods StartInteraction() and EndInteraction() to Interactable.cs that can be used by interactables that need to perform special actions before/after their primary function
+- Added the PlayerActions.cs and PlayerController.cs scripts to handle the player's moveset and what actions the player can perform at any given time.
+-- The player's control over the camera can now be toggled on and off the same as other PlayerActions
+-- DialogueTrigger.cs has been updated to trigger the enabling and disabling of player actions through PlayerController when dialogue is started/finished.
+- Added a hotkey (F) that will auto-complete Picross puzzles for testing purposes
+- Made some adjustments to the CharacterController component on the Player
+- Added class FieldPickup.cs for items that can be collected around the world without any expressed input from the player
+-- Made a simple bobbing animation for field pickups
+-- Added class SnippetFieldPickup.cs for collecting snippets in the overworld -- implemented collection and adding snippets to player inventory methods
+- Added "Picross_TestCross" puzzle to SnippetData
+------------------------------------------------------------------------------------------------------------------------
+5/8/21
 - Added givePlayerQuestDialogue Dialogue variable to Quest.cs for more refined conversations (NOT IMPLEMENTED)
 - Picross puzzles will now auto-clear non-filled squares (Marked and Crossed) upon puzzle completion
 - Updated DialogueManager.cs to incorporate an EventListener, allowing the manager to trigger methods upon closing a conversation (OnDialogueOver)
@@ -12,7 +25,7 @@
 -- Added a hotkey (F) that will auto-complete the puzzle for testing purposes
 -- Modified _FutoshikiSnippet (and test puzzle data) so that a puzzle can have pre-filled answers and partially-visible clues.
 - Set title of Picross Puzzle to appear onscreen when Picross puzzles are solved and revert to blank when unloading
----------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 5/4/21 Version
 - Moved some Assets around
 - Fixed the bug where Crossword puzzle clues would fail to load during gameplay (bug caused by implementing the new Snippet data loading system)

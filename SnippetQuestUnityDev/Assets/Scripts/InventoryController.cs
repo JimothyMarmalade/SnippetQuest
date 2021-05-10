@@ -16,6 +16,7 @@ public class InventoryController : MonoBehaviour
 {
     public static InventoryController Instance { get; set; }
     public List<Snippet> PlayerSnippets = new List<Snippet>();
+    public List<string> PlayerSnippetsSlugs = new List<string>();
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class InventoryController : MonoBehaviour
     {
         Debug.Log("InventoryController: Attempting to add Snippet with slug " + snippetSlug);
         PlayerSnippets.Add(SnippetDatabase.Instance.GetSnippet(snippetSlug));
+        PlayerSnippetsSlugs.Add(snippetSlug);
     }
 
     public void RemoveSnippet(string snippetSlug)
@@ -43,6 +45,7 @@ public class InventoryController : MonoBehaviour
             if (s.snippetSlug == snippetSlug)
             {
                 PlayerSnippets.Remove(s);
+                PlayerSnippetsSlugs.Remove(s.snippetSlug);
                 Debug.Log("Inventory Controller: Removed snippet with slug " + snippetSlug);
                 return;
             }

@@ -30,5 +30,15 @@
     "snippetSolved": "false",
     "numTimesSolved": 0,
     "bestTime": -1
+  },
+  {
+	"snippetSlug": "Picross_TestCross",
+    "snippetType": "Picross",
+    "snippetName": "Test Cross",
+    "masterID": -1,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1
   }
-] 
+]
