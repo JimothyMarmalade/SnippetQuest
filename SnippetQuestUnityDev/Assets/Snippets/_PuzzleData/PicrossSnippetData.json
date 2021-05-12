@@ -28,6 +28,33 @@
     "snippetSolution": "1000101010001000101010001",
     "horizontalGridSize": 5,
     "verticalGridSize": 5
-	
+  },
+  {
+    "snippetSlug": "Picross_SmileyFace",
+    "snippetType": "Picross",
+    "snippetName": "Smiley Face",
+    "masterID": -1,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1,
+    "currentSolution": "",
+    "snippetSolution": "0101001010001001101101110",
+    "horizontalGridSize": 5,
+    "verticalGridSize": 5
+  },
+  {
+    "snippetSlug": "Picross_Leaf",
+    "snippetType": "Picross",
+    "snippetName": "Leaf",
+    "masterID": -1,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1,
+    "currentSolution": "",
+    "snippetSolution": "0000111111000101010100110101100101011010010101101001011000100111111110001000010001011110000100000000",
+    "horizontalGridSize": 10,
+    "verticalGridSize": 10
   }
 ]

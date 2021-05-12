@@ -12,7 +12,7 @@ using UnityEngine;
 
 public class SnippetFieldPickup : FieldPickup
 {
-    public string snippetSlug;
+    public string snippetSlug = "No Slug!";
 
     public override void CollectPickup()
     {

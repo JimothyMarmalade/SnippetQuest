@@ -35,6 +35,9 @@ public class InventoryController : MonoBehaviour
         Debug.Log("InventoryController: Attempting to add Snippet with slug " + snippetSlug);
         PlayerSnippets.Add(SnippetDatabase.Instance.GetSnippet(snippetSlug));
         PlayerSnippetsSlugs.Add(snippetSlug);
+
+        //Send information to the UI and update relevant information
+        NewUIController.Instance.CheckUnlockNewSnippet(snippetSlug);
     }
 
     public void RemoveSnippet(string snippetSlug)

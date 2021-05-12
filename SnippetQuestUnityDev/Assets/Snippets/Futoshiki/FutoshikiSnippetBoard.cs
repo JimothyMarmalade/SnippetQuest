@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/12/21
- * Last Modified by Logan Edmund, 5/6/21
+ * Last Modified by Logan Edmund, 5/11/21
  * 
  * Used to generate UI Futoshiki boards on the fly when fed SnippetData of type Futoshiki. Holds all methods needed to handle gameplay and 
  * data modification/updating.
@@ -66,7 +66,6 @@ public class FutoshikiSnippetBoard : MonoBehaviour
         SetSizes();
         InstantiateAnswerButtons();
         InstantiateClues();
-        SetStartingCluesAndAnswers();
     }
 
     //SetSizes sets the size for answer buttons and clue buttons
@@ -197,20 +196,6 @@ public class FutoshikiSnippetBoard : MonoBehaviour
         }
     }
 
-    //SetStartingCluesAndAnswers will reduce the number of visible clues and answers available on the board at the start 
-    //so the puzzle isn't immediately solvable
-    private void SetStartingCluesAndAnswers()
-    {
-        int i = 0;
-        foreach (char c in futoshikiPuzzleData.visibleAnswers)
-        {
-            if (c == '1')
-            {
-
-            }
-            i++;
-        }
-    }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //Quick check compares the input solution to the snippet's coded solution and checks for equality. Futoshikis can only ever have one solution.

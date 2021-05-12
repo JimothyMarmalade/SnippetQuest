@@ -18,7 +18,7 @@ public class Quest : MonoBehaviour
     public List<QuestGoal> Goals { get; set; } = new List<QuestGoal>();
     public string QuestName { get; set; }
     public string Description { get; set; }
-    public List<Snippet> SnippetReward { get; set; }
+    public List<string> SnippetReward { get; set; }
     public bool IsActive { get; set; }
     public bool IsCompleted { get; set; }
 
@@ -44,10 +44,10 @@ public class Quest : MonoBehaviour
         if (SnippetReward != null)
         {
             //Give the snippet to the player by inserting it in the inventory
-            foreach (Snippet s in SnippetReward)
+            foreach (string s in SnippetReward)
             {
-                InventoryController.Instance.GiveSnippet(s.snippetSlug);
-                Debug.Log("Added Snippet with slug " + s.snippetSlug + "to player Inventory");
+                InventoryController.Instance.GiveSnippet(s);
+                Debug.Log("Added Snippet with slug " + s + "to player Inventory");
             }
         }
         else

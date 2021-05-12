@@ -18,6 +18,8 @@ using TMPro;
 //Controls all UI Elements
 public class NewUIController : MonoBehaviour
 {
+    public static NewUIController Instance { get; set; }
+
     //Panel that displays during on-foot gameplay
     [Header("Third Person Panel(s)")]
     public GameObject thirdPersonPanel;
@@ -29,10 +31,13 @@ public class NewUIController : MonoBehaviour
     public GameObject snippetPanel;
 
     public GameObject picrossSelectionPanel;
-    public Button[] picrossButtons;
+    public List<SnippetLoaderButton> picrossButtons;
 
     public GameObject futoshikiSelectionPanel;
-    public Button[] futoshikiButtons;
+    public List<SnippetLoaderButton> futoshikiButtons;
+
+    public GameObject crosswordSelectionPanel;
+    public List<SnippetLoaderButton> crosswordButtons;
 
     [Header("Snippet Gameplay Panels")]
     public Animator picrossGameplayAnimator;
@@ -64,6 +69,15 @@ public class NewUIController : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else if (Instance == null && Instance != this)
+        {
+            Instance = this;
+        }
+
         //Add all panels to the appropriate lists for indexing
         masterPanels.Add(thirdPersonPanel);         //ID 0
         masterPanels.Add(snippetPanel);             //ID 1
@@ -71,6 +85,9 @@ public class NewUIController : MonoBehaviour
 
         snippetSelectionPanels.Add(picrossSelectionPanel);      //ID 0
         snippetSelectionPanels.Add(futoshikiSelectionPanel);    //ID 1
+
+        LockAllSnippets();
+        FullCheckUnlockNewSnippets();
     }
 
     //----------Methods for activating master panels
@@ -141,13 +158,13 @@ public class NewUIController : MonoBehaviour
         activeSnippetSelectionPanelID = i;
     }
 
-    
 
-    public void LoadPicrossGame(int picrossID)
+    //----------Methods for loading and leaving the individual game panels
+    public void LoadPicrossGame(string picrossSlug)
     {
         picrossGameplayAnimator.SetBool("IsOpen", true);
         //Run the necessary methods that load the picross puzzle into the game board, then set bool "puzzleLoaded" to true
-        picrossGameplayAnimator.SetBool("PuzzleLoaded", picrossBoard.TryBuildPicrossBoard(SnippetDatabase.Instance.GetPicrossSnippet("Picross_TestHeart")));
+        picrossGameplayAnimator.SetBool("PuzzleLoaded", picrossBoard.TryBuildPicrossBoard(SnippetDatabase.Instance.GetPicrossSnippet(picrossSlug)));
     }
 
     public void LeavePicrossGame()
@@ -155,10 +172,10 @@ public class NewUIController : MonoBehaviour
         picrossGameplayAnimator.SetBool("IsOpen", false);
     }
 
-    public void LoadFutoshikiGame(int futoshikiID)
+    public void LoadFutoshikiGame(string futoshikiSlug)
     {
         futoshikiGameplayAnimator.SetBool("IsOpen", true);
-        futoshikiGameplayAnimator.SetBool("PuzzleLoaded", futoshikiBoard.TryBuildFutoshikiBoard(SnippetDatabase.Instance.GetFutoshikiSnippet("Futoshiki_TestPuzzle")));
+        futoshikiGameplayAnimator.SetBool("PuzzleLoaded", futoshikiBoard.TryBuildFutoshikiBoard(SnippetDatabase.Instance.GetFutoshikiSnippet(futoshikiSlug)));
     }
 
     public void LeaveFutoshikiGame()
@@ -166,10 +183,10 @@ public class NewUIController : MonoBehaviour
         futoshikiGameplayAnimator.SetBool("IsOpen", false);
     }
 
-    public void LoadCrosswordGame(int crosswordID)
+    public void LoadCrosswordGame(string crosswordSlug)
     {
         crosswordGameplayAnimator.SetBool("IsOpen", true);
-        crosswordGameplayAnimator.SetBool("PuzzleLoaded", crosswordBoard.TryBuildCrosswordBoard(SnippetDatabase.Instance.GetCrosswordSnippet("Crossword_TestPuzzle")));
+        crosswordGameplayAnimator.SetBool("PuzzleLoaded", crosswordBoard.TryBuildCrosswordBoard(SnippetDatabase.Instance.GetCrosswordSnippet(crosswordSlug)));
     }
 
     public void LeaveCrosswordGame()
@@ -177,6 +194,74 @@ public class NewUIController : MonoBehaviour
         crosswordGameplayAnimator.SetBool("IsOpen", false);
     }
 
+    //----------Methods for turning on/off loader buttons
+
+    //Disables all snippets from being solved
+    public void LockAllSnippets()
+    {
+        foreach (SnippetLoaderButton s in picrossButtons)
+            s.TurnOff();
+        foreach (SnippetLoaderButton s in futoshikiButtons)
+            s.TurnOff();
+        foreach (SnippetLoaderButton s in crosswordButtons)
+            s.TurnOff();
+    }
+
+
+    //Does a full scan of each snippet in player's inventory and unlocks associated buttons
+    public void FullCheckUnlockNewSnippets()
+    {
+        foreach (SnippetLoaderButton s in picrossButtons)
+        {
+            if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
+                s.TurnOn();
+        }
+        foreach (SnippetLoaderButton s in futoshikiButtons)
+        {
+            if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
+                s.TurnOn();
+        }
+        foreach (SnippetLoaderButton s in crosswordButtons)
+        {
+            if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
+                s.TurnOn();
+        }
+    }
+
+    //Unlocks a specific snippet when passed a slug
+    public void CheckUnlockNewSnippet(string snippetSlug)
+    {
+        Debug.Log("CheckUnlockNewSnippet() called...");
+        foreach (SnippetLoaderButton s in picrossButtons)
+        {
+            if (s.snippetSlug == snippetSlug)
+            {
+                s.TurnOn();
+                Debug.Log("Unlocked " + snippetSlug + " on selection panel!");
+                return;
+            }
+        }
+        foreach (SnippetLoaderButton s in futoshikiButtons)
+        {
+            if (s.snippetSlug == snippetSlug)
+            {
+                s.TurnOn();
+                Debug.Log("Unlocked " + snippetSlug + " on selection panel!");
+                return;
+            }
+        }
+        foreach (SnippetLoaderButton s in crosswordButtons)
+        {
+            if (s.snippetSlug == snippetSlug)
+            {
+                s.TurnOn();
+                Debug.Log("Unlocked " + snippetSlug + " on selection panel!");
+                return;
+            }
+        }
+
+        Debug.LogError("UI Controller could not find slug " + snippetSlug + " in any SnippetLoaderButtons!");
+    }
 
     /*
     //----------Methods for activating SnippetSelection panels

@@ -8,7 +8,9 @@ public class Quest_Blumun_TwoPicross : Quest
     {
         QuestName = "Blumun's Amount Challenge";
         Description = "Demonstrate your twice awesome puzzling skills!";
-        SnippetReward = null;
+        SnippetReward = new List<string>();
+        SnippetReward.Add("Futoshiki_3");
+        SnippetReward.Add("Picross_Leaf");
 
         givePlayerQuestDialogue.speakerName = "Blumun";
         givePlayerQuestDialogue.sentences = new string[]{
@@ -21,7 +23,7 @@ public class Quest_Blumun_TwoPicross : Quest
         //-------------------------------------------------------------------
         inProgressDialogue.speakerName = "Blumun";
         inProgressDialogue.sentences = new string[] 
-        {"You haven't completed the quest yet! Keep solving puzzles.",
+        {"You haven't completed the quest yet! Keep solving picross puzzles.",
         "It's fine if you complete puzzles you've already solved, too."
         };
         inProgressDialogue.eyesExpression = "isAngry";
@@ -31,7 +33,7 @@ public class Quest_Blumun_TwoPicross : Quest
         rewardDialogue.sentences = new string[]
         {
             "Hey, look at that! You did it twice! Great job!",
-            "A reward? Sorry, maybe in the next demo."
+            "Here's another Picross puzzle I found, and one of those Futo-whatzits. You really seem to know what you're doing!"
         };
         rewardDialogue.eyesExpression = "IsHappy";
         rewardDialogue.mouthExpression = "MouthSmile";

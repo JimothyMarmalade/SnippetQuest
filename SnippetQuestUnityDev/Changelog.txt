@@ -1,8 +1,14 @@
+5/11/21 Update
+- Added SnippetLoaderButton.cs. Changed the puzzle load methods in NewUIController to take in a string (slug) from a button instead of an int (masterID) and updated all the pre-existing buttons in the UI accordingly.
+- Added methods in the UI to update available snippets to solve based on contents of player inventory.
+- Added new original music into the project folder
+- Added Futoshiki_2, Futoshiki_3, Picross_SmileyFace, and Picross_Leaf snippet data into relevant .json files
+- Added quest rewards for Blumun's available quests
 ------------------------------------------------------------------------------------------------------------------------
-5/10/21 Version
+5/10/21 Update
 - Added methods StartInteraction() and EndInteraction() to Interactable.cs that can be used by interactables that need to perform special actions before/after their primary function
 - Added the PlayerActions.cs and PlayerController.cs scripts to handle the player's moveset and what actions the player can perform at any given time.
--- The player's control over the camera can now be toggled on and off the same as other PlayerActions
+-- The player's control over the camera can now be toggled on and off in scripting the same as other PlayerActions
 -- DialogueTrigger.cs has been updated to trigger the enabling and disabling of player actions through PlayerController when dialogue is started/finished.
 - Added a hotkey (F) that will auto-complete Picross puzzles for testing purposes
 - Made some adjustments to the CharacterController component on the Player
@@ -11,7 +17,7 @@
 -- Added class SnippetFieldPickup.cs for collecting snippets in the overworld -- implemented collection and adding snippets to player inventory methods
 - Added "Picross_TestCross" puzzle to SnippetData
 ------------------------------------------------------------------------------------------------------------------------
-5/8/21
+5/8/21 Update
 - Added givePlayerQuestDialogue Dialogue variable to Quest.cs for more refined conversations (NOT IMPLEMENTED)
 - Picross puzzles will now auto-clear non-filled squares (Marked and Crossed) upon puzzle completion
 - Updated DialogueManager.cs to incorporate an EventListener, allowing the manager to trigger methods upon closing a conversation (OnDialogueOver)

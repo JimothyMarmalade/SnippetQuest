@@ -19,10 +19,15 @@ public class FutoshikiSnippet : Snippet
     public string currentSolution;
     //Futoshiki SnippetSolutions are stored as a string of numbers from top left, going right, then repeating for each row.
     public string snippetSolution;
+
+
     //visibleClues and visibleAnswers are FEN-esque strings used to denote which lesserthan clues are visible at the start of the puzzle
     //and which answer boxes are pre-filled. 0 indicates it is not shown, 1 indicates it is shown.
     public string visibleAnswers;
+    //Visible clues contains data for ALL clues used in the puzzle. The first half of the string tracks top/bottom clues, the back half tracks
+    // left/right clues.
     public string visibleClues;
+
     //Futoshikis are always a perfect square, meaning they only need one variable for gridSize
     public int gridSize;
 
