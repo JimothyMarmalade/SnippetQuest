@@ -9,11 +9,14 @@ public class _FutoshikiAnswerButton : MonoBehaviour
     //refers to the self
     public Button button;
     public TMP_Text buttonText;
-    public FutoshikiSnippetBoard controllerReference;
+    private FutoshikiSnippetBoard controllerReference;
     private bool conflicting = false;
     private bool locked = false;
     public int maxNum;
     private int currentVal = 0;
+
+    public TMP_FontAsset PrintedFont;
+    public TMP_FontAsset HandwrittenFont;
 
 
     public void InstAnswerButton(FutoshikiSnippetBoard controller, int m)
@@ -21,6 +24,7 @@ public class _FutoshikiAnswerButton : MonoBehaviour
         controllerReference = controller;
         maxNum = m;
         buttonText.text = "";
+        buttonText.font = HandwrittenFont;
     }
 
     //Sets the value held to a permanent, developer-defined thing
@@ -31,6 +35,7 @@ public class _FutoshikiAnswerButton : MonoBehaviour
 
         //Locks button as one with a preset value
         locked = true;
+        buttonText.font = PrintedFont;
 
         SetCurrentValue(value);
     }

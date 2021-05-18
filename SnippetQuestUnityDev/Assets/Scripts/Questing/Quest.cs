@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 4/21/21
- * Last Modified by Logan Edmund, 4/21/21
+ * Last Modified by Logan Edmund, 5/14/21
  * 
  * The data container for quest info and their reward for completion
  * 
@@ -10,22 +10,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using System.Linq;
 
 [System.Serializable]
 public class Quest : MonoBehaviour
 {
-    public List<QuestGoal> Goals { get; set; } = new List<QuestGoal>();
-    public string QuestName { get; set; }
-    public string Description { get; set; }
-    public List<string> SnippetReward { get; set; }
-    public bool IsActive { get; set; }
-    public bool IsCompleted { get; set; }
+    public List<QuestGoal> Goals = new List<QuestGoal>();
+
+    public string QuestName;
+
+    public string Description;
+
+    public List<string> SnippetReward;
+
+    public bool IsInProgress;
+
+    public bool IsCompleted;
 
     public Dialogue givePlayerQuestDialogue = new Dialogue();
+
     public Dialogue inProgressDialogue = new Dialogue();
+
     public Dialogue rewardDialogue = new Dialogue();
-    public Dialogue completedDialogue = new Dialogue();
+
+
+    private void Start()
+    {
+        LoadQuestData();
+    }
+
+    public virtual void LoadQuestData()
+    {
+        //Quest data is loaded and set up here
+    }
+
+    public virtual void ActivateQuest()
+    {
+        //Turn on quest goals and listeners here
+    }
 
     public void CheckGoals()
     {
@@ -56,15 +80,24 @@ public class Quest : MonoBehaviour
         }
     }
 
-    public void SetQuestActive()
+    public void SetQuestInProgress()
     {
-        IsActive = true;
+        Debug.Log("Running SetQuestInProgress() in Quest.cs");
+        ActivateQuest();
+
+        IsInProgress = true;
+
+        Debug.Log("Quest name is: " + QuestName);
+        Debug.Log("Goals count is: " + Goals.Count);
+
+
     }
 
     public void SetQuestCompleted()
     {
-        IsActive = false;
+        IsInProgress = false;
         IsCompleted = true;
     }
+
 
 }

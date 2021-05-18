@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 4/21/21
- * Last Modified by Logan Edmund, 4/21/21
+ * Last Modified by Logan Edmund, 5/16/21
  * 
  * Acts as the player's journal and stores information about all quests the player has taken on, completed or in-progress.
  * Also stores notes and other important information.
@@ -14,8 +14,11 @@ using UnityEngine;
 public class QuestLog : MonoBehaviour
 {
     public static QuestLog Instance { get; set; }
-    
-    private List<Quest> questList = new List<Quest>();
+
+    public Quest activeQuest;
+    public List<Quest> inProgressQuests = new List<Quest>();
+    public List<Quest> completedQuests = new List<Quest>();
+
 
 
     private void Awake()
@@ -28,36 +31,88 @@ public class QuestLog : MonoBehaviour
         {
             Instance = this;
         }
+
+        DontDestroyOnLoad(this);
     }
 
-    void Update()
+    //Determines if the UI needs to be updated after a goal is completed.
+    public void CheckUpdateAQID(QuestGoal q)
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (q.AssignedQuest == activeQuest)
         {
-            Debug.Log(questList[0].Description);
+            NewUIController.Instance.UpdateActiveQuestInfo(activeQuest);
         }
     }
 
-    public void AddQuestToLog(Quest q)
+
+    //Copies the quest component into the questmanager and deletes the original instance
+    public void AddQuestToManager(Quest q)
     {
-        questList.Add(q);
-        q.SetQuestActive();
+
     }
 
-    public void RemoveQuestFromLog(Quest q)
+    public void SetActiveQuest(Quest q)
     {
-        foreach (Quest quest in questList)
+        activeQuest = q;
+        NewUIController.Instance.UpdateActiveQuestInfo(q);
+    }
+
+    public void ArchiveQuest(Quest q)
+    {
+        RemoveQuestFromIPQ(q);
+
+        if (activeQuest == q)
+            activeQuest = null;
+
+        AddQuestToCompleted(q);
+
+        if (inProgressQuests.Count != 0)
+            SetActiveQuest(inProgressQuests[0]);
+        else
+            NewUIController.Instance.ClearActiveQuestInfo();
+
+    }
+
+    public void AddQuestToIPQ(Quest q)
+    {
+        inProgressQuests.Add(q);
+        if (activeQuest == null)
+            SetActiveQuest(q);
+    }
+
+    public void RemoveQuestFromIPQ(Quest q)
+    {
+        foreach (Quest quest in inProgressQuests)
         {
-            if (quest.name == q.name)
+            if (quest == q)
             {
-                Debug.Log("Found activeQuest, removing from log");
-                questList.Remove(quest);
+                Debug.Log("Found Quest, removing from log");
+                inProgressQuests.Remove(quest);
+                inProgressQuests.RemoveAll(item => item == null);
                 return;
             }
         }
-        Debug.LogError("Could not find activeQuest \"" + q.name + "\" in QuestLog");
+        Debug.LogError("Could not find Quest \"" + q.name + "\" in InProgressQuests");
     }
 
+    public void AddQuestToCompleted(Quest q)
+    {
+        completedQuests.Add(q);
+    }
 
+    public void RemoveQuestFromCompleted(Quest q)
+    {
+        foreach (Quest quest in completedQuests)
+        {
+            if (quest == q)
+            {
+                Debug.Log("Found Quest in completedQuests, removing from list");
+                completedQuests.Remove(quest);
+                completedQuests.RemoveAll(item => item == null);
+                return;
+            }
+        }
+        Debug.LogError("Could not find Quest \"" + q.name + "\" in completedQuests");
+    }
 
 }

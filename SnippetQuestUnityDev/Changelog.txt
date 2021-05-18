@@ -1,3 +1,47 @@
+5/18/21 Update
+- Included the sightly-trimmed raw audio files for background music in the project.
+
+- Added the AudioManager.cs and Sound.cs classes for implementing sounds in-game
+-- Includes methods for fading in/out BGM tracks for dynamic audio
+
+- Reorganized the Sounds folder in Assets
+
+- Modified how interacting with SerenePlaces and exiting SerenePlaces calls methods, all actions are now performed/called from within the SerenePlaces.cs file
+-- SerenePlaces are now scripted to trigger a change from exploration music to Snippet music
+
+- Modified DialogueTrigger.cs to change music from Exploration to Activity during dialogue and revert when done
+
+- Renamed the music tracks
+-- SnippetQuestActivity is now SQ_Forest_Exploring
+-- SnippetQuestExploring is now SQ_Forest_Snippet
+-- SnippetQuestSolving is now SQ_Forest_Activity
+
+- Changed ExpressionController.cs to use enums for animation states rather than strings.
+-- Updated Dialogue and all quests to utilize this
+
+- Added basic NPC "Abby" into the scene.
+
+- Made some changes to the scene and environment lighting in the project; lightened shadow strength, upped light reflections
+
+- Snippets will now play a sound when solved
+
+- Included a .txt file with references to all free/purchased assets used in the project
+
+- Added the ActiveQuestInfoDisplay.cs file that tracks and displays progression of the last-taken quest.
+
+- Restructured Quest tracking/distribution system
+-- Revamped QuestGiver.cs, Quest.cs, QuestLog.cs. Made QuestTree (temporarily) obsolete.
+
+- Added InteractionPrompt.cs and Billboard.cs, and created the InteractionPrompt prefab that can display over interactables when highlighted by the player. Modified the Interactable.cs class to require an InteractionPrompt that is displayed when the player is close enough to interact with it.
+
+- Added SnippetObtainedPopup.cs and created the SnippetObtainedPopup Prefab. Basic functionality implemented.
+
+- Applied new fonts to Snippet Solving boards. Some scripts now have a space for Printed Text and Handwritten Text.
+
+- Added logic to Jump.cs that caps the player's maximum downward velocity
+
+- Added the MinigameLoader.cs script
+------------------------------------------------------------------------------------------------------------------------
 5/11/21 Update
 - Added SnippetLoaderButton.cs. Changed the puzzle load methods in NewUIController to take in a string (slug) from a button instead of an int (masterID) and updated all the pre-existing buttons in the UI accordingly.
 - Added methods in the UI to update available snippets to solve based on contents of player inventory.

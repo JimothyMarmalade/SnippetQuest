@@ -25,8 +25,8 @@ public class QuestTree_Blumun : QuestTree
             "But hey, you don't wanna hear all that. For now, why don't you interact with that bench over there and try to solve that Picross puzzle I gave you?",
             "I just labeled it as \"Picross 1.\" Take a seat and give 'er a try."
         };
-        FirstEncounterDialogue.eyesExpression = "none";
-        FirstEncounterDialogue.mouthExpression = "MouthMessageBox";
+        FirstEncounterDialogue.eyesExpression = ExpressionController.EyesExpression.None;
+        FirstEncounterDialogue.mouthExpression = ExpressionController.MouthExpression.MessageBox;
         
         //-------------------------------------------------------------------
         AllQuestsCompleteDialogue.speakerName = "Blumun";
@@ -34,8 +34,8 @@ public class QuestTree_Blumun : QuestTree
         {
             "Congrats again on figuring those puzzles out. You're pretty good at this!"
         };
-        AllQuestsCompleteDialogue.eyesExpression = "isHappy";
-        AllQuestsCompleteDialogue.mouthExpression = "MouthSmile";
+        AllQuestsCompleteDialogue.eyesExpression = ExpressionController.EyesExpression.Happy;
+        AllQuestsCompleteDialogue.mouthExpression = ExpressionController.MouthExpression.Happy;
 
 
         questTypes.Add(Quest1);

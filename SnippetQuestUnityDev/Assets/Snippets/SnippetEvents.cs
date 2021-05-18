@@ -29,6 +29,8 @@ public class SnippetEvents : MonoBehaviour
         {
             Instance = this;
         }
+
+        DontDestroyOnLoad(this);
     }
 
     //SnippetSolved runs when a snippet puzzle is completed successfully FOR THE FIRST TIME

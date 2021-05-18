@@ -24,11 +24,25 @@ public class NewUIController : MonoBehaviour
     [Header("Third Person Panel(s)")]
     public GameObject thirdPersonPanel;
 
+    [Header("Active Quest Display")]
+    public ActiveQuestInfoDisplay AQID;
+
+    [Header("Snippet Obtained Popup")]
+    public RectTransform SOPSpawnLocation1;
+    public RectTransform SOPSpawnLocation2;
+    public RectTransform SOPSpawnLocation3;
+    private SnippetObtainedPopup SOP1;
+    private SnippetObtainedPopup SOP2;
+    private SnippetObtainedPopup SOP3;
+
+    public GameObject SOPPrefab;
+
     //Master panel that displays during snippet selection
     //[snippetType]Buttons holds references to the buttons that activate the snippet panel
     [Header("Snippet Selection Panels")]
     public Animator snippetPanelAnimator;
     public GameObject snippetPanel;
+    public Button LeaveSnippetPanelButton;
 
     public GameObject picrossSelectionPanel;
     public List<SnippetLoaderButton> picrossButtons;
@@ -77,6 +91,7 @@ public class NewUIController : MonoBehaviour
         {
             Instance = this;
         }
+        DontDestroyOnLoad(this);
 
         //Add all panels to the appropriate lists for indexing
         masterPanels.Add(thirdPersonPanel);         //ID 0
@@ -86,8 +101,106 @@ public class NewUIController : MonoBehaviour
         snippetSelectionPanels.Add(picrossSelectionPanel);      //ID 0
         snippetSelectionPanels.Add(futoshikiSelectionPanel);    //ID 1
 
+        ClearActiveQuestInfo();
+
         LockAllSnippets();
         FullCheckUnlockNewSnippets();
+    }
+
+    //----------Spawn a new Snippet Obtained Prefab
+    public void SpawnSnippetObtainedPopup(string snippetType)
+    {
+        if (SOP1 == null)
+        {
+            SOP1 = Instantiate(SOPPrefab, SOPSpawnLocation1).GetComponent<SnippetObtainedPopup>();
+            SOP1.Init(snippetType);
+        }
+        else if (SOP2 == null)
+        {
+            SOP2 = Instantiate(SOPPrefab, SOPSpawnLocation2).GetComponent<SnippetObtainedPopup>();
+            SOP2.Init(snippetType);
+        }
+        else if (SOP3 == null)
+        {
+            SOP3 = Instantiate(SOPPrefab, SOPSpawnLocation3).GetComponent<SnippetObtainedPopup>();
+            SOP3.Init(snippetType);
+        }
+        else
+        {
+            //IF there's no room for a new popup, save the information until a new popup can be displayed
+        }
+    }
+
+    //----------Update the Active Quest Information
+    public void UpdateActiveQuestInfo(Quest q)
+    {
+        AQID.QuestTitle.text = q.QuestName;
+        switch (q.Goals.Count)
+        {
+            case (1):
+                AQID.Objective1.text = q.Goals[0].Description;
+                AQID.Objective2.text = "";
+                AQID.Objective3.text = "";
+                break;
+            case (2):
+                AQID.Objective1.text = q.Goals[0].Description;
+                AQID.Objective2.text = q.Goals[1].Description;
+                AQID.Objective3.text = "";
+                break;
+            case (3):
+                AQID.Objective1.text = q.Goals[0].Description;
+                AQID.Objective2.text = q.Goals[1].Description;
+                AQID.Objective3.text = q.Goals[2].Description;
+                break;
+        }
+
+        StrikethroughObjectives(q);
+        if (q.IsCompleted)
+            ShowCompleteText();
+        else
+            HideCompleteText();
+    }
+    public void ClearActiveQuestInfo()
+    {
+        AQID.QuestTitle.text = "No Active Quest";
+        AQID.Objective1.text = "No Active Quest";
+        AQID.Objective2.text = "No Active Quest";
+        AQID.Objective3.text = "No Active Quest";
+        HideCompleteText();
+    }
+    public void StrikethroughObjectives(Quest q)
+    {
+        switch (q.Goals.Count)
+        {
+            case (1):
+                if (q.Goals[0].Completed)
+                    AQID.Objective1.text = "<s>" + AQID.Objective1.text + "</s>";
+                break;
+            case (2):
+                if (q.Goals[0].Completed)
+                    AQID.Objective1.text = "<s>" + AQID.Objective1.text + "</s>";
+                if (q.Goals[1].Completed)
+                    AQID.Objective2.text = "<s>" + AQID.Objective2.text + "</s>";
+                break;
+            case (3):
+                if (q.Goals[0].Completed)
+                    AQID.Objective1.text = "<s>" + AQID.Objective1.text + "</s>";
+                if (q.Goals[1].Completed)
+                    AQID.Objective2.text = "<s>" + AQID.Objective2.text + "</s>";
+                if (q.Goals[2].Completed)
+                    AQID.Objective3.text = "<s>" + AQID.Objective3.text + "</s>";
+                break;
+        }
+    }
+    
+    public void ShowCompleteText()
+    {
+        AQID.CompleteText.gameObject.SetActive(true);
+    }
+
+    public void HideCompleteText()
+    {
+        AQID.CompleteText.gameObject.SetActive(false);
     }
 
     //----------Methods for activating master panels
@@ -117,16 +230,12 @@ public class NewUIController : MonoBehaviour
     {
         ChangeActiveMasterPanel(1);
         snippetPanelAnimator.SetBool("IsOpen", true);
-        PlayerController.Instance.DisableAllMovement();
-        PlayerController.Instance.DisablePlayerCameraControl();
     }
 
     public void DeactivateSnippetSelectionPanel()
     {
         ChangeActiveMasterPanel(0);
         snippetPanelAnimator.SetBool("IsOpen", false);
-        PlayerController.Instance.EnableAllMovement();
-        PlayerController.Instance.EnablePlayerCameraControl();
     }
 
     public void ChangeSelectionPanel(int i)

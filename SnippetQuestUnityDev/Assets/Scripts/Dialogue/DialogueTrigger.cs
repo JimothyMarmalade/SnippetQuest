@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/2/21
- * Last Modified by Logan Edmund, 5/10/21
+ * Last Modified by Logan Edmund, 5/12/21
  * 
  * A DialogueTrigger is simply a container that stores a Dialogue pack and sends it to the DialogueManager when necessary to display it onscreen.
  * 
@@ -19,25 +19,51 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
+        //Add methods to OnDialogueOver to restore control after conversation
+        DialogueManager.OnDialogueOver += DialogueOver;
+
+        //Disable player movement
+        PlayerController.Instance.DisableAllMovement();
+
+        //Begin Dialogue
         DialogueManager.Instance.StartDialogue(dialogue);
-        faceReference.ChangeExpression(dialogue.eyesExpression, dialogue.mouthExpression, dialogue.dialogIdentifier);
+
+        //Begin facial animations
+        faceReference.ChangeExpression(dialogue.eyesExpression, dialogue.mouthExpression);
+
+        //Begin music changes
+        AudioManager.Instance.BGMFocusActivity(1.5f);
     }
 
     public void TriggerDialogue(Dialogue d)
     {
+        //Add methods to OnDialogueOver to restore control after conversation
         DialogueManager.OnDialogueOver += DialogueOver;
-        DialogueManager.OnDialogueOver += PlayerController.Instance.EnableAllMovement;
 
-
+        //Disable player movement
         PlayerController.Instance.DisableAllMovement();
+
+        //Begin Dialogue
         DialogueManager.Instance.StartDialogue(d);
-        faceReference.ChangeExpression(d.eyesExpression, d.mouthExpression, d.dialogIdentifier);
+
+        //Begin facial animations
+        faceReference.ChangeExpression(d.eyesExpression, d.mouthExpression);
+
+        //Begin music changes
+        AudioManager.Instance.BGMFocusActivity(1.5f);
     }
     public void DialogueOver()
     {
+        //Restore Player Movement
+        PlayerController.Instance.EnableAllMovement();
+
+        //Reset the facial expression
         faceReference.ClearExpression();
 
-        DialogueManager.OnDialogueOver -= PlayerController.Instance.EnableAllMovement;
+        //Change music back to exploration
+        AudioManager.Instance.BGMFocusExploration(1.5f);
+
+        //Remove these methods from OnDialogueOver
         DialogueManager.OnDialogueOver -= DialogueOver;
     }
 }

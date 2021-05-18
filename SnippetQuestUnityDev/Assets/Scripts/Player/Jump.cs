@@ -21,6 +21,7 @@ public class Jump : PlayerAction
     [Header("Jump Strength/Gravity")]
     public float JumpHeight = 4;
     public float ForceGravity = -9.81f;
+    public float MaxForceGravity = -30f;
 
     Vector3 PlayerVelocity;
     public bool isGrounded;
@@ -44,6 +45,7 @@ public class Jump : PlayerAction
 
         //Apply Gravity
         PlayerVelocity.y += ForceGravity * Time.deltaTime;
+        PlayerVelocity.y = Mathf.Clamp(PlayerVelocity.y, MaxForceGravity, Mathf.Infinity);
         Controller.Move(PlayerVelocity * Time.deltaTime);
     }
 }

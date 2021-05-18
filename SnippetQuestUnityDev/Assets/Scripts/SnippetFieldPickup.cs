@@ -17,9 +17,10 @@ public class SnippetFieldPickup : FieldPickup
     public override void CollectPickup()
     {
         //Find a reference to the slug in th snippetDatabase and add it to the player's inventory
-
         InventoryController.Instance.GiveSnippet(snippetSlug);
         Debug.Log("Added Snippet with slug " + snippetSlug + "to player Inventory");
+
+
 
         base.CollectPickup();
     }

@@ -35,6 +35,8 @@ public class SnippetDatabase : MonoBehaviour
         {
             Instance = this;
         }
+        DontDestroyOnLoad(this);
+
         BuildDatabase();
     }
 
@@ -55,7 +57,7 @@ public class SnippetDatabase : MonoBehaviour
     {
         foreach (Snippet s in AllSnippets)
         {
-            Debug.Log("Slug: " + s.snippetSlug);
+           // Debug.Log("Slug: " + s.snippetSlug);
             if (s.snippetSlug == slug)
                 return s;
         }
@@ -67,7 +69,7 @@ public class SnippetDatabase : MonoBehaviour
     {
         foreach (Snippet s in AllSnippets)
         {
-            Debug.Log("masterID: " + s.masterID);
+            //Debug.Log("masterID: " + s.masterID);
             if (s.masterID == masterID)
                 return s;
         }
@@ -79,7 +81,7 @@ public class SnippetDatabase : MonoBehaviour
     {
         foreach (PicrossSnippet s in PicrossSnippets)
         {
-            Debug.Log("Slug: " + s.snippetSlug);
+            //Debug.Log("Slug: " + s.snippetSlug);
             if (s.snippetSlug == slug)
                 return s;
         }
@@ -91,7 +93,7 @@ public class SnippetDatabase : MonoBehaviour
     {
         foreach (FutoshikiSnippet s in FutoshikiSnippets)
         {
-            Debug.Log("Slug: " + s.snippetSlug);
+            //Debug.Log("Slug: " + s.snippetSlug);
             if (s.snippetSlug == slug)
                 return s;
         }
@@ -103,7 +105,7 @@ public class SnippetDatabase : MonoBehaviour
     {
         foreach (CrosswordSnippet s in CrosswordSnippets)
         {
-            Debug.Log("Slug: " + s.snippetSlug);
+            //Debug.Log("Slug: " + s.snippetSlug);
             if (s.snippetSlug == slug)
                 return s;
         }

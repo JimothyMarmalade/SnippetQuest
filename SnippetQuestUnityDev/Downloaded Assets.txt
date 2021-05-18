@@ -1,0 +1,18 @@
+[Unity Asset Store Downloads]
+BrokenVector's LowPoly Tree Pack
+Dustyroom's Free Casual Game SFX Pack
+JustCreate's Low-Poly Simple Nature Pack
+Polygon-Park's Low Poly Park Pack
+
+[Fonts]
+Abril Fatface
+Coustard
+Fjalla One
+Fredericka the Great
+Josefin Sans
+Pangolin
+Playfair Display
+Rozha One
+
+[Plugins]
+Newtonsoft Json.NET Unity Package

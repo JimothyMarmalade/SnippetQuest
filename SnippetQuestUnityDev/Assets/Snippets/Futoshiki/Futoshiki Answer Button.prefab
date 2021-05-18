@@ -148,8 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 2421570898130727649}
   buttonText: {fileID: 2421570898192549817}
-  controllerReference: {fileID: 0}
   maxNum: 0
+  PrintedFont: {fileID: 11400000, guid: 1614b1798aa97594e8d459347dc472ec, type: 2}
+  HandwrittenFont: {fileID: 11400000, guid: 5990cdd7c42945c4fbc5d67dc8bc0645, type: 2}
 --- !u!1 &2421570898192549823
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,6 +28,8 @@ public class InventoryController : MonoBehaviour
         {
             Instance = this;
         }
+
+        DontDestroyOnLoad(this);
     }
 
     public void GiveSnippet(string snippetSlug)
@@ -38,6 +40,7 @@ public class InventoryController : MonoBehaviour
 
         //Send information to the UI and update relevant information
         NewUIController.Instance.CheckUnlockNewSnippet(snippetSlug);
+        NewUIController.Instance.SpawnSnippetObtainedPopup(SnippetDatabase.Instance.GetSnippet(snippetSlug).snippetType);
     }
 
     public void RemoveSnippet(string snippetSlug)

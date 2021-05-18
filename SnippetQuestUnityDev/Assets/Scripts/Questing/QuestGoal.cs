@@ -22,6 +22,7 @@ public class QuestGoal
     public virtual void Init()
     {
         //default initialization dealies
+
     }
 
     public bool Evaluate()
@@ -38,6 +39,11 @@ public class QuestGoal
     {
         Completed = true;
         Debug.Log("Quest goal \"" + Description + "\" completed.");
+
+        //Send Notification to UI to update quest objective display
+        QuestLog.Instance.CheckUpdateAQID(this);
+
+
         AssignedQuest.CheckGoals();
     }
 

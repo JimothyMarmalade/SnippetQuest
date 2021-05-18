@@ -23,10 +23,10 @@ public class Dialogue
     public string speakerName = "";
 
     //Name of the eyes expression used when saying this dialogue
-    public string eyesExpression = "";
+    public ExpressionController.EyesExpression eyesExpression;
 
     //name of the mouth expression used when saying this dialogue
-    public string mouthExpression = "";
+    public ExpressionController.MouthExpression mouthExpression;
 
     //name of the body animation used when saying this dialogue
     public string bodyAnimation = "";

@@ -18,6 +18,36 @@ public class SerenePlace : Interactable
     public override void Interact()
     {
         Debug.Log("Interacting with a Serene Place");
-        FindObjectOfType<NewUIController>().ActivateSnippetSelectionPanel();
+
+        //Revoke Player Control
+        PlayerController.Instance.DisableAllMovement();
+        PlayerController.Instance.DisablePlayerCameraControl();
+
+        //Turn on the relevant UI
+        NewUIController.Instance.ActivateSnippetSelectionPanel();
+
+        //Add a listener to the button that triggers leaving the Snippet selection panel, meaning each serene place can have unique leaving properties
+        NewUIController.Instance.LeaveSnippetPanelButton.onClick.AddListener(LeaveSerenePlace);
+
+        //Change music to Snippet Music
+        AudioManager.Instance.BGMFocusSnippet(1.5f);
+
+
+    }
+
+    private void LeaveSerenePlace()
+    {
+        //Remove the UI Listener
+        NewUIController.Instance.LeaveSnippetPanelButton.onClick.RemoveListener(LeaveSerenePlace);
+
+        //Turn off the UI
+        NewUIController.Instance.DeactivateSnippetSelectionPanel();
+
+        //Return Player Control
+        PlayerController.Instance.EnableAllMovement();
+        PlayerController.Instance.EnablePlayerCameraControl();
+
+        //Change Music to Exploration
+        AudioManager.Instance.BGMFocusExploration(1.5f);
     }
 }

@@ -360,6 +360,8 @@ public class FutoshikiSnippetBoard : MonoBehaviour
     public void OnPuzzleSolved()
     {
         Debug.Log("OnPuzzleSolved ran in FutoshikiSnippetBoard");
+
+        AudioManager.Instance.Play("SnippetSolved");
         SnippetEvents.Instance.SnippetSolved(futoshikiPuzzleData.snippetSlug);
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Quest_Blumun_TwoPicross : Quest
 {
-    private void Start()
+    public override void LoadQuestData()
     {
         QuestName = "Blumun's Amount Challenge";
         Description = "Demonstrate your twice awesome puzzling skills!";
@@ -18,16 +18,16 @@ public class Quest_Blumun_TwoPicross : Quest
             "How about you go ahead and complete that picross puzzle again, twice over? Seems easy enough.",
             "Especially considering you already know the solution."
         };
-        givePlayerQuestDialogue.eyesExpression = "none";
-        givePlayerQuestDialogue.mouthExpression = "MouthSmile";
+        givePlayerQuestDialogue.eyesExpression = ExpressionController.EyesExpression.None;
+        givePlayerQuestDialogue.mouthExpression = ExpressionController.MouthExpression.Happy;
         //-------------------------------------------------------------------
         inProgressDialogue.speakerName = "Blumun";
         inProgressDialogue.sentences = new string[] 
         {"You haven't completed the quest yet! Keep solving picross puzzles.",
         "It's fine if you complete puzzles you've already solved, too."
         };
-        inProgressDialogue.eyesExpression = "isAngry";
-        inProgressDialogue.mouthExpression = "MouthOpen";
+        inProgressDialogue.eyesExpression = ExpressionController.EyesExpression.Angry;
+        inProgressDialogue.mouthExpression = ExpressionController.MouthExpression.Open_O;
         //-------------------------------------------------------------------
         rewardDialogue.speakerName = "Blumun";
         rewardDialogue.sentences = new string[]
@@ -35,18 +35,14 @@ public class Quest_Blumun_TwoPicross : Quest
             "Hey, look at that! You did it twice! Great job!",
             "Here's another Picross puzzle I found, and one of those Futo-whatzits. You really seem to know what you're doing!"
         };
-        rewardDialogue.eyesExpression = "IsHappy";
-        rewardDialogue.mouthExpression = "MouthSmile";
+        rewardDialogue.eyesExpression = ExpressionController.EyesExpression.Happy;
+        rewardDialogue.mouthExpression = ExpressionController.MouthExpression.Happy;
         //-------------------------------------------------------------------
-        completedDialogue.speakerName = "Blumun";
-        completedDialogue.sentences = new string[]
-        {
-            "Yep, I'm still here. Hope no one sneaks up behind me."
-        };
-        completedDialogue.eyesExpression = "none";
-        completedDialogue.mouthExpression = "none";
-        //-------------------------------------------------------------------
-        Goals.Add(new AmountSolvedGoal(this, "Picross", "Solve the Picross puzzle Blumun gave you twice", false, 0, 2));
+    }
+
+    public override void ActivateQuest()
+    {
+        Goals.Add(new AmountSolvedGoal(this, "Picross", "Complete two Picross Puzzles", false, 0, 2));
 
         Goals.ForEach(g => g.Init());
     }
