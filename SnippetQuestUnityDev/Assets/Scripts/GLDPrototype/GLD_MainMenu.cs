@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class GLD_MainMenu : MonoBehaviour
 {
     public GameObject HelpPanel1, HelpPanel2, HelpPanel3;
     public GameObject CreditsPanel;

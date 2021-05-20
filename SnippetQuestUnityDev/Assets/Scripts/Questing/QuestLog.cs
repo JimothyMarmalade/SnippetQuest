@@ -40,7 +40,7 @@ public class QuestLog : MonoBehaviour
     {
         if (q.AssignedQuest == activeQuest)
         {
-            NewUIController.Instance.UpdateActiveQuestInfo(activeQuest);
+            UIController.Instance.UpdateActiveQuestInfo(activeQuest);
         }
     }
 
@@ -54,7 +54,7 @@ public class QuestLog : MonoBehaviour
     public void SetActiveQuest(Quest q)
     {
         activeQuest = q;
-        NewUIController.Instance.UpdateActiveQuestInfo(q);
+        UIController.Instance.UpdateActiveQuestInfo(q);
     }
 
     public void ArchiveQuest(Quest q)
@@ -69,7 +69,7 @@ public class QuestLog : MonoBehaviour
         if (inProgressQuests.Count != 0)
             SetActiveQuest(inProgressQuests[0]);
         else
-            NewUIController.Instance.ClearActiveQuestInfo();
+            UIController.Instance.ClearActiveQuestInfo();
 
     }
 

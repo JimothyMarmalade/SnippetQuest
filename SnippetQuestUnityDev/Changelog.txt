@@ -1,3 +1,24 @@
+5/20/21 Update (Save/Load Functionality)
+- Renamed all the original GLD Prototype Scripts to avoid conflictions
+- Renamed NewUIController.cs to UIController.cs
+
+- Created GameManager.cs.
+
+- Created SaveSystem.cs and InventoryData.cs for game save purposes. 
+-- Added saving/loading capability to InventoryController.cs.
+
+- Created LevelController.cs, GeneralTesting_LevelController.cs, GeneralTesting_LevelData.cs.
+-- LevelController holds methods that are used by all levels to manage data.
+-- Levels can now hold variables that indicate what and how items should be spawned in when a level is loaded.
+-- The UIController (should) properly reload available snippets for player access when a new scene is loaded.
+
+- Created a Player+Camera prefab that can be used by the game to Spawn the player at a location/Rotation within a level.
+
+- Added the SceneHandler.cs Class that enables loading in/out of different scenes.
+-- Added the LoadingScreen scene and accompanying scripting.
+
+- Moved the UIController script onto the Exploration HUD and rewired UI components accordingly.
+------------------------------------------------------------------------------------------------------------------------
 5/18/21 Update
 - Included the sightly-trimmed raw audio files for background music in the project.
 

@@ -47,11 +47,11 @@ public class SnippetLoaderButton : MonoBehaviour
         }
 
         if (type == snippetType.Crossword)
-            NewUIController.Instance.LoadCrosswordGame(snippetSlug);
+            UIController.Instance.LoadCrosswordGame(snippetSlug);
         else if (type == snippetType.Picross)
-            NewUIController.Instance.LoadPicrossGame(snippetSlug);
+            UIController.Instance.LoadPicrossGame(snippetSlug);
         else if (type == snippetType.Futoshiki)
-            NewUIController.Instance.LoadFutoshikiGame(snippetSlug);
+            UIController.Instance.LoadFutoshikiGame(snippetSlug);
     }
 
     public void TurnOn()

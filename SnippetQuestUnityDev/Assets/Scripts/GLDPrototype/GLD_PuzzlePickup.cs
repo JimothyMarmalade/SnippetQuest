@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzlePickup : MonoBehaviour
+public class GLD_PuzzlePickup : MonoBehaviour
 {
     //PuzzleID instantiates to -1, which will result in no puzzles being added
-    private GameController ControllerReference;
+    private GLD_GameController ControllerReference;
     public int PuzzleID = -1;
 
     //Called when the Player interacts with the Puzzle Pickup
@@ -19,7 +19,7 @@ public class PuzzlePickup : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void SetControllerReference(GameController c)
+    public void SetControllerReference(GLD_GameController c)
     {
         ControllerReference = c;
     }

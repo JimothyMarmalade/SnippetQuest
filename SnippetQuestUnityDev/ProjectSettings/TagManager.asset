@@ -12,6 +12,7 @@ TagManager:
   - NewUIController
   - PlayerCamera
   - MinigameLoader
+  - LevelController
   layers:
   - Default
   - TransparentFX

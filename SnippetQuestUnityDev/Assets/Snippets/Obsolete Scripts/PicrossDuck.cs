@@ -48,7 +48,7 @@ public class PicrossDuck : _PicrossPuzzle
     public override void OnPuzzleSolved()
     {
         Debug.Log("OnPuzzleSolved ran in PicrossCross");
-        GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>().SpawnCheckmark(3);
+        GameObject.FindGameObjectWithTag("UIController").GetComponent<GLD_UIController>().SpawnCheckmark(3);
     }
 
 }

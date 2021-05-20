@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/4/21
- * Last Modified by Logan Edmund, 3/14/21
+ * Last Modified by Logan Edmund, 5/19/21
  * 
  * Function of NewUIController.cs is to handle all UI elements in Snippetquest, most notably the HUD during on-foot exploration and the
  * Snippet menu during Snippet interaction and selection. 
@@ -16,9 +16,9 @@ using UnityEngine.UI;
 using TMPro;
 
 //Controls all UI Elements
-public class NewUIController : MonoBehaviour
+public class UIController : MonoBehaviour
 {
-    public static NewUIController Instance { get; set; }
+    public static UIController Instance { get; set; }
 
     //Panel that displays during on-foot gameplay
     [Header("Third Person Panel(s)")]
@@ -104,7 +104,7 @@ public class NewUIController : MonoBehaviour
         ClearActiveQuestInfo();
 
         LockAllSnippets();
-        FullCheckUnlockNewSnippets();
+        //FullCheckUnlockNewSnippets();
     }
 
     //----------Spawn a new Snippet Obtained Prefab

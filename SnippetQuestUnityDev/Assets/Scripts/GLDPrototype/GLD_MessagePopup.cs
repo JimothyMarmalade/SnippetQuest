@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MessagePopup : MonoBehaviour
+public class GLD_MessagePopup : MonoBehaviour
 {
     public string Message = "Blank";
 

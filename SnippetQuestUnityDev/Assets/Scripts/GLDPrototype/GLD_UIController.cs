@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 //Controls all UI Elements
-public class UIController : MonoBehaviour
+public class GLD_UIController : MonoBehaviour
 {
     public GameObject ThirdPersonPanel;
     public GameObject SnippetSelectionPanel;

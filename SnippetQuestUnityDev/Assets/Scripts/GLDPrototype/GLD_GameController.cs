@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GLD_GameController : MonoBehaviour
 {
-    public UIController UIControllerInstance;
+    public GLD_UIController UIControllerInstance;
     public GameObject UICanvas;
 
     private List<GameObject> AllPuzzlePickups = new List<GameObject>();
@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
 
         foreach (GameObject obj in AllPuzzlePickups)
         {
-            obj.GetComponent<PuzzlePickup>().SetControllerReference(this);
+            obj.GetComponent<GLD_PuzzlePickup>().SetControllerReference(this);
         }
     }
 
