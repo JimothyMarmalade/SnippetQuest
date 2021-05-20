@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Quest_Blumun_TwoPicross : Quest
+public class Quest_Blumun_AmtChallenge : Quest
 {
     public override void LoadQuestData()
     {
@@ -15,15 +15,15 @@ public class Quest_Blumun_TwoPicross : Quest
         givePlayerQuestDialogue.speakerName = "Blumun";
         givePlayerQuestDialogue.sentences = new string[]{
             "Ready for something else, huh? Well then, alright...",
-            "How about you go ahead and complete that picross puzzle again, twice over? Seems easy enough.",
-            "Especially considering you already know the solution."
+            "How about you go ahead and complete two Picross puzzles and a Futoshiki puzzle?",
+            "That should give you a healthy challenge."
         };
         givePlayerQuestDialogue.eyesExpression = ExpressionController.EyesExpression.None;
         givePlayerQuestDialogue.mouthExpression = ExpressionController.MouthExpression.Happy;
         //-------------------------------------------------------------------
         inProgressDialogue.speakerName = "Blumun";
         inProgressDialogue.sentences = new string[] 
-        {"You haven't completed the quest yet! Keep solving picross puzzles.",
+        {"You haven't completed the quest yet! Keep solving.",
         "It's fine if you complete puzzles you've already solved, too."
         };
         inProgressDialogue.eyesExpression = ExpressionController.EyesExpression.Angry;
@@ -32,17 +32,19 @@ public class Quest_Blumun_TwoPicross : Quest
         rewardDialogue.speakerName = "Blumun";
         rewardDialogue.sentences = new string[]
         {
-            "Hey, look at that! You did it twice! Great job!",
+            "Hey, look at that! You did all my challenges! Great job!",
             "Here's another Picross puzzle I found, and one of those Futo-whatzits. You really seem to know what you're doing!"
         };
         rewardDialogue.eyesExpression = ExpressionController.EyesExpression.Happy;
         rewardDialogue.mouthExpression = ExpressionController.MouthExpression.Happy;
         //-------------------------------------------------------------------
+
+        Goals.Add(new AmountSolvedGoal(this, "Picross", "Complete two Picross Puzzles", false, 0, 2));
+        Goals.Add(new AmountSolvedGoal(this, "Futoshiki", "Complete one Futoshiki Puzzle", false, 0, 1));
     }
 
     public override void ActivateQuest()
     {
-        Goals.Add(new AmountSolvedGoal(this, "Picross", "Complete two Picross Puzzles", false, 0, 2));
 
         Goals.ForEach(g => g.Init());
     }

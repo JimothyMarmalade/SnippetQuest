@@ -1,3 +1,8 @@
+5/20/21 Update 2 (Quest Handling Update)
+- Fixed a bug where the active quest information panel wouldn't properly update.
+
+- Moved all gamedata components that store information onto a single object, GameManager
+------------------------------------------------------------------------------------------------------------------------
 5/20/21 Update (Save/Load Functionality)
 - Renamed all the original GLD Prototype Scripts to avoid conflictions
 - Renamed NewUIController.cs to UIController.cs

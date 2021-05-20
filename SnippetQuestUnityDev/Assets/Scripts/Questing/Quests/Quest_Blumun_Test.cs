@@ -40,13 +40,11 @@ public class Quest_Blumun_Test : Quest
         rewardDialogue.mouthExpression = ExpressionController.MouthExpression.Surprised;
         //-------------------------------------------------------------------
 
-        
+        Goals.Add(new SnippetSolvedGoal(this, "Picross_TestHeart", "Complete Picross 1", false, 0, 1));
     }
 
     public override void ActivateQuest()
     {
-        Goals.Add(new SnippetSolvedGoal(this, "Picross_TestHeart", "Complete Picross 1", false, 0, 1));
-
         Goals.ForEach(g => g.Init());
     }
 }

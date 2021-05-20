@@ -19,8 +19,6 @@ public class QuestLog : MonoBehaviour
     public List<Quest> inProgressQuests = new List<Quest>();
     public List<Quest> completedQuests = new List<Quest>();
 
-
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -33,6 +31,22 @@ public class QuestLog : MonoBehaviour
         }
 
         DontDestroyOnLoad(this);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.RightBracket))
+        {
+            //Debug -- Change the current active quest.
+            foreach(Quest q in inProgressQuests)
+            {
+                if (activeQuest != q)
+                {
+                    SetActiveQuest(q);
+                    break;
+                }
+            }
+        }
     }
 
     //Determines if the UI needs to be updated after a goal is completed.
@@ -53,6 +67,7 @@ public class QuestLog : MonoBehaviour
 
     public void SetActiveQuest(Quest q)
     {
+
         activeQuest = q;
         UIController.Instance.UpdateActiveQuestInfo(q);
     }

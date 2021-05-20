@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/4/21
- * Last Modified by Logan Edmund, 5/19/21
+ * Last Modified by Logan Edmund, 5/20/21
  * 
  * Function of NewUIController.cs is to handle all UI elements in Snippetquest, most notably the HUD during on-foot exploration and the
  * Snippet menu during Snippet interaction and selection. 
@@ -40,8 +40,8 @@ public class UIController : MonoBehaviour
     //Master panel that displays during snippet selection
     //[snippetType]Buttons holds references to the buttons that activate the snippet panel
     [Header("Snippet Selection Panels")]
-    public Animator snippetPanelAnimator;
     public GameObject snippetPanel;
+    public Animator snippetPanelAnimator;
     public Button LeaveSnippetPanelButton;
 
     public GameObject picrossSelectionPanel;
@@ -91,7 +91,6 @@ public class UIController : MonoBehaviour
         {
             Instance = this;
         }
-        DontDestroyOnLoad(this);
 
         //Add all panels to the appropriate lists for indexing
         masterPanels.Add(thirdPersonPanel);         //ID 0
@@ -372,43 +371,5 @@ public class UIController : MonoBehaviour
         Debug.LogError("UI Controller could not find slug " + snippetSlug + " in any SnippetLoaderButtons!");
     }
 
-    /*
-    //----------Methods for activating SnippetSelection panels
-    public void ChangeActiveSelectionPanel(int i)
-    {
-        DeactivateSelectionPanel();
-        SetActiveSelectionPanel(i);
-    }
-
-    public void SetActiveSelectionPanel(int i)
-    {
-        snippetSelectionPanels[i].SetActive(true);
-        activeSnippetSelectionPanelID = i;
-    }
-
-    public void DeactivateSelectionPanel()
-    {
-        snippetSelectionPanels[activeSnippetSelectionPanelID].SetActive(false);
-        activeSnippetSelectionPanelID = -1;
-    }
-
-    //----------Methods for activating SnippetGameplay panels
-    public void ChangeActiveGameplayPanel(int i)
-    {
-        DeactivateSelectionPanel();
-        SetActiveSelectionPanel(i);
-    }
-
-    public void SetActiveGameplayPanel(int i)
-    {
-        snippetGameplayPanels[i].SetActive(true);
-        activeSnippetGameplayPanelID = i;
-    }
-
-    public void DeactivateGameplayPanel()
-    {
-        snippetGameplayPanels[activeSnippetGameplayPanelID].SetActive(false);
-        activeSnippetGameplayPanelID = -1;
-    }
-    */
+    
 }

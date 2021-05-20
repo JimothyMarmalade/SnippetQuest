@@ -87,20 +87,6 @@ public class QuestGiver : NPC
 
             DT.TriggerDialogue(AllQuestsCompleteDialogue);
         }
-
-        /*
-        else
-        {
-            //If there is another quest to undertake, begin it and start over.
-            if (questTree.CheckNewQuestExists())
-            {
-                AssignQuest();
-                Debug.LogError("Quest Successfully assigned, but quest-giving dialogue could not be loaded.");
-                Debug.LogError("Implement Dialogue existing for the assignment of quests past the first in a QuestTree. " +
-                    "Current Dialogue problems are caused by a loading error -- WILL NEED to overhaul Quest system down the line.");
-            }
-        }
-        */
     }
 
     public void AssignNextQuest()

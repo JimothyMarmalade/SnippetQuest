@@ -17,11 +17,12 @@ using System.Linq;
 [System.Serializable]
 public class Quest : MonoBehaviour
 {
-    public List<QuestGoal> Goals = new List<QuestGoal>();
 
     public string QuestName;
 
     public string Description;
+
+    public List<QuestGoal> Goals = new List<QuestGoal>();
 
     public List<string> SnippetReward;
 
