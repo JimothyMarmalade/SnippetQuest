@@ -1,3 +1,8 @@
+[Crew]
+Logan Edmund - Creative Director, Lead Programmer
+James Joyce - 
+Mika Nave - Original Soundtrack
+
 [Unity Asset Store Downloads]
 BrokenVector's LowPoly Tree Pack
 Dustyroom's Free Casual Game SFX Pack

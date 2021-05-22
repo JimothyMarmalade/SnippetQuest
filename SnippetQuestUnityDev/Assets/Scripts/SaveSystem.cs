@@ -12,6 +12,47 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
+    #region SnippetData Save/Load Methods
+
+    public static void SaveSnippetData(SnippetDatabase database)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/playerSnippetData.nbl";
+        Debug.Log("Saving SnippetData at " + path);
+
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        SnippetData snippets = new SnippetData(database);
+
+        formatter.Serialize(stream, snippets);
+        stream.Close();
+    }
+
+    public static SnippetData LoadSnippetData()
+    {
+        string path = Application.persistentDataPath + "/playerSnippetData.nbl";
+
+        if (File.Exists(path))
+        {
+            Debug.Log("Loading snippetData from " + path);
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            SnippetData snippetData = formatter.Deserialize(stream) as SnippetData;
+            stream.Close();
+
+            return snippetData;
+        }
+        else
+        {
+            Debug.LogError("Snippet save file not found in " + path);
+            return null;
+        }
+    }
+
+    #endregion
+
     #region PlayerData Save/Load Methods
     public static void SavePlayerInventory(InventoryController inventory)
     {

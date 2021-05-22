@@ -39,8 +39,8 @@ public class Quest_Blumun_AmtChallenge : Quest
         rewardDialogue.mouthExpression = ExpressionController.MouthExpression.Happy;
         //-------------------------------------------------------------------
 
-        Goals.Add(new AmountSolvedGoal(this, "Picross", "Complete two Picross Puzzles", false, 0, 2));
-        Goals.Add(new AmountSolvedGoal(this, "Futoshiki", "Complete one Futoshiki Puzzle", false, 0, 1));
+        Goals.Add(new AmountSolvedGoal(this, Snippet.SnippetType.Picross, "Complete two Picross Puzzles", false, 0, 2));
+        Goals.Add(new AmountSolvedGoal(this, Snippet.SnippetType.Futoshiki, "Complete one Futoshiki Puzzle", false, 0, 1));
     }
 
     public override void ActivateQuest()

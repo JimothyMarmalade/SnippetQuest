@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 5/19/21
- * Last Modified by Logan Edmund, 5/19/21
+ * Last Modified by Logan Edmund, 5/20/21
  * 
  * GameManager.cs handles all the overhead for loading/saving, instigating scene transitions, spawning critical objects.
  * 
@@ -26,11 +26,21 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         DontDestroyOnLoad(this);
+
+        LoadGameData();
     }
 
-    private void Start()
+    //Triggers the loading of all information needed for the game AS A WHOLE
+    public void LoadGameData()
     {
-        PlayerEnteredNewScene();
+        Debug.Log("LoadGameData()...");
+
+        SnippetDatabase.Instance.BuildDatabase();
+        SnippetDatabase.Instance.LoadSnippetInfo();
+
+        InventoryController.Instance.LoadInventory();
+
+        SceneHandler.Load(SceneHandler.Scene.Debug_GeneralTesting);
     }
 
     //Called when the player enters a new scene

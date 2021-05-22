@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/4/21
- * Last Modified by Logan Edmund, 5/20/21
+ * Last Modified by Logan Edmund, 5/21/21
  * 
  * Function of NewUIController.cs is to handle all UI elements in Snippetquest, most notably the HUD during on-foot exploration and the
  * Snippet menu during Snippet interaction and selection. 
@@ -21,22 +21,25 @@ public class UIController : MonoBehaviour
     public static UIController Instance { get; set; }
 
     //Panel that displays during on-foot gameplay
-    [Header("Third Person Panel(s)")]
-    public GameObject thirdPersonPanel;
+    [Header("Exploration Panel")]
+    public GameObject ExplorationPanelPrefab;
+    public bool SceneRequiresExplorationPanel;
+    private GameObject ExplorationPanel;
+    public UI_ExplorationDisplay UI_EXP;
 
-    [Header("Active Quest Display")]
-    public ActiveQuestInfoDisplay AQID;
+    [Header("Snippet Panel")]
+    public GameObject SnippetPanelPrefab;
+    public bool SceneRequiresSnippetPanel;
+    private GameObject SnippetPanel;
+    public UI_SnippetDisplay UI_SNIPPET;
 
-    [Header("Snippet Obtained Popup")]
-    public RectTransform SOPSpawnLocation1;
-    public RectTransform SOPSpawnLocation2;
-    public RectTransform SOPSpawnLocation3;
-    private SnippetObtainedPopup SOP1;
-    private SnippetObtainedPopup SOP2;
-    private SnippetObtainedPopup SOP3;
+    [Header("Dialogue Panel")]
+    public GameObject DialoguePanelPrefab;
+    public bool SceneRequiresDialoguePanel;
+    private GameObject DialoguePanel;
 
-    public GameObject SOPPrefab;
 
+    /*
     //Master panel that displays during snippet selection
     //[snippetType]Buttons holds references to the buttons that activate the snippet panel
     [Header("Snippet Selection Panels")]
@@ -62,15 +65,15 @@ public class UIController : MonoBehaviour
 
     public Animator crosswordGameplayAnimator;
     public CrosswordSnippetBoard crosswordBoard;
+    */
+
 
     [Header("Dialog Panels")]
-    public GameObject dialoguePanel;
+    //public GameObject dialoguePanel;
 
 
     //masterPanels holds the primary display panels (HUD, Snippets)
     private List<GameObject> masterPanels = new List<GameObject>();
-    //snippetSelectionPanels holds the different types of panels in the Snippet Selection menu
-    private List<GameObject> snippetSelectionPanels = new List<GameObject>();
     //snippetGameplayPanels holds the panels that contain the actual gameboards used to view/solve panels
     private List<GameObject> snippetGameplayPanels = new List<GameObject>();
 
@@ -92,115 +95,125 @@ public class UIController : MonoBehaviour
             Instance = this;
         }
 
+        //If the scene requires an exploration panel, load the panel.
+        if (SceneRequiresExplorationPanel)
+        {
+            LoadExplorationUI();
+
+            ClearActiveQuestInfo();
+        }
+
+        if (SceneRequiresSnippetPanel)
+        {
+            LoadSnippetUI();
+
+            LockAllSnippets();
+            FullCheckUnlockNewSnippets();
+        }
+
+        if (SceneRequiresDialoguePanel)
+        {
+            LoadDialoguePanel();
+        }
+
+
         //Add all panels to the appropriate lists for indexing
-        masterPanels.Add(thirdPersonPanel);         //ID 0
-        masterPanels.Add(snippetPanel);             //ID 1
-        masterPanels.Add(dialoguePanel);            //ID 2
+        masterPanels.Add(ExplorationPanel);           //ID 0
+        masterPanels.Add(SnippetPanel);               //ID 1
+        //masterPanels.Add(dialoguePanel);            //ID 2
 
-        snippetSelectionPanels.Add(picrossSelectionPanel);      //ID 0
-        snippetSelectionPanels.Add(futoshikiSelectionPanel);    //ID 1
+    }
 
-        ClearActiveQuestInfo();
+    private void LoadExplorationUI()
+    {
+        ExplorationPanel = Instantiate(ExplorationPanelPrefab, this.transform);
+        UI_EXP = ExplorationPanel.GetComponent<UI_ExplorationDisplay>();
+    }
 
-        LockAllSnippets();
-        //FullCheckUnlockNewSnippets();
+    private void LoadSnippetUI()
+    {
+        SnippetPanel = Instantiate(SnippetPanelPrefab, this.transform);
+        UI_SNIPPET = SnippetPanel.GetComponent<UI_SnippetDisplay>();
+    }
+
+    private void LoadDialoguePanel()
+    {
+        DialoguePanel = Instantiate(DialoguePanelPrefab, this.transform);
     }
 
     //----------Spawn a new Snippet Obtained Prefab
     public void SpawnSnippetObtainedPopup(string snippetType)
     {
-        if (SOP1 == null)
-        {
-            SOP1 = Instantiate(SOPPrefab, SOPSpawnLocation1).GetComponent<SnippetObtainedPopup>();
-            SOP1.Init(snippetType);
-        }
-        else if (SOP2 == null)
-        {
-            SOP2 = Instantiate(SOPPrefab, SOPSpawnLocation2).GetComponent<SnippetObtainedPopup>();
-            SOP2.Init(snippetType);
-        }
-        else if (SOP3 == null)
-        {
-            SOP3 = Instantiate(SOPPrefab, SOPSpawnLocation3).GetComponent<SnippetObtainedPopup>();
-            SOP3.Init(snippetType);
-        }
+        if (UI_EXP != null) 
+            UI_EXP.SpawnSnippetObtainedPopup(snippetType);
         else
         {
-            //IF there's no room for a new popup, save the information until a new popup can be displayed
+            LoadExplorationUI();
+            UI_EXP.SpawnSnippetObtainedPopup(snippetType);
         }
+
     }
 
     //----------Update the Active Quest Information
     public void UpdateActiveQuestInfo(Quest q)
     {
-        AQID.QuestTitle.text = q.QuestName;
-        switch (q.Goals.Count)
-        {
-            case (1):
-                AQID.Objective1.text = q.Goals[0].Description;
-                AQID.Objective2.text = "";
-                AQID.Objective3.text = "";
-                break;
-            case (2):
-                AQID.Objective1.text = q.Goals[0].Description;
-                AQID.Objective2.text = q.Goals[1].Description;
-                AQID.Objective3.text = "";
-                break;
-            case (3):
-                AQID.Objective1.text = q.Goals[0].Description;
-                AQID.Objective2.text = q.Goals[1].Description;
-                AQID.Objective3.text = q.Goals[2].Description;
-                break;
-        }
+        if (UI_EXP != null)
+            UI_EXP.UpdateActiveQuestInfo(q);
 
-        StrikethroughObjectives(q);
-        if (q.IsCompleted)
-            ShowCompleteText();
         else
-            HideCompleteText();
+        {
+            LoadExplorationUI();
+            UI_EXP.UpdateActiveQuestInfo(q);
+
+        }
     }
     public void ClearActiveQuestInfo()
     {
-        AQID.QuestTitle.text = "No Active Quest";
-        AQID.Objective1.text = "No Active Quest";
-        AQID.Objective2.text = "No Active Quest";
-        AQID.Objective3.text = "No Active Quest";
-        HideCompleteText();
+        if (UI_EXP != null)
+            UI_EXP.ClearActiveQuestInfo();
+
+        else
+        {
+            LoadExplorationUI(); 
+            UI_EXP.ClearActiveQuestInfo();
+        }
     }
     public void StrikethroughObjectives(Quest q)
     {
-        switch (q.Goals.Count)
+        if (UI_EXP != null)
+            UI_EXP.StrikethroughObjectives(q);
+
+        else
         {
-            case (1):
-                if (q.Goals[0].Completed)
-                    AQID.Objective1.text = "<s>" + AQID.Objective1.text + "</s>";
-                break;
-            case (2):
-                if (q.Goals[0].Completed)
-                    AQID.Objective1.text = "<s>" + AQID.Objective1.text + "</s>";
-                if (q.Goals[1].Completed)
-                    AQID.Objective2.text = "<s>" + AQID.Objective2.text + "</s>";
-                break;
-            case (3):
-                if (q.Goals[0].Completed)
-                    AQID.Objective1.text = "<s>" + AQID.Objective1.text + "</s>";
-                if (q.Goals[1].Completed)
-                    AQID.Objective2.text = "<s>" + AQID.Objective2.text + "</s>";
-                if (q.Goals[2].Completed)
-                    AQID.Objective3.text = "<s>" + AQID.Objective3.text + "</s>";
-                break;
+            LoadExplorationUI();
+            UI_EXP.StrikethroughObjectives(q);
         }
     }
-    
+
     public void ShowCompleteText()
     {
-        AQID.CompleteText.gameObject.SetActive(true);
+        if (UI_EXP != null)
+            UI_EXP.ShowCompleteText();
+
+        else
+        {
+            LoadExplorationUI();
+            UI_EXP.ShowCompleteText();
+        }
     }
 
     public void HideCompleteText()
     {
-        AQID.CompleteText.gameObject.SetActive(false);
+        if (UI_EXP != null)
+            UI_EXP.HideCompleteText();
+
+        else
+        {
+            LoadExplorationUI();
+            UI_EXP.HideCompleteText();
+        }
     }
+
 
     //----------Methods for activating master panels
     public void ChangeActiveMasterPanel(int i)
@@ -225,19 +238,20 @@ public class UIController : MonoBehaviour
         activeMasterPanelID = -1;
     }
 
+    //Methods for activating Snippet Panels
     public void ActivateSnippetSelectionPanel()
     {
         ChangeActiveMasterPanel(1);
-        snippetPanelAnimator.SetBool("IsOpen", true);
+        UI_SNIPPET.snippetPanelAnimator.SetBool("IsOpen", true);
     }
 
     public void DeactivateSnippetSelectionPanel()
     {
         ChangeActiveMasterPanel(0);
-        snippetPanelAnimator.SetBool("IsOpen", false);
+        UI_SNIPPET.snippetPanelAnimator.SetBool("IsOpen", false);
     }
 
-    public void ChangeSelectionPanel(int i)
+    public void ChangeSnippetSelectionPanel(int i)
     {
         //No panel == 0, Picross == 1, Futoshiki == 2
         //Deactivate old Panel
@@ -248,88 +262,90 @@ public class UIController : MonoBehaviour
             Debug.Log("SelectionID != -1");
             //If there's no active panel, do nothing
             if (activeSnippetSelectionPanelID == 1)
-                snippetPanelAnimator.SetBool("ShowPicross", false);
+                UI_SNIPPET.snippetPanelAnimator.SetBool("ShowPicross", false);
             else if (activeSnippetSelectionPanelID == 2)
-                snippetPanelAnimator.SetBool("ShowFutoshiki", false);
+                UI_SNIPPET.snippetPanelAnimator.SetBool("ShowFutoshiki", false);
             else if (activeSnippetSelectionPanelID == 3)
-                snippetPanelAnimator.SetBool("ShowCrossword", false);
+                UI_SNIPPET.snippetPanelAnimator.SetBool("ShowCrossword", false);
 
         }
         //Activate new panel
         if (i == 1)
-            snippetPanelAnimator.SetBool("ShowPicross", true);
+            UI_SNIPPET.snippetPanelAnimator.SetBool("ShowPicross", true);
         else if (i == 2)
-            snippetPanelAnimator.SetBool("ShowFutoshiki", true);
+            UI_SNIPPET.snippetPanelAnimator.SetBool("ShowFutoshiki", true);
         else if (i == 3)
-            snippetPanelAnimator.SetBool("ShowCrossword", true);
+            UI_SNIPPET.snippetPanelAnimator.SetBool("ShowCrossword", true);
 
         activeSnippetSelectionPanelID = i;
     }
 
-
+    #region Methods for Loading/Leaving individual game Panels
     //----------Methods for loading and leaving the individual game panels
     public void LoadPicrossGame(string picrossSlug)
     {
-        picrossGameplayAnimator.SetBool("IsOpen", true);
+        UI_SNIPPET.picrossGameplayAnimator.SetBool("IsOpen", true);
         //Run the necessary methods that load the picross puzzle into the game board, then set bool "puzzleLoaded" to true
-        picrossGameplayAnimator.SetBool("PuzzleLoaded", picrossBoard.TryBuildPicrossBoard(SnippetDatabase.Instance.GetPicrossSnippet(picrossSlug)));
+        UI_SNIPPET.picrossGameplayAnimator.SetBool("PuzzleLoaded", UI_SNIPPET.picrossBoard.TryBuildPicrossBoard(SnippetDatabase.Instance.GetPicrossSnippet(picrossSlug)));
     }
 
     public void LeavePicrossGame()
     {
-        picrossGameplayAnimator.SetBool("IsOpen", false);
+        UI_SNIPPET.picrossGameplayAnimator.SetBool("IsOpen", false);
     }
 
     public void LoadFutoshikiGame(string futoshikiSlug)
     {
-        futoshikiGameplayAnimator.SetBool("IsOpen", true);
-        futoshikiGameplayAnimator.SetBool("PuzzleLoaded", futoshikiBoard.TryBuildFutoshikiBoard(SnippetDatabase.Instance.GetFutoshikiSnippet(futoshikiSlug)));
+        UI_SNIPPET.futoshikiGameplayAnimator.SetBool("IsOpen", true);
+        UI_SNIPPET.futoshikiGameplayAnimator.SetBool("PuzzleLoaded", UI_SNIPPET.futoshikiBoard.TryBuildFutoshikiBoard(SnippetDatabase.Instance.GetFutoshikiSnippet(futoshikiSlug)));
     }
 
     public void LeaveFutoshikiGame()
     {
-        futoshikiGameplayAnimator.SetBool("IsOpen", false);
+        UI_SNIPPET.futoshikiGameplayAnimator.SetBool("IsOpen", false);
     }
 
     public void LoadCrosswordGame(string crosswordSlug)
     {
-        crosswordGameplayAnimator.SetBool("IsOpen", true);
-        crosswordGameplayAnimator.SetBool("PuzzleLoaded", crosswordBoard.TryBuildCrosswordBoard(SnippetDatabase.Instance.GetCrosswordSnippet(crosswordSlug)));
+        UI_SNIPPET.crosswordGameplayAnimator.SetBool("IsOpen", true);
+        UI_SNIPPET.crosswordGameplayAnimator.SetBool("PuzzleLoaded", UI_SNIPPET.crosswordBoard.TryBuildCrosswordBoard(SnippetDatabase.Instance.GetCrosswordSnippet(crosswordSlug)));
     }
 
     public void LeaveCrosswordGame()
     {
-        crosswordGameplayAnimator.SetBool("IsOpen", false);
+        UI_SNIPPET.crosswordGameplayAnimator.SetBool("IsOpen", false);
     }
 
+    #endregion
+
+    #region Methods for turning on/off the buttons for individual snippets
     //----------Methods for turning on/off loader buttons
 
     //Disables all snippets from being solved
     public void LockAllSnippets()
     {
-        foreach (SnippetLoaderButton s in picrossButtons)
+        foreach (SnippetLoaderButton s in UI_SNIPPET.picrossButtons)
             s.TurnOff();
-        foreach (SnippetLoaderButton s in futoshikiButtons)
+        foreach (SnippetLoaderButton s in UI_SNIPPET.futoshikiButtons)
             s.TurnOff();
-        foreach (SnippetLoaderButton s in crosswordButtons)
+        foreach (SnippetLoaderButton s in UI_SNIPPET.crosswordButtons)
             s.TurnOff();
     }
-
 
     //Does a full scan of each snippet in player's inventory and unlocks associated buttons
     public void FullCheckUnlockNewSnippets()
     {
-        foreach (SnippetLoaderButton s in picrossButtons)
+        foreach (SnippetLoaderButton s in UI_SNIPPET.picrossButtons)
         {
             if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
                 s.TurnOn();
         }
-        foreach (SnippetLoaderButton s in futoshikiButtons)
+        foreach (SnippetLoaderButton s in UI_SNIPPET.futoshikiButtons)
         {
             if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
                 s.TurnOn();
         }
-        foreach (SnippetLoaderButton s in crosswordButtons)
+        foreach (SnippetLoaderButton s in UI_SNIPPET.crosswordButtons)
         {
             if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
                 s.TurnOn();
@@ -340,7 +356,7 @@ public class UIController : MonoBehaviour
     public void CheckUnlockNewSnippet(string snippetSlug)
     {
         Debug.Log("CheckUnlockNewSnippet() called...");
-        foreach (SnippetLoaderButton s in picrossButtons)
+        foreach (SnippetLoaderButton s in UI_SNIPPET.picrossButtons)
         {
             if (s.snippetSlug == snippetSlug)
             {
@@ -349,7 +365,7 @@ public class UIController : MonoBehaviour
                 return;
             }
         }
-        foreach (SnippetLoaderButton s in futoshikiButtons)
+        foreach (SnippetLoaderButton s in UI_SNIPPET.futoshikiButtons)
         {
             if (s.snippetSlug == snippetSlug)
             {
@@ -358,7 +374,7 @@ public class UIController : MonoBehaviour
                 return;
             }
         }
-        foreach (SnippetLoaderButton s in crosswordButtons)
+        foreach (SnippetLoaderButton s in UI_SNIPPET.crosswordButtons)
         {
             if (s.snippetSlug == snippetSlug)
             {
@@ -371,5 +387,5 @@ public class UIController : MonoBehaviour
         Debug.LogError("UI Controller could not find slug " + snippetSlug + " in any SnippetLoaderButtons!");
     }
 
-    
+    #endregion
 }

@@ -27,7 +27,7 @@ public class SerenePlace : Interactable
         UIController.Instance.ActivateSnippetSelectionPanel();
 
         //Add a listener to the button that triggers leaving the Snippet selection panel, meaning each serene place can have unique leaving properties
-        UIController.Instance.LeaveSnippetPanelButton.onClick.AddListener(LeaveSerenePlace);
+        UIController.Instance.UI_SNIPPET.LeaveSnippetPanelButton.onClick.AddListener(LeaveSerenePlace);
 
         //Change music to Snippet Music
         AudioManager.Instance.BGMFocusSnippet(1.5f);
@@ -38,7 +38,7 @@ public class SerenePlace : Interactable
     private void LeaveSerenePlace()
     {
         //Remove the UI Listener
-        UIController.Instance.LeaveSnippetPanelButton.onClick.RemoveListener(LeaveSerenePlace);
+        UIController.Instance.UI_SNIPPET.LeaveSnippetPanelButton.onClick.RemoveListener(LeaveSerenePlace);
 
         //Turn off the UI
         UIController.Instance.DeactivateSnippetSelectionPanel();

@@ -40,7 +40,7 @@ public class InventoryController : MonoBehaviour
 
         //Send information to the UI and update relevant information
         UIController.Instance.CheckUnlockNewSnippet(snippetSlug);
-        UIController.Instance.SpawnSnippetObtainedPopup(SnippetDatabase.Instance.GetSnippet(snippetSlug).snippetType);
+        UIController.Instance.SpawnSnippetObtainedPopup(SnippetDatabase.Instance.GetSnippet(snippetSlug).snippetType.ToString());
     }
 
     //Same as GiveSnippet, but doesn't prompt any sort of UI Notification when triggered. Used when loading the player's inventory.
@@ -89,7 +89,9 @@ public class InventoryController : MonoBehaviour
             PlayerSnippetsSlugs.Clear();
 
             foreach (string s in data.inventorySnippetSlugs)
-                GiveSnippetSilent(s);
+                PlayerSnippetsSlugs.Add(s);
+            if (UIController.Instance != null)
+                UIController.Instance.FullCheckUnlockNewSnippets();
         }
         else
         {

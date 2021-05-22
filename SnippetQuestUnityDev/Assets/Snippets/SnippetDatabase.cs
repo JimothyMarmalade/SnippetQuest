@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 4/21/21
- * Last Modified by Logan Edmund, 4/22/21
+ * Last Modified by Logan Edmund, 5/20/21
  * 
  * Function of SnippetDatabase.cs is to hold references/data for EVERY SNIPPET in the game. This does not apply to gameplay needs such as world location
  * and is mainly to serve as a way for the SnippetController to load/reference Snippet data.
@@ -10,20 +10,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;
 
+[System.Serializable]
 public class SnippetDatabase : MonoBehaviour
 {
-    public static SnippetDatabase Instance { get; set; }
-    public TextAsset MasterDataReference;
-    public TextAsset PicrossDataReference;
-    public TextAsset FutoshikiDataReference;
-    public TextAsset CrosswordDataReference;
-    private List<Snippet> AllSnippets { get; set; }
-    private List<PicrossSnippet> PicrossSnippets { get; set; }
-    private List<FutoshikiSnippet> FutoshikiSnippets { get; set; }
+    public static SnippetDatabase Instance;
 
-    private List<CrosswordSnippet> CrosswordSnippets { get; set; }
+    public List<Snippet> AllSnippets;
+
+    public List<PicrossSnippet> PicrossSnippets;
+
+    public List<FutoshikiSnippet> FutoshikiSnippets;
+
+    public List<CrosswordSnippet> CrosswordSnippets;
+
+    public bool DatabaseBuilt = false;
 
     private void Awake()
     {
@@ -40,17 +41,75 @@ public class SnippetDatabase : MonoBehaviour
         BuildDatabase();
     }
 
-    private void BuildDatabase()
+    public void BuildDatabase()
     {
-        AllSnippets = JsonConvert.DeserializeObject<List<Snippet>>(MasterDataReference.ToString());
+        Debug.Log("Running BuildDatabase()...");
+        //Only allow the database to be built once during runtime
+        if (!DatabaseBuilt)
+        {
+            //Load Snippet Data from file and modify snippets accordingly
+            foreach (Snippet s in AllSnippets)
+            {
+                if (!s.CheckCriticalInformation())
+                    Debug.LogWarning("Critical Information Check returned false for Snippet " + s.snippetSlug);
 
-        PicrossSnippets = JsonConvert.DeserializeObject<List<PicrossSnippet>>(PicrossDataReference.ToString());
+                s.ResetPlayerInformation();
+                switch (s.snippetType)
+                {
+                    case Snippet.SnippetType.Picross:
+                        PicrossSnippets.Add(s as PicrossSnippet);
+                        break;
 
-        FutoshikiSnippets = JsonConvert.DeserializeObject<List<FutoshikiSnippet>>(FutoshikiDataReference.ToString());
+                    case Snippet.SnippetType.Futoshiki:
+                        FutoshikiSnippets.Add(s as FutoshikiSnippet);
+                        break;
 
-        CrosswordSnippets = JsonConvert.DeserializeObject<List<CrosswordSnippet>>(CrosswordDataReference.ToString());
+                    case Snippet.SnippetType.Crossword:
+                        CrosswordSnippets.Add(s as CrosswordSnippet);
+                        break;
+                }
+            }
+            DatabaseBuilt = true;
+        }
+        else
+        {
+            Debug.LogWarning("SnippetDatabase was not built because it has already been built.");
+        }
+    }
 
-        //Debug.Log(PicrossSnippets[0].snippetSolution);
+
+    public void SaveSnippetInfo()
+    {
+        Debug.Log("Saving snippet information...");
+        SaveSystem.SaveSnippetData(this);
+    }
+
+    public void LoadSnippetInfo()
+    {
+        Debug.Log("Loading Snippet Information...");
+        SnippetData data = SaveSystem.LoadSnippetData();
+
+        if (data != null)
+        {
+            foreach (SnipInfo info in data.AllSnippetInfo)
+            {
+                foreach (Snippet s in AllSnippets)
+                {
+                    if (s.snippetSlug == info.snippetSlug)
+                    {
+                        s.snippetSolved = info.isSolved;
+                        s.bestTime = info.bestTime;
+                        s.numTimesSolved = info.timesCompleted;
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No Saved SnippetData found. Creating new save data...");
+            SaveSnippetInfo();
+        }
     }
 
     public Snippet GetSnippet(string slug)

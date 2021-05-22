@@ -1,3 +1,14 @@
+5/22/21 Update
+NOTE: To test gameplay, you must load the GameInitialization scene. Loading Debug_GeneralTesting immediately will cause errors.
+
+- Retooled Snippet Data Management to use Scriptable Objects (again) instead of a .json file
+
+- SnippetData can now be saved/loaded for individual snippets (current solution, best time, etc.)
+
+- The UI has now been broken up into component parts with prefabs for each part.
+-- The Exploration, Dialogue, and Snippet UI panels exist separately from one another and can be instantiated independently.
+-- The three panels have their own scripting that (hopefully) allows for more dynamic UI instances.
+------------------------------------------------------------------------------------------------------------------------
 5/20/21 Update 2 (Quest Handling Update)
 - Fixed a bug where the active quest information panel wouldn't properly update.
 

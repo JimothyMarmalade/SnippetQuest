@@ -25,8 +25,11 @@ public class GeneralTesting_LevelController : LevelController
 
     private void Start()
     {
-        //LoadLevel();
-        //SpawnPlayerAtLocation(PlayerSpawnLocation.position, PlayerSpawnLocation.rotation);
+        LoadLevel();
+        //Set the available snippets up in the Snippet UI
+        UIController.Instance.FullCheckUnlockNewSnippets();
+        //After the level has been loaded, spawn the player in the desired postion.
+        SpawnPlayerAtLocation(PlayerSpawnLocation.position, PlayerSpawnLocation.rotation);
     }
     public override void LoadLevel()
     {
@@ -34,9 +37,8 @@ public class GeneralTesting_LevelController : LevelController
         GeneralTesting_LevelData d = SaveSystem.LoadGeneralTestingData();
         if (d == null)
         {
+            Debug.LogWarning("No save data found for Level. Creating new save data.");
             SaveLevel();
-            LoadLevel();
-            return;
         }
 
         SnippetPickup_PicrossTestCross_Collected = d.SnippetPickup_PicrossTestCross_Collected;
@@ -51,9 +53,6 @@ public class GeneralTesting_LevelController : LevelController
             SpawnSnippetPickup(Futoshiki2Location.position, "Futoshiki_2");
 
         }
-
-        //When everything else has been done to load the level, spawn the player where they're supposed to be.
-        SpawnPlayerAtLocation(PlayerSpawnLocation.position, PlayerSpawnLocation.rotation);
     }
 
     public override void SaveLevel()

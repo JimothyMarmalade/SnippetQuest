@@ -12,9 +12,9 @@ using UnityEngine;
 
 public class AmountSolvedGoal : QuestGoal
 {
-    public string SnippetType { get; set; }
+    public Snippet.SnippetType SnippetType { get; set; }
 
-    public AmountSolvedGoal(Quest quest, string snippetType, string description, bool completed, int currentAmount, int requiredAmount)
+    public AmountSolvedGoal(Quest quest, Snippet.SnippetType snippetType, string description, bool completed, int currentAmount, int requiredAmount)
     {
         this.AssignedQuest = quest;
         this.SnippetType = snippetType;
