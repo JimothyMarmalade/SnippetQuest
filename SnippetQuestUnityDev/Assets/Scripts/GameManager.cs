@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
         InventoryController.Instance.LoadInventory();
 
-        SceneHandler.Load(SceneHandler.Scene.Debug_GeneralTesting);
+        SceneHandler.Load(SceneHandler.Scene.Menu_SnippetQuestMainMenu);
     }
 
     //Called when the player enters a new scene
@@ -62,4 +62,13 @@ public class GameManager : MonoBehaviour
         //Save the current level
         GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SaveLevel();
     }
+
+    public void GoToScene(SceneHandler.Scene s)
+    {
+        PlayerExitingScene();
+
+        SceneHandler.Load(s);
+    }
+
+
 }

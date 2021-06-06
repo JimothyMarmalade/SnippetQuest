@@ -17,15 +17,11 @@ public class QuestGiver : NPC
     public bool CompletedQuest { get; set; }
     */
 
-    public bool MetPlayer { get; set; }
-    public bool HasQuestInProgress { get; set; }
-    public bool AllQuestsCompleted { get; set; }
-
-    public Quest currentQuest;
-    public List<Quest> AvailableQuests = new List<Quest>();
-
-    public Dialogue FirstEncounterDialogue;
-    public Dialogue AllQuestsCompleteDialogue;
+    /*
+    public bool MetPlayer;
+    public bool HasQuestInProgress;
+    public bool AllQuestsCompleted;
+    */
 
     /*
     [SerializeField]
@@ -36,11 +32,26 @@ public class QuestGiver : NPC
     private string questTreeType;
     */
 
+
+    public Quest currentQuest;
+    public List<Quest> AvailableQuests = new List<Quest>();
+
+    public Dialogue FirstEncounterDialogue;
+    public Dialogue AllQuestsCompleteDialogue;
+
+
     private void Awake()
     {
+
         if (npcData == null)
         {
-            Debug.LogError("Missing NPCData for " + gameObject.name);
+            Debug.LogError("Missing NPCData for " + gameObject.name + ", building new.");
+            npcData = new NPCData();
+            npcData.InitQuestGiver();
+        }
+        else
+        {
+            npcData.InitQuestGiver();
         }
 
         DT = gameObject.GetComponent<DialogueTrigger>();
@@ -48,8 +59,6 @@ public class QuestGiver : NPC
         {
             Debug.LogError("Missing DialogueTrigger component on " + gameObject.name);
         }
-
-        MetPlayer = false;
 
         /*
         this.questTree = (QuestTree)gameObject.AddComponent(System.Type.GetType(questTreeType));
@@ -66,13 +75,13 @@ public class QuestGiver : NPC
             questTree = gameObject.GetComponent<QuestTree>();
         */
         //First check to see if the player has interacted with this NPC before. If they have unique dialogue for a first encounter, initiate it.
-        if (!MetPlayer)
+        if (!npcData.MetPlayer)
         {
             Debug.Log("Branch 1");
-            MetPlayer = true;
+            npcData.MetPlayer = true;
             DT.TriggerDialogue(FirstEncounterDialogue);
         }
-        else if (!AllQuestsCompleted)
+        else if (!npcData.AllQuestsCompleted)
         {
             Debug.Log("Branch 2");
 
@@ -104,13 +113,13 @@ public class QuestGiver : NPC
             //Add quest to Questlog
             QuestLog.Instance.AddQuestToIPQ(currentQuest);
             //Set NPC as having a quest in progress and load the quest's dialogue
-            HasQuestInProgress = true;
+            npcData.HasQuestInProgress = true;
             DT.TriggerDialogue(currentQuest.givePlayerQuestDialogue);
         }
         //If the list is empty, there's no currentQuest, and this was somehow triggered by accident, compensate.
         else if (currentQuest == null)
         {
-            AllQuestsCompleted = true;
+            npcData.AllQuestsCompleted = true;
             DT.TriggerDialogue(AllQuestsCompleteDialogue);
         }
     }
@@ -131,10 +140,10 @@ public class QuestGiver : NPC
 
             currentQuest = null;
 
-            HasQuestInProgress = false;
+            npcData.HasQuestInProgress = false;
 
             if (AvailableQuests.Count == 0)
-                AllQuestsCompleted = true;
+                npcData.AllQuestsCompleted = true;
 
         }
         else

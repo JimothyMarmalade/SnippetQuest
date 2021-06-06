@@ -17,6 +17,7 @@ public static class SceneHandler
     public enum Scene
     {
         GameInitialization, LoadingScreen,
+        Menu_SnippetQuestMainMenu,
         Debug_GeneralTesting
     }
 

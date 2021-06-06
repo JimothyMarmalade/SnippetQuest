@@ -35,6 +35,12 @@ public class InventoryController : MonoBehaviour
     public void GiveSnippet(string snippetSlug)
     {
         Debug.Log("InventoryController: Attempting to add Snippet with slug " + snippetSlug);
+        if (PlayerSnippetsSlugs.Contains(snippetSlug))
+        {
+            Debug.LogWarning("PlayerInventory already has this snippet.");
+            return;
+        }
+
         PlayerSnippets.Add(SnippetDatabase.Instance.GetSnippet(snippetSlug));
         PlayerSnippetsSlugs.Add(snippetSlug);
 
@@ -95,7 +101,8 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("PlayerInventory save file could not be found.");
+            Debug.LogWarning("PlayerInventory save file could not be found, creating new blank data.");
+            SaveInventory();
         }
     }
 

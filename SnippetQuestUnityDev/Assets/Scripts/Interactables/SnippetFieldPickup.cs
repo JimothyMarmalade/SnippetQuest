@@ -13,7 +13,7 @@ using UnityEngine;
 public class SnippetFieldPickup : FieldPickup
 {
     private LevelController level;
-    private string snippetSlug = "No Slug!";
+    public string snippetSlug = "No Slug!";
 
     public override void CollectPickup()
     {
@@ -22,7 +22,14 @@ public class SnippetFieldPickup : FieldPickup
         Debug.Log("Added Snippet with slug " + snippetSlug + "to player Inventory");
 
         //Have the level controller update and save that this pickup has been collected.
-        level.ItemCollected(snippetSlug);
+        if (level != null)
+        {
+            level.ItemCollected(snippetSlug);
+        }
+        else
+        {
+            Debug.LogWarning("Snippet Pickup did not have a reference to this level's levelcontroller and may be a permanent part of the scene.");
+        }
 
         base.CollectPickup();
     }

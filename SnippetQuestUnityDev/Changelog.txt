@@ -1,3 +1,12 @@
+5/27/21 Update
+- Added QuestData.cs to hold quest information for saving/loading (Quest data save/loading is not implemented fully)
+
+- Modified NPCData.cs. The class was mostly unused before, but has now been extended to carry NPC information such as their ID, guestgiver status, and quest line.
+
+- Added scene Menu_SnippetQuestMainMenu
+
+- Updated the version of the Unity Editor to the current LTS version (2020)
+------------------------------------------------------------------------------------------------------------------------
 5/22/21 Update
 NOTE: To test gameplay, you must load the GameInitialization scene. Loading Debug_GeneralTesting immediately will cause errors.
 

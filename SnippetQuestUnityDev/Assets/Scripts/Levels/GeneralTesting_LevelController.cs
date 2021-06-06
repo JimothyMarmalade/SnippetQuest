@@ -78,6 +78,10 @@ public class GeneralTesting_LevelController : LevelController
             SnippetPickup_Futoshiki2_Collected = true;
             saveNeeded = true;
         }
+        else
+        {
+            //Do nothing.
+        }
 
         if (saveNeeded)
             SaveSystem.SaveGeneralTestingData(this);
