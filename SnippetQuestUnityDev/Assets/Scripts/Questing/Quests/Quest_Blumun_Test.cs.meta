@@ -3,7 +3,9 @@ guid: 90b7874823bf7b64a83fe8c6c3c74e99
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - EQIDPrefab: {fileID: 9055507697368286117, guid: 613fcc638f24d104fb18b1f2b5adc734, type: 3}
+  - EQID: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

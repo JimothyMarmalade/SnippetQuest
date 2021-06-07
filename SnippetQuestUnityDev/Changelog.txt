@@ -1,4 +1,129 @@
+5/27/21 Update
+- Added QuestData.cs to hold quest information for saving/loading (Quest data save/loading is not implemented fully)
+
+- Modified NPCData.cs. The class was mostly unused before, but has now been extended to carry NPC information such as their ID, guestgiver status, and quest line.
+
+- Added scene Menu_SnippetQuestMainMenu
+
+- Updated the version of the Unity Editor to the current LTS version (2020)
+------------------------------------------------------------------------------------------------------------------------
+5/22/21 Update
+NOTE: To test gameplay, you must load the GameInitialization scene. Loading Debug_GeneralTesting immediately will cause errors.
+
+- Retooled Snippet Data Management to use Scriptable Objects (again) instead of a .json file
+
+- SnippetData can now be saved/loaded for individual snippets (current solution, best time, etc.)
+
+- The UI has now been broken up into component parts with prefabs for each part.
+-- The Exploration, Dialogue, and Snippet UI panels exist separately from one another and can be instantiated independently.
+-- The three panels have their own scripting that (hopefully) allows for more dynamic UI instances.
+------------------------------------------------------------------------------------------------------------------------
+5/20/21 Update 2 (Quest Handling Update)
+- Fixed a bug where the active quest information panel wouldn't properly update.
+
+- Moved all gamedata components that store information onto a single object, GameManager
+------------------------------------------------------------------------------------------------------------------------
+5/20/21 Update (Save/Load Functionality)
+- Renamed all the original GLD Prototype Scripts to avoid conflictions
+- Renamed NewUIController.cs to UIController.cs
+
+- Created GameManager.cs.
+
+- Created SaveSystem.cs and InventoryData.cs for game save purposes. 
+-- Added saving/loading capability to InventoryController.cs.
+
+- Created LevelController.cs, GeneralTesting_LevelController.cs, GeneralTesting_LevelData.cs.
+-- LevelController holds methods that are used by all levels to manage data.
+-- Levels can now hold variables that indicate what and how items should be spawned in when a level is loaded.
+-- The UIController (should) properly reload available snippets for player access when a new scene is loaded.
+
+- Created a Player+Camera prefab that can be used by the game to Spawn the player at a location/Rotation within a level.
+
+- Added the SceneHandler.cs Class that enables loading in/out of different scenes.
+-- Added the LoadingScreen scene and accompanying scripting.
+
+- Moved the UIController script onto the Exploration HUD and rewired UI components accordingly.
+------------------------------------------------------------------------------------------------------------------------
+5/18/21 Update
+- Included the sightly-trimmed raw audio files for background music in the project.
+
+- Added the AudioManager.cs and Sound.cs classes for implementing sounds in-game
+-- Includes methods for fading in/out BGM tracks for dynamic audio
+
+- Reorganized the Sounds folder in Assets
+
+- Modified how interacting with SerenePlaces and exiting SerenePlaces calls methods, all actions are now performed/called from within the SerenePlaces.cs file
+-- SerenePlaces are now scripted to trigger a change from exploration music to Snippet music
+
+- Modified DialogueTrigger.cs to change music from Exploration to Activity during dialogue and revert when done
+
+- Renamed the music tracks
+-- SnippetQuestActivity is now SQ_Forest_Exploring
+-- SnippetQuestExploring is now SQ_Forest_Snippet
+-- SnippetQuestSolving is now SQ_Forest_Activity
+
+- Changed ExpressionController.cs to use enums for animation states rather than strings.
+-- Updated Dialogue and all quests to utilize this
+
+- Added basic NPC "Abby" into the scene.
+
+- Made some changes to the scene and environment lighting in the project; lightened shadow strength, upped light reflections
+
+- Snippets will now play a sound when solved
+
+- Included a .txt file with references to all free/purchased assets used in the project
+
+- Added the ActiveQuestInfoDisplay.cs file that tracks and displays progression of the last-taken quest.
+
+- Restructured Quest tracking/distribution system
+-- Revamped QuestGiver.cs, Quest.cs, QuestLog.cs. Made QuestTree (temporarily) obsolete.
+
+- Added InteractionPrompt.cs and Billboard.cs, and created the InteractionPrompt prefab that can display over interactables when highlighted by the player. Modified the Interactable.cs class to require an InteractionPrompt that is displayed when the player is close enough to interact with it.
+
+- Added SnippetObtainedPopup.cs and created the SnippetObtainedPopup Prefab. Basic functionality implemented.
+
+- Applied new fonts to Snippet Solving boards. Some scripts now have a space for Printed Text and Handwritten Text.
+
+- Added logic to Jump.cs that caps the player's maximum downward velocity
+
+- Added the MinigameLoader.cs script
+------------------------------------------------------------------------------------------------------------------------
+5/11/21 Update
+- Added SnippetLoaderButton.cs. Changed the puzzle load methods in NewUIController to take in a string (slug) from a button instead of an int (masterID) and updated all the pre-existing buttons in the UI accordingly.
+- Added methods in the UI to update available snippets to solve based on contents of player inventory.
+- Added new original music into the project folder
+- Added Futoshiki_2, Futoshiki_3, Picross_SmileyFace, and Picross_Leaf snippet data into relevant .json files
+- Added quest rewards for Blumun's available quests
+------------------------------------------------------------------------------------------------------------------------
+5/10/21 Update
+- Added methods StartInteraction() and EndInteraction() to Interactable.cs that can be used by interactables that need to perform special actions before/after their primary function
+- Added the PlayerActions.cs and PlayerController.cs scripts to handle the player's moveset and what actions the player can perform at any given time.
+-- The player's control over the camera can now be toggled on and off in scripting the same as other PlayerActions
+-- DialogueTrigger.cs has been updated to trigger the enabling and disabling of player actions through PlayerController when dialogue is started/finished.
+- Added a hotkey (F) that will auto-complete Picross puzzles for testing purposes
+- Made some adjustments to the CharacterController component on the Player
+- Added class FieldPickup.cs for items that can be collected around the world without any expressed input from the player
+-- Made a simple bobbing animation for field pickups
+-- Added class SnippetFieldPickup.cs for collecting snippets in the overworld -- implemented collection and adding snippets to player inventory methods
+- Added "Picross_TestCross" puzzle to SnippetData
+------------------------------------------------------------------------------------------------------------------------
+5/8/21 Update
+- Added givePlayerQuestDialogue Dialogue variable to Quest.cs for more refined conversations (NOT IMPLEMENTED)
+- Picross puzzles will now auto-clear non-filled squares (Marked and Crossed) upon puzzle completion
+- Updated DialogueManager.cs to incorporate an EventListener, allowing the manager to trigger methods upon closing a conversation (OnDialogueOver)
+- Updated Dialogue.cs to hold values for eye, mouth, and body animations, one per conversation
+- Updated ExpressionController.cs with methods to trigger eye/mouth animations based on string input, and a method to revert back to the default animation
+- Updated DialogueTrigger.cs to trigger facial expressions when Dialogue is sent to the DialogueManager.
+- Added a hotkey (F) that will auto-complete Crossword Puzzles for testing purposes
+- Improved Futoshiki Puzzles
+-- Added indicators of faulty solutions
+-- Changed answer buttons so they can spawn in blank instead of the puzzle filling with ones
+-- Added a hotkey (F) that will auto-complete the puzzle for testing purposes
+-- Modified _FutoshikiSnippet (and test puzzle data) so that a puzzle can have pre-filled answers and partially-visible clues.
+- Set title of Picross Puzzle to appear onscreen when Picross puzzles are solved and revert to blank when unloading
+------------------------------------------------------------------------------------------------------------------------
 5/4/21 Version
+- Moved some Assets around
 - Fixed the bug where Crossword puzzle clues would fail to load during gameplay (bug caused by implementing the new Snippet data loading system)
 - Implemented UnloadSnippet() in CrosswordSnippetBoard.cs to conserve resources when leaving the Crossword game board.
 - Implemented UnloadSnippet() in FutoshikiSnippetBoard.cs to conserve resources when leaving the Futoshiki game board.

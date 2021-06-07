@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 4/21/21
- * Last Modified by Logan Edmund, 4/27/21
+ * Last Modified by Logan Edmund, 5/16/21
  * 
  * Overrides NPC.cs. To be used when an NPC has a quest or string of quests that can be undertaken by the player.
  * 
@@ -12,24 +12,46 @@ using UnityEngine;
 
 public class QuestGiver : NPC
 {
+    /*
     public bool AssignedQuest { get; set; }
     public bool CompletedQuest { get; set; }
+    */
 
+    /*
+    public bool MetPlayer;
+    public bool HasQuestInProgress;
+    public bool AllQuestsCompleted;
+    */
+
+    /*
     [SerializeField]
     private GameObject questLogReference;
     [SerializeField]
     private string questType;
     [SerializeField]
     private string questTreeType;
+    */
 
-    public Quest activeQuest;
-    public QuestTree questTree;
 
-    private void Start()
+    public Quest currentQuest;
+    public List<Quest> AvailableQuests = new List<Quest>();
+
+    public Dialogue FirstEncounterDialogue;
+    public Dialogue AllQuestsCompleteDialogue;
+
+
+    private void Awake()
     {
+
         if (npcData == null)
         {
-            Debug.LogError("Missing NPCData for " + gameObject.name);
+            Debug.LogError("Missing NPCData for " + gameObject.name + ", building new.");
+            npcData = new NPCData();
+            npcData.InitQuestGiver();
+        }
+        else
+        {
+            npcData.InitQuestGiver();
         }
 
         DT = gameObject.GetComponent<DialogueTrigger>();
@@ -38,68 +60,97 @@ public class QuestGiver : NPC
             Debug.LogError("Missing DialogueTrigger component on " + gameObject.name);
         }
 
+        /*
         this.questTree = (QuestTree)gameObject.AddComponent(System.Type.GetType(questTreeType));
         if (questTree = null)
             Debug.LogError("There is no attached QuestTree on NPC " + npcData.characterName);
+        */
+
     }
 
     public override void Interact()
     {
-        //The Idea is that Interact will do the current actions, but be making calls to QuestTree in order to retreive the relevant information.
+        /*
         if (questTree == null)
             questTree = gameObject.GetComponent<QuestTree>();
-
-
-        if (!AssignedQuest && !CompletedQuest)
+        */
+        //First check to see if the player has interacted with this NPC before. If they have unique dialogue for a first encounter, initiate it.
+        if (!npcData.MetPlayer)
         {
-            //Assign the First Quest
-            DT.TriggerDialogue(questTree.FirstEncounterDialogue);
-            AssignQuest();
+            Debug.Log("Branch 1");
+            npcData.MetPlayer = true;
+            DT.TriggerDialogue(FirstEncounterDialogue);
         }
-        else if (AssignedQuest && !CompletedQuest)
+        else if (!npcData.AllQuestsCompleted)
         {
-            //Display the In-Progress Dialogue
-            Debug.Log("Checking Quest status...");
-            CheckQuest();
-        }
-        else
-        {
-            //If there is another quest to undertake, begin it and start over.
-            if (questTree.CheckNewQuestExists())
-            {
-                AssignQuest();
-            }
-            //If not, then display the end-of-quest dialogue.
+            Debug.Log("Branch 2");
+
+            if (currentQuest == null)
+                AssignNextQuest();
             else
-            {
-                DT.TriggerDialogue(questTree.AllQuestsCompleteDialogue);
-            }
-        }
-    }
-
-    public void AssignQuest()
-    {
-        //Get the next quest to undertake from the QuestTree
-        AssignedQuest = true;
-        CompletedQuest = false;
-        activeQuest = (Quest)questLogReference.AddComponent(System.Type.GetType(questTree.GetActiveQuest()));
-        QuestLog.Instance.AddQuestToLog(activeQuest);
-    }
-
-    void CheckQuest()
-    {
-        if (activeQuest.IsCompleted)
-        {
-            activeQuest.GiveRewards();
-            CompletedQuest = true;
-            AssignedQuest = false;
-            DT.TriggerDialogue(activeQuest.rewardDialogue);
-            Destroy(questLogReference.GetComponent(System.Type.GetType(activeQuest.name)));
-            questTree.TrySetNextQuestActive();
+                CheckCurrentQuestCompletion();
         }
         else
         {
-            DT.TriggerDialogue(activeQuest.inProgressDialogue);
+            Debug.Log("Branch 3");
+
+            DT.TriggerDialogue(AllQuestsCompleteDialogue);
+        }
+    }
+
+    public void AssignNextQuest()
+    {
+        Debug.Log("Branch 2.1");
+
+        //Assign the next quest if there is another quest to assign.
+        if (AvailableQuests.Count != 0)
+        {
+            //Get the next quest from the list, set it as the NPC's current quest, and remove it from the available backlog
+            currentQuest = AvailableQuests[0];
+            AvailableQuests.RemoveAt(0);
+            //Load quest data and Turn on the quest listeners
+            currentQuest.SetQuestInProgress();
+            //Add quest to Questlog
+            QuestLog.Instance.AddQuestToIPQ(currentQuest);
+            //Set NPC as having a quest in progress and load the quest's dialogue
+            npcData.HasQuestInProgress = true;
+            DT.TriggerDialogue(currentQuest.givePlayerQuestDialogue);
+        }
+        //If the list is empty, there's no currentQuest, and this was somehow triggered by accident, compensate.
+        else if (currentQuest == null)
+        {
+            npcData.AllQuestsCompleted = true;
+            DT.TriggerDialogue(AllQuestsCompleteDialogue);
+        }
+    }
+
+    void CheckCurrentQuestCompletion()
+    {
+        Debug.Log("Branch 2.2");
+
+        if (currentQuest.IsCompleted)
+        {
+            Debug.Log("Branch 2.2.1");
+
+            DT.TriggerDialogue(currentQuest.rewardDialogue);
+
+            currentQuest.GiveRewards();
+
+            QuestLog.Instance.ArchiveQuest(currentQuest);
+
+            currentQuest = null;
+
+            npcData.HasQuestInProgress = false;
+
+            if (AvailableQuests.Count == 0)
+                npcData.AllQuestsCompleted = true;
+
+        }
+        else
+        {
+            Debug.Log("Branch 2.2.2");
+
+            DT.TriggerDialogue(currentQuest.inProgressDialogue);
         }
     }
 }

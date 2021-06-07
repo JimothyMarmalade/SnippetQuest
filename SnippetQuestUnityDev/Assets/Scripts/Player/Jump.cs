@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jump : MonoBehaviour
+public class Jump : PlayerAction
 {
     [Header("Movement/Interaction References")]
     public CharacterController Controller;
@@ -21,6 +21,7 @@ public class Jump : MonoBehaviour
     [Header("Jump Strength/Gravity")]
     public float JumpHeight = 4;
     public float ForceGravity = -9.81f;
+    public float MaxForceGravity = -30f;
 
     Vector3 PlayerVelocity;
     public bool isGrounded;
@@ -36,7 +37,7 @@ public class Jump : MonoBehaviour
         }
 
         //Jump
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && canPerform && isGrounded)
         {
             PlayerVelocity.y = Mathf.Sqrt(JumpHeight * -2f * ForceGravity);
         }
@@ -44,6 +45,7 @@ public class Jump : MonoBehaviour
 
         //Apply Gravity
         PlayerVelocity.y += ForceGravity * Time.deltaTime;
+        PlayerVelocity.y = Mathf.Clamp(PlayerVelocity.y, MaxForceGravity, Mathf.Infinity);
         Controller.Move(PlayerVelocity * Time.deltaTime);
     }
 }

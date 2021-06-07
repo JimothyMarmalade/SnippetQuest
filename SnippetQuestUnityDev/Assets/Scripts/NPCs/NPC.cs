@@ -11,14 +11,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[SerializeField]
 public class NPC : Interactable
 {
     //Uses an NPCData class to hold all the data associated with the NPC - name, quest distribution, dialog trees
     public NPCData npcData;
-    [SerializeField]
     public DialogueTrigger DT { get; set; }
 
-    private void Start()
+    private void Awake()
     {
         if (npcData == null)
         {

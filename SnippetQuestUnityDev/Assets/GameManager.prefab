@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5262241702429740764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5262241702429740757}
+  - component: {fileID: 5262241702429740758}
+  - component: {fileID: 5262241702429740760}
+  - component: {fileID: 5262241702429740761}
+  - component: {fileID: 5262241702429740762}
+  - component: {fileID: 5262241702429740763}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5262241702429740757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262241702429740764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.6388838, y: 1.3495302, z: -41.321606}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5262241702429740758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262241702429740764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60597cd7fdebea2498965a3b70a01f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5262241702429740760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262241702429740764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e2611d30f702449b2274ad988876f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllSnippets:
+  - {fileID: 11400000, guid: 99105b3a5d41f4e4898da48f24268012, type: 2}
+  - {fileID: 11400000, guid: 808b102ef6887e6489b3e177a6881270, type: 2}
+  - {fileID: 11400000, guid: ea66a1f4c4866d943be1e825355867ee, type: 2}
+  - {fileID: 11400000, guid: 9ba4e351cddfffd4b8aaa412adbeab39, type: 2}
+  - {fileID: 11400000, guid: 0b8ad31268ac3484ba9c5b591fb2a410, type: 2}
+  - {fileID: 11400000, guid: c8051793813add54a98e9b3dde0a9ee0, type: 2}
+  - {fileID: 11400000, guid: 12766a97ae4f2b743aff79dd80847bbb, type: 2}
+  - {fileID: 11400000, guid: f244867550d119c47b8204ed900f9732, type: 2}
+  PicrossSnippets: []
+  FutoshikiSnippets: []
+  CrosswordSnippets: []
+--- !u!114 &5262241702429740761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262241702429740764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58467353ea1db5e4183c651d6bee52a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerSnippets: []
+  PlayerSnippetsSlugs: []
+--- !u!114 &5262241702429740762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262241702429740764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52df61b31d76029418b4393dc33d40a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeQuest: {fileID: 0}
+  inProgressQuests: []
+  completedQuests: []
+--- !u!114 &5262241702429740763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262241702429740764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f184df68134bc42925e8467000c299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

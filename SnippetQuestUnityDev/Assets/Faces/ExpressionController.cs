@@ -10,6 +10,13 @@ public class ExpressionController : MonoBehaviour
     public Animator eyesAnimator;
     public Animator mouthAnimator;
 
+    public enum EyesExpression {None, Angry, Sad, Curious, Surprised, Upset, Happy};
+    public enum MouthExpression {None, Angry, Sad, Curious, Surprised, Upset, Happy, Open_O, MessageBox};
+
+    public EyesExpression eyeCurrEXP = EyesExpression.None;
+    public MouthExpression mouthCurrEXP = MouthExpression.None;
+
+
     public float maxEyeMoveDist = 0.3f;
 
     private IEnumerator Blink;
@@ -27,9 +34,6 @@ public class ExpressionController : MonoBehaviour
     {
         if (manualControlEnabled)
             CheckPlayerInput();
-
-        
-
     }
 
     private IEnumerator calcBlink()
@@ -152,6 +156,107 @@ public class ExpressionController : MonoBehaviour
             bool toggle = !mouthAnimator.GetBool("MouthSmile");
             mouthAnimator.SetBool("MouthSmile", toggle);
         }
+
+    }
+
+    //Hard-wipes the face animator to stop any current non-default expressions
+    public void ClearExpression()
+    {
+        foreach (AnimatorControllerParameter parameter in eyesAnimator.parameters)
+        {
+            if (parameter.type == AnimatorControllerParameterType.Bool)
+                eyesAnimator.SetBool(parameter.name, false);
+        }
+        foreach (AnimatorControllerParameter parameter in mouthAnimator.parameters)
+        {
+            if (parameter.type == AnimatorControllerParameterType.Bool)
+                mouthAnimator.SetBool(parameter.name, false);
+        }
+
+        isExpressing = false;
+    }
+
+    //turns on the associated expression
+    public void ChangeExpression(EyesExpression eyes, MouthExpression mouth)
+    {
+        if (isExpressing)
+            ClearExpression();
+
+        switch (eyes)
+        {
+            case EyesExpression.None:
+                eyeCurrEXP = eyes;
+                break;
+            case EyesExpression.Angry:
+                eyesAnimator.SetBool("IsAngry", true);
+                eyeCurrEXP = eyes;
+                break;
+            case EyesExpression.Curious:
+                eyesAnimator.SetBool("IsCurious", true);
+                eyeCurrEXP = eyes;
+                break;
+            case EyesExpression.Sad:
+                eyesAnimator.SetBool("IsSad", true);
+                eyeCurrEXP = eyes;
+                break;
+            case EyesExpression.Happy:
+                eyesAnimator.SetBool("IsHappy", true);
+                eyeCurrEXP = eyes;
+                break;
+            case EyesExpression.Surprised:
+                eyesAnimator.SetBool("IsSurprised", true);
+                eyeCurrEXP = eyes;
+                break;
+            case EyesExpression.Upset:
+                eyesAnimator.SetBool("IsUpset", true);
+                eyeCurrEXP = eyes;
+                break;
+        }
+
+        switch (mouth)
+        {
+            case MouthExpression.None:
+                mouthCurrEXP = mouth;
+                break;
+            case MouthExpression.Angry:
+                mouthAnimator.SetBool("MouthAngry", true);
+                mouthCurrEXP = mouth;
+                break;
+            case MouthExpression.Curious:
+                mouthAnimator.SetBool("MouthCurious", true);
+                mouthCurrEXP = mouth;
+                break;
+            case MouthExpression.Sad:
+                mouthAnimator.SetBool("MouthSad", true);
+                mouthCurrEXP = mouth;
+                break;
+            case MouthExpression.Happy:
+                mouthAnimator.SetBool("MouthSmile", true);
+                mouthCurrEXP = mouth;
+                break;
+            case MouthExpression.Surprised:
+                mouthAnimator.SetBool("MouthSurprised", true);
+                mouthCurrEXP = mouth;
+                break;
+            case MouthExpression.Upset:
+                mouthAnimator.SetBool("MouthUpset", true);
+                mouthCurrEXP = mouth;
+                break;
+            case MouthExpression.Open_O:
+                mouthAnimator.SetBool("MouthOpen", true);
+                mouthCurrEXP = mouth;
+                break;
+            case MouthExpression.MessageBox:
+                mouthAnimator.SetBool("MouthMessageBox", true);
+                mouthCurrEXP = mouth;
+                break;
+        }
+
+        if (eyeCurrEXP != EyesExpression.None || mouthCurrEXP != MouthExpression.None)
+            isExpressing = true;
+        else
+            isExpressing = false;
+
 
     }
 

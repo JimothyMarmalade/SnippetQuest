@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/8/21
- * Last Modified by Logan Edmund, 5/4/21
+ * Last Modified by Logan Edmund, 5/10/21
  * 
  * Used to generate UI picross boards on the fly when fed SnippetData of type Picross. Holds all methods needed to handle gameplay and 
  * data modification/updating.
@@ -45,6 +45,22 @@ public class PicrossSnippetBoard : MonoBehaviour
     int maxNumVerticalClues;
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    private void Update()
+    {
+        //Auto-complete
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            for (int i = 0; i < picrossPuzzleData.snippetSolution.Length; i++)
+            {
+                if (picrossPuzzleData.snippetSolution[i] == '1')
+                {
+                    answerButtons[i].SetState("Filled");
+                }
+            }
+            CheckWinCondition();
+        }
+    }
 
     //Ensures all necessary data is accurate, then runs BuildPicrossBoard().
     public bool TryBuildPicrossBoard(PicrossSnippet s)
@@ -368,10 +384,14 @@ public class PicrossSnippetBoard : MonoBehaviour
         {
             if (b.transform.GetComponent<Button>() != null)
             {
-                //b.SetState("Blank");
+                if (b.currentValue != '1')
+                    b.SetState("Blank");
+
                 b.transform.GetComponent<Button>().interactable = false;
             }
         }
+
+        PuzzleHeader.text = picrossPuzzleData.snippetName;
 
         //If this is the first time completing the puzzle, run OnPuzzleSolved. Else, run OnPuzzleComplete.
         OnPuzzleSolved();
@@ -381,6 +401,7 @@ public class PicrossSnippetBoard : MonoBehaviour
     public virtual void OnPuzzleSolved()
     {
         Debug.Log("OnPuzzleSolved ran in PicrossSnippetBoard");
+        AudioManager.Instance.Play("SnippetSolved");
         SnippetEvents.Instance.SnippetSolved(picrossSlug);        
     }
 
@@ -395,6 +416,8 @@ public class PicrossSnippetBoard : MonoBehaviour
         foreach (_PicrossClueButton b in clueButtonsVertical)
             if (b != null)
                 Destroy(b.gameObject);
+
+        PuzzleHeader.text = "[Puzzle Title Not Displaying]";
     }
 }
 

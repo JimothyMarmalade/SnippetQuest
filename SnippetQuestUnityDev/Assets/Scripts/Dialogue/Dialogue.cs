@@ -22,6 +22,15 @@ public class Dialogue
     //Name of the person speaking in this dialog segment
     public string speakerName = "";
 
+    //Name of the eyes expression used when saying this dialogue
+    public ExpressionController.EyesExpression eyesExpression;
+
+    //name of the mouth expression used when saying this dialogue
+    public ExpressionController.MouthExpression mouthExpression;
+
+    //name of the body animation used when saying this dialogue
+    public string bodyAnimation = "";
+
     //The sentences that will be spoken
     [TextArea(3, 10)]
     public string[] sentences;

@@ -16,6 +16,13 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; set; }
+
+    public GameObject DEBUGDialogMenuNametag;
+
+    public delegate void DialogueEvent();
+    public static event DialogueEvent OnDialogueOver;
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -47,6 +54,8 @@ public class DialogueManager : MonoBehaviour
     {
         //Debug.Log("Starting conversation with " + dialogue.speakerName);
         animator.SetBool("IsOpen", true);
+
+        DEBUGDialogMenuNametag.SetActive(true);
 
         nameText.text = dialogue.speakerName;
         sentences.Clear();
@@ -85,8 +94,12 @@ public class DialogueManager : MonoBehaviour
     {
         //Debug.Log("End of Conversation");
         animator.SetBool("IsOpen", false);
-        //nameText.text = "";
-        //sentences.Clear();
+        DEBUGDialogMenuNametag.SetActive(false);
+
+        if (OnDialogueOver != null)
+        {
+            OnDialogueOver();
+        }
 
     }
 

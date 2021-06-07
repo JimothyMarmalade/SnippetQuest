@@ -30,5 +30,55 @@
     "snippetSolved": "false",
     "numTimesSolved": 0,
     "bestTime": -1
+  },
+  {
+	"snippetSlug": "Picross_TestCross",
+    "snippetType": "Picross",
+    "snippetName": "Test Cross",
+    "masterID": -4,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1
+  },
+  {
+    "snippetSlug": "Picross_SmileyFace",
+    "snippetType": "Picross",
+    "snippetName": "Smiley Face",
+    "masterID": -5,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1
+  },
+  {
+    "snippetSlug": "Futoshiki_2",
+    "snippetType": "Futoshiki",
+    "snippetName": "Futoshiki 2",
+    "masterID": -6,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1
+  },
+  {
+    "snippetSlug": "Futoshiki_3",
+    "snippetType": "Futoshiki",
+    "snippetName": "Futoshiki 3",
+    "masterID": -7,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1
+  },
+  {
+    "snippetSlug": "Picross_Leaf",
+    "snippetType": "Picross",
+    "snippetName": "Leaf",
+    "masterID": -8,
+    "typeID": 0,
+    "snippetSolved": "false",
+    "numTimesSolved": 0,
+    "bestTime": -1
   }
-] 
+]

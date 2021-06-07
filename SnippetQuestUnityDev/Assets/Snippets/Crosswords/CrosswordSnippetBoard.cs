@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-//Last edited by Logan Edmund, 5/4/21
+//Last edited by Logan Edmund, 5/7/21
 
 
 public class CrosswordSnippetBoard : MonoBehaviour
@@ -31,6 +31,13 @@ public class CrosswordSnippetBoard : MonoBehaviour
 
     private CrosswordSnippet CurrentSnippetData;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+            foreach (GameObject g in inputs)
+                if (g != null && g.GetComponent<_CrosswordSquare>() != null)
+                    g.GetComponent<_CrosswordSquare>().AutoAnswer();
+    }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public bool TryBuildCrosswordBoard(CrosswordSnippet s)
@@ -57,11 +64,11 @@ public class CrosswordSnippetBoard : MonoBehaviour
         //First, the board defines the size of crosswordGridButtons based on the input data.
         float totalsize = gridPanel.sizeDelta.x;
         Debug.Log("gridPanel TotalSize: " + totalsize);
-        float inputSize = totalsize/crosswordPuzzleData.GridLength;
+        float inputSize = totalsize/crosswordPuzzleData.gridSize;
         Debug.Log("inputSize: " + inputSize);
 
         //With that done, we can now generate prefab buttons to fill the grid.
-        inputs = new GameObject[crosswordPuzzleData.GridLength, crosswordPuzzleData.GridLength];
+        inputs = new GameObject[crosswordPuzzleData.gridSize, crosswordPuzzleData.gridSize];
 
         float startLocX = inputSize/2;
         float startLocY = inputSize/2;
@@ -69,9 +76,9 @@ public class CrosswordSnippetBoard : MonoBehaviour
 
 
         //Build all needed input spaces, place them on the board, and assign them to the array
-        for (int row = 0; row < crosswordPuzzleData.GridLength; row++)
+        for (int row = 0; row < crosswordPuzzleData.gridSize; row++)
         {
-            for (int col = 0; col < crosswordPuzzleData.GridLength; col++)
+            for (int col = 0; col < crosswordPuzzleData.gridSize; col++)
             {
                 //Calculate the Y value for the row
                 GameObject a = Instantiate(crosswordGridSpacePrefab);
@@ -137,9 +144,9 @@ public class CrosswordSnippetBoard : MonoBehaviour
         //With all the buttons set, it's time to tidy up the board by removing inputs with no clues and
         //placing the appropriate clue numbers on inputs that need them.
         int clueNum = 1;
-        for (int i = 0; i < crosswordPuzzleData.GridLength; i++)
+        for (int i = 0; i < crosswordPuzzleData.gridSize; i++)
         {
-            for (int j = 0; j < crosswordPuzzleData.GridLength; j++)
+            for (int j = 0; j < crosswordPuzzleData.gridSize; j++)
             {
                 _CrosswordSquare iLogic = inputs[j, i].GetComponent<_CrosswordSquare>();
                 if (iLogic.GetAnswerChar() == '\0')
@@ -177,9 +184,9 @@ public class CrosswordSnippetBoard : MonoBehaviour
         //Run through every space and, if all have the correct char, mark puzzle as complete.
         bool PuzzleSolved = true;
         _CrosswordSquare iLogic = null;
-        for (int i = 0; i < crosswordPuzzleData.GridLength; i++)
+        for (int i = 0; i < crosswordPuzzleData.gridSize; i++)
         {
-            for (int j = 0; j < crosswordPuzzleData.GridLength; j++)
+            for (int j = 0; j < crosswordPuzzleData.gridSize; j++)
             {
                 if (inputs[j, i] != null)
                 {
@@ -189,7 +196,8 @@ public class CrosswordSnippetBoard : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Puzzle Solved: " + PuzzleSolved);
+        if (PuzzleSolved)
+            EndGame();
     }
 
     public void DisplayClues(int across, int down)
@@ -198,6 +206,27 @@ public class CrosswordSnippetBoard : MonoBehaviour
         DownClueText.text = "Down: " + cluesDown[down-1];
     }
 
+    public void EndGame()
+    {
+        foreach (GameObject g in inputs)
+            if (g != null && g.GetComponentInChildren<TMP_InputField>() != null)
+                g.GetComponentInChildren<TMP_InputField>().interactable = false;
+
+        OnPuzzleSolved();
+    }
+
+    public void OnPuzzleSolved()
+    {
+        Debug.Log("OnPuzzleSolved ran in CrosswordSnippetBoard with slug: " + crosswordPuzzleData.snippetSlug);
+
+        AudioManager.Instance.Play("SnippetSolved");
+        SnippetEvents.Instance.SnippetSolved(crosswordPuzzleData.snippetSlug);
+    }
+
+    public void OnPuzzleCompleted()
+    {
+
+    }
 
     //UnloadSnippet unloads all the buttons from the gameplay panel so they do not use resources. 
     public void UnloadSnippet()

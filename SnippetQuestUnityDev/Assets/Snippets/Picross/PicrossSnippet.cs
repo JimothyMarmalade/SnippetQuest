@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 3/4/21
- * Last Modified by Logan Edmund, 3/4/21
+ * Last Modified by Logan Edmund, 5/20/21
  * 
  * Function of PicrossSnippet.cs is to hold data for each individual picross Snippet that can be inserted into puzzle boards.
  * This data and inheriting classes are NOT INTENDED for gameplay purposes such as if it has been collected by the player or position in the world.
@@ -13,42 +13,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Picross Snippet", menuName = "Snippets/Picross")]
 public class PicrossSnippet : Snippet
 {
-    //currentSolution is a FEN-esque notation string used to hold the player's current in-progress solution.
-    public string currentSolution { get; set; }
-    //Picross SnippetSolutions are stored as a single string of 0's and 1's, similar to FEN notation in chess
-    public string snippetSolution { get; set; }
+    [Header("Picross Variables")]
+
     //The horizontal and vertical grid size used by the board/solution
-    public int horizontalGridSize { get; set; }
-    public int verticalGridSize { get; set; }
+    public int horizontalGridSize;
+    public int verticalGridSize;
+    //currentSolution is a FEN-esque notation string used to hold the player's current in-progress solution.
+    public string currentSolution;
+    //Picross SnippetSolutions are stored as a single string of 0's and 1's, similar to FEN notation in chess
+    public string snippetSolution;
 
-    //----------
-    [Newtonsoft.Json.JsonConstructor]
-    public PicrossSnippet(string snippetSlug, string snippetType, string snippetName, int masterID,
-                   int typeID, bool snippetSolved, int numTimesSolved, float bestTime,
-                   
-                   string currentSolution, string snippetSolution, int horizontalGridSize, int verticalGridSize)
+    //---------- Constructor
+    public PicrossSnippet()
     {
-        this.snippetSlug = snippetSlug;
-        this.snippetType = snippetType;
-        this.snippetName = snippetName;
-        this.masterID = masterID;
-        this.typeID = typeID;
-        this.snippetSolved = snippetSolved;
-        this.numTimesSolved = numTimesSolved;
-        this.bestTime = bestTime;
+        this.snippetSlug = "NULLSLUG";
+        this.snippetType = SnippetType.Picross;
+        this.snippetName = "NO NAME";
+        this.masterID = 0000;
+        this.typeID = 000;
+        this.snippetSolved = false;
+        this.numTimesSolved = 0;
+        this.bestTime = 0;
 
-        this.currentSolution = currentSolution;
-        this.snippetSolution = snippetSolution;
-        this.horizontalGridSize = horizontalGridSize;
-        this.verticalGridSize = verticalGridSize;
+        this.currentSolution = "NO CURRENT SOLUTION";
+        this.snippetSolution = "NO SNIPPET SOLUTION";
+        this.horizontalGridSize = -10;
+        this.verticalGridSize = -10;
     }
 
 
-    public bool CheckCriticalInformation()
+    public override bool CheckCriticalInformation()
     {
-        if (snippetType != "Picross")
+        if (snippetType != Snippet.SnippetType.Picross)
         {
             Debug.LogError("PicrossSnippet " + snippetSlug + " is not of type Picross!");
             return false;
