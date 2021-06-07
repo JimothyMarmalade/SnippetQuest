@@ -19,6 +19,11 @@ public class MainMenu : LevelController
         GameManager.Instance.GoToScene(SceneHandler.Scene.Debug_GeneralTesting);
     }
 
+    public void GoToLeadPark()
+    {
+        GameManager.Instance.GoToScene(SceneHandler.Scene.Level_LeadPark);
+    }
+
     public override void LoadLevel()
     {
         //throw new System.NotImplementedException();

@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Debug_GeneralTesting.unity
     guid: 1438817e0ef54bc45a0a9d3f94a99462
+  - enabled: 1
+    path: Assets/Scenes/Level_LeadPark.unity
+    guid: 33192bcdefd40954995c76cef20a0e07
   m_configObjects: {}

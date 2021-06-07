@@ -13,13 +13,14 @@ using UnityEngine;
 
 public class GeneralTesting_LevelController : LevelController
 {
-    public bool SnippetPickup_PicrossTestCross_Collected;
-    public bool SnippetPickup_Futoshiki2_Collected;
+    
 
     public Transform PlayerSpawnLocation;
 
     public Transform PicrossTestCrossLocation;
+    public bool SnippetPickup_PicrossTestCross_Collected;
     public Transform Futoshiki2Location;
+    public bool SnippetPickup_Futoshiki2_Collected;
 
     #region Start, Save/Load
 

@@ -18,7 +18,9 @@ public static class SceneHandler
     {
         GameInitialization, LoadingScreen,
         Menu_SnippetQuestMainMenu,
-        Debug_GeneralTesting
+        Debug_GeneralTesting,
+        Level_LeadPark
+
     }
 
     private static Action onLoaderCallback;
