@@ -1,3 +1,10 @@
+6/7/21 Update
+- Added terrain and baked lightmap to Level_LeadPark based off concept art
+
+- Added the basic level controller scripting for Lead Park
+
+- Lead Park is now accessible from the main menu after loading the GameInitialization scene
+------------------------------------------------------------------------------------------------------------------------
 5/27/21 Update
 - Added QuestData.cs to hold quest information for saving/loading (Quest data save/loading is not implemented fully)
 
