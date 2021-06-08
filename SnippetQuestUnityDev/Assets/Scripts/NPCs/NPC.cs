@@ -35,20 +35,13 @@ public class NPC : Interactable
     //Interact runs when the player approaches an NPC and makes a conscious choice to interact with them by pressing the Use button.
     public override void Interact()
     {
-        if (npcData != null)
+        if (DT != null)
         {
-            if (DT != null)
-            {
-                DT.TriggerDialogue();
-            }
-            else
-            {
-                Debug.LogError("Missing DialogueTrigger component on " + gameObject.name);
-            }
+            DT.TriggerDialogue();
         }
         else
         {
-            Debug.LogError("Error! NPC has no NPCData!");
+            Debug.LogError("Missing DialogueTrigger component on " + gameObject.name);
         }
     }
 }

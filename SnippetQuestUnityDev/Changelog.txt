@@ -1,3 +1,14 @@
+6/8/21 Update
+- Added Alice(Questgiver), Pyo(NPC), and Ranger(NPC) into Level_LeadPark
+-- Assigned dialogue to Pyo and Ranger
+-- Assigned Alice a placeholder quest and basic dialogue
+
+- Added SnippetPickups to the start of LeadPark to fill the player's inventory with puzzles
+
+- Fixed erroneous grid size input for Crossword_TestPuzzle
+
+- Created a basic AudioManager prefab from the AudioManager in Debug_GeneralTesting and added it into Level_LeadPark
+------------------------------------------------------------------------------------------------------------------------
 6/7/21 Update
 - Added terrain and baked lightmap to Level_LeadPark based off concept art
 

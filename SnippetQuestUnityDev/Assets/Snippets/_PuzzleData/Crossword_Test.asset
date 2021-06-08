@@ -23,6 +23,7 @@ MonoBehaviour:
   currentSolution: NO CURRENT SOLUTION
   PuzzleDescription: A puzzle taken from Jim's PennyDell to see if crosswords work
     in this game.
+  gridSize: 13
   WordsAcross:
   - NUN
   - ALDA
@@ -227,4 +228,3 @@ MonoBehaviour:
   - {x: 11, y: 9}
   - {x: 12, y: 9}
   - {x: 8, y: 10}
-  GridLength: 13
