@@ -19,8 +19,8 @@ public static class SceneHandler
         GameInitialization, LoadingScreen,
         Menu_SnippetQuestMainMenu,
         Debug_GeneralTesting,
-        Level_LeadPark
-
+        Level_LeadPark,
+        Minigame_LeadParkTicTacToe
     }
 
     private static Action onLoaderCallback;

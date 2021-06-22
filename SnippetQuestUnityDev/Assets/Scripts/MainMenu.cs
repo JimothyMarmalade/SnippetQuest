@@ -23,6 +23,10 @@ public class MainMenu : LevelController
     {
         GameManager.Instance.GoToScene(SceneHandler.Scene.Level_LeadPark);
     }
+    public void GoToLeadParkTTT()
+    {
+        GameManager.Instance.GoToScene(SceneHandler.Scene.Minigame_LeadParkTicTacToe);
+    }
 
     public override void LoadLevel()
     {

@@ -1,3 +1,34 @@
+6/21/21 Update
+- Added New Puzzles to Database and Snippet Selection Panel
+-- Picross_Leadite
+-- Picross_Notepad
+-- Picross_Math
+-- Picross_Pickaxe
+-- Repurposed/Relabeled Futoshiki_3 as "Blumun's Fishing Guide"
+
+- Added new QuestGoal type: ItemCollectedGoal
+-- Tracks how many of an item the player has at any given time. 
+
+- Added ItemFieldPickup class for non-snippet collectables that can be collected in the field.
+-- Created a basic prefab for such items
+
+- Updated Alice's quest to use the new ItemCollectedGoal
+-- Made Pyo's Headgear into a collectable ItemFieldPickup and added it to Lead Park (On riverside path)
+
+- Added Fisherman Blumun into the Lead Park scene
+- Added the quest "Whatever Floats Your Boat," assigned a quest goal, and attached it to Blumun in Lead Park.
+
+- Updated the InventoryController with methods to:
+-- Add/Remove Items
+-- Return item count in inventory
+
+- Created the "Stump and Rocks" SerenePlace. Created a prefab and saved it in prefabs folder.
+
+- Changed the positions of the Snippet Pickups in Lead Park; moved most of them around the area instead of all at the start.
+
+- Added the new scene "Minigame_LeadParkTicTacToe." Created a barebones 3D Tic-Tac-Toe game that can be played and replayed.
+- Added a non-functional "launcher" for the minigame into Lead Park.
+------------------------------------------------------------------------------------------------------------------------
 6/8/21 Update
 - Added Alice(Questgiver), Pyo(NPC), and Ranger(NPC) into Level_LeadPark
 -- Assigned dialogue to Pyo and Ranger

@@ -11,12 +11,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class InventoryController : MonoBehaviour
 {
     public static InventoryController Instance { get; set; }
+
+    public delegate void InventoryEvent(string itemSlug);
+    public static event InventoryEvent OnItemCollected;
+
+
     public List<Snippet> PlayerSnippets = new List<Snippet>();
     public List<string> PlayerSnippetsSlugs = new List<string>();
+
+    public List<string> PlayerInventory = new List<string>();
+
 
     private void Awake()
     {
@@ -32,7 +41,64 @@ public class InventoryController : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void GiveSnippet(string snippetSlug)
+    //Adds an item to the player's inventory
+    public void AddItem(string itemSlug)
+    {
+        Debug.Log("InventoryController: Adding item with slug " + itemSlug);
+
+        PlayerInventory.Add(itemSlug);
+
+        if (OnItemCollected != null)
+        {
+            OnItemCollected(itemSlug);
+        }
+    }
+    //Adds an amount of an item to the player's inventory 
+    public void AddItem(string itemSlug, int count)
+    {
+        Debug.Log("InventoryController: Adding " + count + " of item with slug " + itemSlug);
+
+        for (int i = 0; i < count; i++)
+            PlayerInventory.Add(itemSlug);
+
+        if (OnItemCollected != null)
+        {
+            OnItemCollected(itemSlug);
+        }
+    }
+
+    //Removes an item from the player's inventory
+    public void RemoveItem(string itemSlug, int count)
+    {
+        Debug.Log("InventoryController: attempting removal " + count + " of item with slug " + itemSlug);
+        int inventorycount = ItemAmountInInventory(itemSlug);
+
+        if (inventorycount >= count)
+        {
+            for (int i = 0; i < count; i++)
+                PlayerInventory.Remove(itemSlug);
+        }
+        else
+        {
+            Debug.Log("PlayerInventory only contains " + inventorycount + " of the needed " + count + " " + itemSlug);
+        }
+
+        if (OnItemCollected != null)
+        {
+            OnItemCollected(itemSlug);
+        }
+    }
+
+    //Returns how many of a certain item is in the playerInventory
+    public int ItemAmountInInventory(string itemSlug)
+    {
+        int num = ((from temp in PlayerInventory where temp.Equals(itemSlug) select temp).Count());
+        Debug.Log("Num of " + itemSlug + " in player inventory: " + num);
+        return num;
+    }
+
+
+    public void AddSnippet(string snippetSlug)
     {
         Debug.Log("InventoryController: Attempting to add Snippet with slug " + snippetSlug);
         if (PlayerSnippetsSlugs.Contains(snippetSlug))
@@ -50,7 +116,7 @@ public class InventoryController : MonoBehaviour
     }
 
     //Same as GiveSnippet, but doesn't prompt any sort of UI Notification when triggered. Used when loading the player's inventory.
-    public void GiveSnippetSilent(string snippetSlug)
+    public void AddSnippetSilent(string snippetSlug)
     {
         Debug.Log("InventoryController: Attempting to add Snippet with slug " + snippetSlug);
         PlayerSnippets.Add(SnippetDatabase.Instance.GetSnippet(snippetSlug));

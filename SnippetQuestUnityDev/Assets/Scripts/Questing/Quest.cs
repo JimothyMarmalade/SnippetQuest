@@ -71,7 +71,7 @@ public class Quest : MonoBehaviour
             //Give the snippet to the player by inserting it in the inventory
             foreach (string s in SnippetReward)
             {
-                InventoryController.Instance.GiveSnippet(s);
+                InventoryController.Instance.AddSnippet(s);
                 Debug.Log("Added Snippet with slug " + s + "to player Inventory");
             }
         }

@@ -18,7 +18,7 @@ public class SnippetFieldPickup : FieldPickup
     public override void CollectPickup()
     {
         //Find a reference to the slug in th snippetDatabase and add it to the player's inventory
-        InventoryController.Instance.GiveSnippet(snippetSlug);
+        InventoryController.Instance.AddSnippet(snippetSlug);
         Debug.Log("Added Snippet with slug " + snippetSlug + "to player Inventory");
 
         //Have the level controller update and save that this pickup has been collected.
@@ -28,7 +28,7 @@ public class SnippetFieldPickup : FieldPickup
         }
         else
         {
-            Debug.LogWarning("Snippet Pickup did not have a reference to this level's levelcontroller and may be a permanent part of the scene.");
+            Debug.LogWarning("Snippet Pickup did not have a reference to this level's levelcontroller and may exist as a permanent part of the scene.");
         }
 
         base.CollectPickup();

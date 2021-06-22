@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe173d4e8c45eb24ba5b0d5225249a5b, type: 3}
+  m_Name: Picross_Leadite
+  m_EditorClassIdentifier: 
+  snippetSlug: Picross_Leadite
+  snippetType: 1
+  snippetName: Leadite
+  masterID: 0
+  typeID: 0
+  snippetSolved: 0
+  numTimesSolved: 0
+  bestTime: 0
+  horizontalGridSize: 15
+  verticalGridSize: 10
+  currentSolution: NO CURRENT SOLUTION
+  snippetSolution: 000001111100000001111000111100011000101000110100000101000001100000101000001100000000000001100000010001001011000001110110001111000111100000001111100000

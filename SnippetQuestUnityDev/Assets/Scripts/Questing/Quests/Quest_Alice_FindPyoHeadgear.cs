@@ -41,8 +41,7 @@ public class Quest_Alice_FindPyoHeadgear : Quest
         rewardDialogue.mouthExpression = ExpressionController.MouthExpression.Happy;
         //-------------------------------------------------------------------
 
-        Debug.LogWarning("Quest_Alice_FindPyoHeadgear only has debugging goals assigned!");
-        Goals.Add(new AmountSolvedGoal(this, Snippet.SnippetType.Picross, "Complete two Picross Puzzles", false, 0, 2));
+        Goals.Add(new ItemCollectedGoal(this, "Pyos_Headgear", "Find Pyo's missing artillery helmet", false, 1));
 
     }
 

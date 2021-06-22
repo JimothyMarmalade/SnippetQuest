@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe173d4e8c45eb24ba5b0d5225249a5b, type: 3}
+  m_Name: Picross_Pickaxe
+  m_EditorClassIdentifier: 
+  snippetSlug: Picross_Pickaxe
+  snippetType: 1
+  snippetName: Pickaxe
+  masterID: 0
+  typeID: 0
+  snippetSolved: 0
+  numTimesSolved: 0
+  bestTime: 0
+  horizontalGridSize: 10
+  verticalGridSize: 10
+  currentSolution: NO CURRENT SOLUTION
+  snippetSolution: 0101111111011000001100111111010000010101000010110100010101010010100101010100011010100000111100000000
