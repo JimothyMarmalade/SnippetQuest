@@ -10,9 +10,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class TicTacToeController : MonoBehaviour
 {
+    [Header("Display")]
+    public TMP_Text winnerDisplay;
+
+
+    [Header("Game Pieces & Locations")]
     public GameObject[] XPieces = new GameObject[5];
     public GameObject[] OPieces = new GameObject[5];
 
@@ -21,6 +28,8 @@ public class TicTacToeController : MonoBehaviour
 
     public TicTacToeGridspace[] spaces = new TicTacToeGridspace[9];
 
+
+    [Header("Gameplay Variables")]
     public bool gameOver;
     bool humanWins;
     bool AIWins;
@@ -31,14 +40,8 @@ public class TicTacToeController : MonoBehaviour
     public TicTacToeGridspace.PlacedPiece HumanPlayerSide; 
     public TicTacToeGridspace.PlacedPiece AIPlayerSide;
 
-    private enum TicTacToeAI {Random, Blueballer}
-    private TicTacToeAI currentAI;
-
-
-    //Array of locations for the pieces to be placed
-
-    private int XMoves = 0;
-    private int OMoves = 0;
+    public enum TicTacToeAI {Random, Blueballer}
+    public TicTacToeAI currentAI;
 
     public void Start()
     {
@@ -57,6 +60,11 @@ public class TicTacToeController : MonoBehaviour
 
         gameOver = false;
         currentAI = TicTacToeAI.Random;
+
+        if (isHumanPlayerTurn)
+            winnerDisplay.text = "Human Player's Turn";
+        else
+            winnerDisplay.text = "AI's Turn";
     }
 
     public void Update()
@@ -103,10 +111,11 @@ public class TicTacToeController : MonoBehaviour
                 player1Turns++;
                 gameTurns++;
                 isHumanPlayerTurn = !isHumanPlayerTurn;
+                winnerDisplay.text = "AI's Turn";
             }
             else
             {
-                Debug.Log("Can't place piece there!");
+                winnerDisplay.text = "Can't place piece there!";
             }
 
             if (gameTurns > 4)
@@ -122,6 +131,7 @@ public class TicTacToeController : MonoBehaviour
             player2Turns++;
             gameTurns++;
             isHumanPlayerTurn = !isHumanPlayerTurn;
+            winnerDisplay.text = "Human Player's Turn";
         }
 
         if (gameTurns > 4)
@@ -147,6 +157,31 @@ public class TicTacToeController : MonoBehaviour
             else
                 return null;
         }
+        else if (currentAI == TicTacToeAI.Blueballer)
+        {
+            //Blueballer will deliberately attempt to stop player from completing half-made lines.
+            List<TicTacToeGridspace> openSpaces = new List<TicTacToeGridspace>();
+            List<TicTacToeGridspace> humanSpaces = new List<TicTacToeGridspace>();
+            foreach (TicTacToeGridspace g in spaces)
+            {
+                if (g.piece == TicTacToeGridspace.PlacedPiece.None)
+                    openSpaces.Add(g);
+                else if (g.piece == TicTacToeGridspace.PlacedPiece.X)
+                    humanSpaces.Add(g);
+            }
+            //IF the human player hasn't put down a piece yet, it's safe to make a move anywhere.
+            if (humanSpaces.Count == 0)
+            {
+                int r = openSpaces.Count;
+                r = Random.Range(0, r);
+                return openSpaces[r];
+            }
+            else if (humanSpaces.Count == 1)
+            {
+
+            }
+        }
+
         //If there is no AI selected, place a piece at the first open spot.
         else
         {
@@ -154,11 +189,8 @@ public class TicTacToeController : MonoBehaviour
                 if (g.piece == TicTacToeGridspace.PlacedPiece.None)
                     return g;
         }
-
         return null;
     }
-
-
 
     //Checks all possible win conditions to see if the game is over.
     private void CheckWinCondition()
@@ -253,13 +285,13 @@ public class TicTacToeController : MonoBehaviour
     private void GameOver()
     {
         if (humanWins)
-            Debug.Log("Human Player Wins!");
+            winnerDisplay.text = "Human Player Wins!";
         else if (AIWins)
-            Debug.Log("AI Wins!");
+            winnerDisplay.text = ("AI Wins!");
         else if (!humanWins && !AIWins)
         {
             gameOver = true;
-            Debug.Log("Tie!");
+            winnerDisplay.text = ("Tie!");
         }
 
         foreach (TicTacToeGridspace t in spaces)
@@ -283,6 +315,8 @@ public class TicTacToeController : MonoBehaviour
             OPieces[i].transform.position = OStartLocations[i];
         }
 
+        winnerDisplay.text = "";
+
         gameTurns = 0;
         player1Turns = 0;
         player2Turns = 0;
@@ -305,6 +339,11 @@ public class TicTacToeController : MonoBehaviour
     //Returns to main menu
     public void ReturnToMainMenu()
     {
-        GameManager.Instance.GoToScene(SceneHandler.Scene.Minigame_LeadParkTicTacToe);
+        GameManager.Instance.GoToScene(SceneHandler.Scene.Menu_SnippetQuestMainMenu);
+    }
+
+    public void GoToLeadPark()
+    {
+        GameManager.Instance.GoToScene(SceneHandler.Scene.Level_LeadPark);
     }
 }

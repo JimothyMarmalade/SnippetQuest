@@ -60,7 +60,14 @@ public class GameManager : MonoBehaviour
         InventoryController.Instance.SaveInventory();
 
         //Save the current level
-        GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SaveLevel();
+        try
+        {
+            GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SaveLevel();
+        }
+        catch
+        {
+            Debug.Log("No LevelController found");
+        }
     }
 
     public void GoToScene(SceneHandler.Scene s)

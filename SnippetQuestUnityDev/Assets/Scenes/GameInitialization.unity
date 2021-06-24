@@ -554,6 +554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSnippets: []
   PlayerSnippetsSlugs: []
+  PlayerInventory: []
 --- !u!114 &5262241702741871137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,6 +621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5262241702741871148}
   - component: {fileID: 5262241702741871151}
+  - component: {fileID: 5262241702741871142}
   - component: {fileID: 5262241702741871137}
   - component: {fileID: 5262241702741871136}
   - component: {fileID: 5262241702741871139}
@@ -631,6 +633,70 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5262241702741871142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262241702741871141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0728817efea6b24889f6ff247020466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Forest_Snippet
+    clip: {fileID: 8300000, guid: 2c05b0b2d37553f43aae8b3f7b9c2c86, type: 3}
+    loop: 1
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Forest_Activity
+    clip: {fileID: 8300000, guid: cdb9165b3bbea6f47a34bb38d23741c5, type: 3}
+    loop: 1
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Forest_Exploration
+    clip: {fileID: 8300000, guid: 88ce83d8fe1978b4da5efe637768dc52, type: 3}
+    loop: 1
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: ItemPickup
+    clip: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: SnippetSolved
+    clip: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  levelExplorationBGM:
+    name: 
+    clip: {fileID: 0}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  levelActivityBGM:
+    name: 
+    clip: {fileID: 0}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  levelSnippetBGM:
+    name: 
+    clip: {fileID: 0}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
 --- !u!4 &5262241702741871148
 Transform:
   m_ObjectHideFlags: 0

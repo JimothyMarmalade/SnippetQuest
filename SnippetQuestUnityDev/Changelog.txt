@@ -1,3 +1,11 @@
+6/28/21 Update
+- Added some HUD elements to the Lead Park Tic Tac Toe game
+
+- Implemented MinigameLauncher.cs Script
+-- The player can now go between Lead Park and the TTT game.
+
+- Removed the Audiomanager prefab and began reworking the AudioManager script as a persistent object attached to the GameManager
+------------------------------------------------------------------------------------------------------------------------
 6/21/21 Update
 - Added New Puzzles to Database and Snippet Selection Panel
 -- Picross_Leadite

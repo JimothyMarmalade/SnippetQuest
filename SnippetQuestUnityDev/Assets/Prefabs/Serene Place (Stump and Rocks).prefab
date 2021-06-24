@@ -159,6 +159,10 @@ PrefabInstance:
       value: InteractionPrompt Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 7647725938500413883, guid: 33db89c49115cbf4c91ce32017a9028f, type: 3}
+      propertyPath: Interaction
+      value: Interact
+      objectReference: {fileID: 0}
+    - target: {fileID: 7647725938500413883, guid: 33db89c49115cbf4c91ce32017a9028f, type: 3}
       propertyPath: playerInteraction
       value: 2
       objectReference: {fileID: 0}

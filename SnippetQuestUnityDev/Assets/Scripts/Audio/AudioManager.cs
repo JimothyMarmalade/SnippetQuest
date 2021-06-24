@@ -1,8 +1,9 @@
 /*
  * Created by Logan Edmund, 5/11/21
- * Last Modified by Logan Edmund, 5/12/21
+ * Last Modified by Logan Edmund, 6/24/21
  * 
  * Controls the playback of BGM, SFX, and other sounds.
+ * The AudioManager is a single, persistent object that will exist through the entire game. It will not be stored in individual levels.
  * 
  */
 
@@ -15,6 +16,11 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; set; }
+    public string[] AllGameMusic;
+    public string[] AllGameSFX;
+
+    public Sound[] levelSounds;
+    public Sound[] levelSFX;
     public Sound[] sounds;
 
     
@@ -47,6 +53,7 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
     }
+
     private void Start()
     {
         StartBGM("Forest_Exploration", "Forest_Snippet", "Forest_Activity");

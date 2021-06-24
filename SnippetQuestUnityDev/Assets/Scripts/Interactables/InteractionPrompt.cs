@@ -14,9 +14,7 @@ using TMPro;
 
 public class InteractionPrompt : MonoBehaviour
 {
-    public enum InteractType { None, Talk, SitDown, Interact};
-
-    public InteractType playerInteraction;
+    public string Interaction;
 
     public TMP_Text InteractionText;
 
@@ -27,21 +25,7 @@ public class InteractionPrompt : MonoBehaviour
 
     public void SetText()
     {
-        switch (playerInteraction)
-        {
-            case (InteractType.None):
-                InteractionText.text = "NO INTERACTION SET";
-                break;
-            case (InteractType.Talk):
-                InteractionText.text = "E - Talk";
-                break;
-            case (InteractType.SitDown):
-                InteractionText.text = "E - Sit Down";
-                break;
-            case (InteractType.Interact):
-                InteractionText.text = "E - Interact";
-                break;
-        }
+        InteractionText.text = "E - " + Interaction;
     }
 
 

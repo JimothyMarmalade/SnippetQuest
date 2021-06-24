@@ -162,8 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionPrompt: {fileID: 5251931296760090219}
-  npcData:
-    characterName: 
+  npcData: {fileID: 0}
   currentQuest: {fileID: 0}
   AvailableQuests: []
   FirstEncounterDialogue:
@@ -401,6 +400,10 @@ PrefabInstance:
     - target: {fileID: 7533034862954115117, guid: 33db89c49115cbf4c91ce32017a9028f, type: 3}
       propertyPath: m_Name
       value: InteractionPrompt Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7647725938500413883, guid: 33db89c49115cbf4c91ce32017a9028f, type: 3}
+      propertyPath: Interaction
+      value: Talk
       objectReference: {fileID: 0}
     - target: {fileID: 7647725938500413883, guid: 33db89c49115cbf4c91ce32017a9028f, type: 3}
       propertyPath: playerInteraction
