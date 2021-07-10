@@ -50,7 +50,14 @@ public class GameManager : MonoBehaviour
         InventoryController.Instance.LoadInventory();
 
         //Load the Scene according to the saved data
-        GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().LoadLevel();
+        try
+        {
+            GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().LoadLevel();
+        }
+        catch
+        {
+            Debug.Log("No LevelController found");
+        }
     }
 
     //Called when the player leaves a scene
@@ -75,6 +82,8 @@ public class GameManager : MonoBehaviour
         PlayerExitingScene();
 
         SceneHandler.Load(s);
+
+        PlayerEnteredNewScene();
     }
 
 

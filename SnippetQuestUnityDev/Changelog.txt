@@ -1,4 +1,16 @@
-6/28/21 Update
+7/10/21 Update
+- Added the base Leadite model asset into the project.
+
+- Retooled the AudioManager.cs script to act as a single object persistent across scenes, load sounds as needed instead of all at once, and better organize sound clips.
+-- Drafted a new naming convention for Sound Clips in the Unity Editor
+-- Implemented dynamic loading of sound clips
+-- Refined the systems used to switch tracks
+
+- Retooled the UIController.cs script to act as a single object persistent across scenes and load HUD elements based on the current level.
+------------------------------------------------------------------------------------------------------------------------
+6/24/21 Pre-Audio Rework
+This is a precautionary push saving recent work done before attempting to overhaul the audiomanager implementation.
+
 - Added some HUD elements to the Lead Park Tic Tac Toe game
 
 - Implemented MinigameLauncher.cs Script

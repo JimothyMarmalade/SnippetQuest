@@ -7,23 +7,36 @@
  * 
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; set; }
-    public string[] AllGameMusic;
-    public string[] AllGameSFX;
+    //AllGameSounds stores the slugs for all sound clips used in-game - music, SFX, etc.
+    [Header("Game-Wide AudioClip References")]
+    public AudioClip[] GeneralSFX;
 
-    public Sound[] levelSounds;
-    public Sound[] levelSFX;
-    public Sound[] sounds;
+    [Header("Level AudioClip References")]
+    public AudioClip[] LeadParkBGM;
+    public AudioClip[] LeadParkSFX;
 
-    
+    [Header("Loaded Sounds")]
+    //levelSounds stores all the clips that will be used in this level  - music, SFX, etc.
+    public List<Sound> loadedSounds;
+
+    public enum LoadedSoundCollection { None, Level_LeadPark, Debug_AllSounds }
+    public LoadedSoundCollection currentSoundCollection;
+
+    //the three BGM variables keep track of references for the current level's dynamic BGM tracks.
+    public enum CurrentBGM {None, Exploration, Activity, Snippet}
+    [Header("Active Dynamic BGM Tracks")]
+    public bool BGMPlaying;
+    public CurrentBGM focusedBGM;
+
+
     public Sound levelExplorationBGM;
     public Sound levelActivityBGM;
     public Sound levelSnippetBGM;
@@ -42,27 +55,88 @@ public class AudioManager : MonoBehaviour
             Instance = this;
         }
 
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
+        focusedBGM = CurrentBGM.None;
+        ClearLoadedSounds();
 
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
+        LoadPrioritySounds();
 
-            s.source.loop = s.loop;
-        }
+        BGMPlaying = false;
     }
 
     private void Start()
     {
-        StartBGM("Forest_Exploration", "Forest_Snippet", "Forest_Activity");
+
     }
 
-    public void Play(string soundName)
+    //Loads all sounds. Based off the input sound collection, loads in sounds and creates AudioSources for them.
+    public void LoadSoundCollection(LoadedSoundCollection c)
+    {
+        if (c == currentSoundCollection)
+        {
+            Debug.Log("LoadSoundCollection() returned early because the sonud collection did not change.");
+            return;
+        }
+
+        ClearLoadedSounds();
+
+        switch (c)
+        {
+            case LoadedSoundCollection.Debug_AllSounds:
+                Debug.LogWarning("Debug_AllSounds has not been implemented yet!");
+                break;
+            case LoadedSoundCollection.Level_LeadPark:
+                foreach (AudioClip ac in LeadParkSFX)
+                {
+                    loadedSounds.Add(CreateSound(ac, false, false, 1, 1));
+                }
+                foreach (AudioClip ac in LeadParkBGM)
+                {
+                    loadedSounds.Add(CreateSound(ac, false, true, 0.5f, 1));
+                }
+                currentSoundCollection = LoadedSoundCollection.Level_LeadPark;
+                break;
+        }
+    }
+
+    public void LoadPrioritySounds()
+    {
+        foreach (AudioClip ac in GeneralSFX)
+        {
+            loadedSounds.Add(CreateSound(ac, true, false, 1, 1));
+        }
+    }
+
+    //Empties the loadedSounds list of non-priority SFX and destroys all current audiosources.
+    public void ClearLoadedSounds()
+    {
+        ClearDynamicBGMSounds();
+
+        foreach (Sound s in loadedSounds)
+        {
+            if (!s.priority)
+            {
+                Destroy(s.source);
+                loadedSounds.Remove(s);
+            }
+        }
+        currentSoundCollection = LoadedSoundCollection.None;
+        BGMPlaying = false;
+    }
+
+    //Creates a new Sound object when fed an AudioClip and some modifiers.
+    public Sound CreateSound(AudioClip clip, bool priority, bool loop, float volume, float pitch)
+    {
+        AudioSource source = gameObject.AddComponent<AudioSource>();
+
+        Sound s = new Sound(source, clip, priority, loop, volume, pitch);
+
+        return s;
+    }
+
+    public void PlaySound(string soundName)
     {
         Debug.Log("Playing sound " + soundName);
-        Sound s = Array.Find(sounds, sound => sound.name == soundName);
+        Sound s = loadedSounds.Find(item => item.name == soundName);
 
         if (s == null)
         {
@@ -72,45 +146,104 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    public void StartBGM(string ExplorationBGM, string SnippetBGM, string ActivityBGM)
+    #region DynamicBGM Methods
+    //Sets the references to the different BGM tracks.
+    public void SetDynamicBGMSounds(string ExplorationBGM, string SnippetBGM, string ActivityBGM)
     {
-        levelExplorationBGM = Array.Find(sounds, sound => sound.name == ExplorationBGM); ;
-        levelSnippetBGM = Array.Find(sounds, sound => sound.name == SnippetBGM);
-        levelActivityBGM = Array.Find(sounds, sound => sound.name == ActivityBGM);
+        foreach (Sound s in loadedSounds)
+        {
+            levelExplorationBGM = loadedSounds.Find(item => item.name == ExplorationBGM);
+            levelSnippetBGM = loadedSounds.Find(item => item.name == SnippetBGM);
+            levelActivityBGM = loadedSounds.Find(item => item.name == ActivityBGM);
+        }
+    }
 
-        levelSnippetBGM.source.volume = 0;
-        levelActivityBGM.source.volume = 0;
+    //Clears the references to the current BGM tracks.
+    public void ClearDynamicBGMSounds()
+    {
+        levelExplorationBGM = null;
+        levelSnippetBGM = null;
+        levelActivityBGM = null;
+        focusedBGM = CurrentBGM.None;
+        BGMPlaying = false;
+    }
 
-        levelExplorationBGM.source.Play();
-        levelSnippetBGM.source.Play();
-        levelActivityBGM.source.Play();
+
+    //Method to initialize the dynamic BGM tracks for a level.
+    public void StartBGM(CurrentBGM startingTrack)
+    {
+        //If the BGM hasn't started yet, run the regular version of this method.
+        if (!BGMPlaying)
+        {
+            switch (startingTrack)
+            {
+                case CurrentBGM.Exploration:
+                    focusedBGM = CurrentBGM.Exploration;
+                    levelSnippetBGM.source.volume = 0;
+                    levelActivityBGM.source.volume = 0;
+                    break;
+                case CurrentBGM.Activity:
+                    focusedBGM = CurrentBGM.Activity;
+                    levelExplorationBGM.source.volume = 0;
+                    levelSnippetBGM.source.volume = 0;
+                    break;
+                case CurrentBGM.Snippet:
+                    focusedBGM = CurrentBGM.Snippet;
+                    levelExplorationBGM.source.volume = 0;
+                    levelActivityBGM.source.volume = 0;
+                    break;
+            }
+
+            levelExplorationBGM.source.Play();
+            levelSnippetBGM.source.Play();
+            levelActivityBGM.source.Play();
+            BGMPlaying = true;
+        }
 
     }
 
     public void BGMFocusExploration(float duration)
     {
-        FadeIn(levelExplorationBGM, duration);
-        FadeOut(levelSnippetBGM, duration);
-        FadeOut(levelActivityBGM, duration);
+        if (focusedBGM != CurrentBGM.Exploration)
+        {
+            focusedBGM = CurrentBGM.Exploration;
+            FadeIn(levelExplorationBGM, duration);
+            FadeOut(levelSnippetBGM, duration);
+            FadeOut(levelActivityBGM, duration);
+        }
     }
 
     public void BGMFocusSnippet(float duration)
     {
-        FadeOut(levelExplorationBGM, duration);
-        FadeIn(levelSnippetBGM, duration);
-        FadeOut(levelActivityBGM, duration);
+        if (focusedBGM != CurrentBGM.Snippet)
+        {
+            focusedBGM = CurrentBGM.Snippet;
+            FadeOut(levelExplorationBGM, duration);
+            FadeIn(levelSnippetBGM, duration);
+            FadeOut(levelActivityBGM, duration);
+
+        }
     }
 
     public void BGMFocusActivity(float duration)
     {
-        FadeOut(levelExplorationBGM, duration);
-        FadeOut(levelSnippetBGM, duration);
-        FadeIn(levelActivityBGM, duration);
+        if (focusedBGM != CurrentBGM.Activity)
+        {
+            focusedBGM = CurrentBGM.Activity;
+            FadeOut(levelExplorationBGM, duration);
+            FadeOut(levelSnippetBGM, duration);
+            FadeIn(levelActivityBGM, duration);
+
+        }
     }
 
+    #endregion
+
+    #region Music FadeIn/FadeOut Methods and Coroutines
+    //Methods to trigger the fading in/out of BGM tracks
     public void FadeOut(string soundName, float duration)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == soundName);
+        Sound s = loadedSounds.Find(item => item.name == soundName);
 
         StartCoroutine(FadeOut(s, duration, Mathf.SmoothStep));
     }
@@ -121,7 +254,7 @@ public class AudioManager : MonoBehaviour
 
     public void FadeIn(string soundName, float duration)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == soundName);
+        Sound s = loadedSounds.Find(item => item.name == soundName);
 
         StartCoroutine(FadeIn(s, duration, Mathf.SmoothStep));
     }
@@ -130,6 +263,7 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(FadeIn(s, duration, Mathf.SmoothStep));
     }
 
+    //The IEnums where the actual work for fading tracks is done
     public static IEnumerator FadeOut(Sound sound, float fadingTime, Func<float, float, float, float> Interpolate)
     {
         float startVolume = sound.source.volume;
@@ -162,10 +296,11 @@ public class AudioManager : MonoBehaviour
 
         sound.source.volume = resultVolume;
     }
+    #endregion
 
     private bool CheckSoundExists(string soundName)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == soundName);
+        Sound s = loadedSounds.Find(item => item.name == soundName);
 
         if (s == null)
         {
@@ -175,6 +310,4 @@ public class AudioManager : MonoBehaviour
 
         return true;
     }
-
-
 }

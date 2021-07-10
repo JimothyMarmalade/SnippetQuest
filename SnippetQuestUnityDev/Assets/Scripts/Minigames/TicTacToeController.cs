@@ -45,6 +45,8 @@ public class TicTacToeController : MonoBehaviour
 
     public void Start()
     {
+        AudioManager.Instance.BGMFocusActivity(2);
+
         //Set up transforms
         for (int i = 0; i < 5; i++)
         {
@@ -345,5 +347,7 @@ public class TicTacToeController : MonoBehaviour
     public void GoToLeadPark()
     {
         GameManager.Instance.GoToScene(SceneHandler.Scene.Level_LeadPark);
+
+        AudioManager.Instance.BGMFocusExploration(2);
     }
 }

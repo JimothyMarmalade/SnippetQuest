@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4a2e1feb186944bb7286aeff75a15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxName: ItemPickup
+  sfxName: SFX_SingleSnippetCollected
   snippetSlug: No Slug
 --- !u!95 &3626158104841463209
 Animator:

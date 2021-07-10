@@ -14,6 +14,9 @@ public class Sound
 {
     public string name;
 
+    //if a sound is a priority sound, that means it is always loaded with the AudioManager.
+    public bool priority;
+
     public AudioClip clip;
 
     public bool loop = false;
@@ -26,4 +29,18 @@ public class Sound
 
     [HideInInspector]
     public AudioSource source;
+
+    public Sound(AudioSource source, AudioClip clip, bool priority, bool loop, float volume, float pitch)
+    {
+        this.source = source;
+        this.source.clip = clip;
+        name = clip.name;
+        this.priority = priority;
+        this.source.loop = loop;
+        this.source.volume = volume;
+        this.source.pitch = pitch;
+        this.source.playOnAwake = false;
+    }
+
+
 }

@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 8840673244196501997}
   - component: {fileID: 8840673244196501998}
   m_Layer: 0
-  m_Name: 32-Side Test Head
+  m_Name: Prefab_Head_V1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4938,6 +4938,8 @@ MonoBehaviour:
   mouth: {fileID: 8840673243903241212}
   eyesAnimator: {fileID: 8840673243446104463}
   mouthAnimator: {fileID: 8840673243903241213}
+  eyeCurrEXP: 0
+  mouthCurrEXP: 0
   maxEyeMoveDist: 0.3
   manualControlEnabled: 0
 --- !u!1 &8840673244531370809

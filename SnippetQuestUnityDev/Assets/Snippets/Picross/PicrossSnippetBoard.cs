@@ -401,7 +401,7 @@ public class PicrossSnippetBoard : MonoBehaviour
     public virtual void OnPuzzleSolved()
     {
         Debug.Log("OnPuzzleSolved ran in PicrossSnippetBoard");
-        AudioManager.Instance.Play("SnippetSolved");
+        AudioManager.Instance.PlaySound("SFX_SnippetSolved");
         SnippetEvents.Instance.SnippetSolved(picrossSlug);        
     }
 

@@ -20,7 +20,7 @@ public class FieldPickup : MonoBehaviour
     {
         Debug.Log("Running CollectPickup()");
         if (AudioManager.Instance != null)
-            AudioManager.Instance.Play(sfxName);
+            AudioManager.Instance.PlaySound(sfxName);
         else
             Debug.LogWarning("No AudioManager Instance exists!");
 

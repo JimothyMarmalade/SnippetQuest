@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 34494101}
   - component: {fileID: 34494100}
   m_Layer: 5
-  m_Name: Blackout
+  m_Name: Blackout Curtain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -452,8 +452,9 @@ GameObject:
   - component: {fileID: 2002515840}
   - component: {fileID: 2002515839}
   - component: {fileID: 2002515838}
+  - component: {fileID: 2002515842}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -540,6 +541,106 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2002515842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002515837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dfa2135f4e2174aa5e40fae77b4457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExplorationPanelPrefab: {fileID: 2053019870865152493, guid: 28f2c7c243fc12842a5afb0194b0ba4a, type: 3}
+  SceneRequiresExplorationPanel: 0
+  UI_EXP: {fileID: 0}
+  SnippetPanelPrefab: {fileID: 7171411599755100040, guid: 9732252365c22a941be292b82eb0ce22, type: 3}
+  SceneRequiresSnippetPanel: 0
+  UI_SNIPPET: {fileID: 0}
+  DialoguePanelPrefab: {fileID: 8642767946686390988, guid: 8aa80b0ee6302a444b843e431f57a39e, type: 3}
+  SceneRequiresDialoguePanel: 0
+  BlackoutPanel: {fileID: 34494098}
+  masterPanels: []
+--- !u!1 &2131551637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2131551639}
+  - component: {fileID: 2131551638}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2131551638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131551637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0728817efea6b24889f6ff247020466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GeneralSFX:
+  - {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
+  - {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  LeadParkBGM:
+  - {fileID: 8300000, guid: cdb9165b3bbea6f47a34bb38d23741c5, type: 3}
+  - {fileID: 8300000, guid: 88ce83d8fe1978b4da5efe637768dc52, type: 3}
+  - {fileID: 8300000, guid: 2c05b0b2d37553f43aae8b3f7b9c2c86, type: 3}
+  LeadParkSFX: []
+  loadedSounds: []
+  currentSoundCollection: 0
+  focusedBGM: 0
+  levelExplorationBGM:
+    name: 
+    priority: 0
+    clip: {fileID: 0}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  levelActivityBGM:
+    name: 
+    priority: 0
+    clip: {fileID: 0}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  levelSnippetBGM:
+    name: 
+    priority: 0
+    clip: {fileID: 0}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+--- !u!4 &2131551639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131551637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5262241702741871136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +722,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5262241702741871148}
   - component: {fileID: 5262241702741871151}
-  - component: {fileID: 5262241702741871142}
   - component: {fileID: 5262241702741871137}
   - component: {fileID: 5262241702741871136}
   - component: {fileID: 5262241702741871139}
@@ -633,70 +733,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5262241702741871142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5262241702741871141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0728817efea6b24889f6ff247020466, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: Forest_Snippet
-    clip: {fileID: 8300000, guid: 2c05b0b2d37553f43aae8b3f7b9c2c86, type: 3}
-    loop: 1
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Forest_Activity
-    clip: {fileID: 8300000, guid: cdb9165b3bbea6f47a34bb38d23741c5, type: 3}
-    loop: 1
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Forest_Exploration
-    clip: {fileID: 8300000, guid: 88ce83d8fe1978b4da5efe637768dc52, type: 3}
-    loop: 1
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: ItemPickup
-    clip: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
-    loop: 0
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
-  - name: SnippetSolved
-    clip: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
-    loop: 0
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
-  levelExplorationBGM:
-    name: 
-    clip: {fileID: 0}
-    loop: 0
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
-  levelActivityBGM:
-    name: 
-    clip: {fileID: 0}
-    loop: 0
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
-  levelSnippetBGM:
-    name: 
-    clip: {fileID: 0}
-    loop: 0
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
 --- !u!4 &5262241702741871148
 Transform:
   m_ObjectHideFlags: 0

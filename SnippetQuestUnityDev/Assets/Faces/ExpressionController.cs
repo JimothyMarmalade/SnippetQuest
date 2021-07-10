@@ -22,6 +22,7 @@ public class ExpressionController : MonoBehaviour
     private IEnumerator Blink;
 
     public bool manualControlEnabled = false;
+    public bool DEBUGForceExpressionUpdate = false;
     private bool isExpressing = false;
 
     void Start()
@@ -34,6 +35,11 @@ public class ExpressionController : MonoBehaviour
     {
         if (manualControlEnabled)
             CheckPlayerInput();
+        else if (DEBUGForceExpressionUpdate)
+        {
+            ChangeExpression(eyeCurrEXP, mouthCurrEXP);
+            DEBUGForceExpressionUpdate = false;
+        }
     }
 
     private IEnumerator calcBlink()

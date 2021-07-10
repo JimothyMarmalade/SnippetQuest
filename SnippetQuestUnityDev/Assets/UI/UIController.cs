@@ -38,6 +38,8 @@ public class UIController : MonoBehaviour
     public bool SceneRequiresDialoguePanel;
     private GameObject DialoguePanel;
 
+    [Header("Blackout Panel")]
+    public GameObject BlackoutPanel;
 
     /*
     //Master panel that displays during snippet selection
@@ -73,7 +75,7 @@ public class UIController : MonoBehaviour
 
 
     //masterPanels holds the primary display panels (HUD, Snippets)
-    private List<GameObject> masterPanels = new List<GameObject>();
+    public List<GameObject> masterPanels = new List<GameObject>();
     //snippetGameplayPanels holds the panels that contain the actual gameboards used to view/solve panels
     private List<GameObject> snippetGameplayPanels = new List<GameObject>();
 
@@ -94,7 +96,9 @@ public class UIController : MonoBehaviour
         {
             Instance = this;
         }
+        DontDestroyOnLoad(this);
 
+        /*
         //If the scene requires an exploration panel, load the panel.
         if (SceneRequiresExplorationPanel)
         {
@@ -106,16 +110,13 @@ public class UIController : MonoBehaviour
         if (SceneRequiresSnippetPanel)
         {
             LoadSnippetUI();
-
-            LockAllSnippets();
-            FullCheckUnlockNewSnippets();
         }
 
         if (SceneRequiresDialoguePanel)
         {
             LoadDialoguePanel();
         }
-
+        */
 
         //Add all panels to the appropriate lists for indexing
         masterPanels.Add(ExplorationPanel);           //ID 0
@@ -124,21 +125,80 @@ public class UIController : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        BlackoutPanel.SetActive(false);
+    }
+
+    public void ReloadHUD(bool needsExploration, bool needsSnippets, bool needsDialogue)
+    {
+        UnloadAllHUD();
+        masterPanels.Clear();
+
+        if (needsExploration)
+        {
+            SceneRequiresExplorationPanel = true;
+            LoadExplorationUI();
+            masterPanels.Add(ExplorationPanel);
+        }
+        if (needsSnippets)
+        {
+            SceneRequiresSnippetPanel = true;
+            LoadSnippetUI();
+            masterPanels.Add(SnippetPanel);
+        }
+        if (needsDialogue)
+        {
+            SceneRequiresDialoguePanel = true;
+            LoadDialoguePanel();
+        }
+
+    }
+
     private void LoadExplorationUI()
     {
         ExplorationPanel = Instantiate(ExplorationPanelPrefab, this.transform);
         UI_EXP = ExplorationPanel.GetComponent<UI_ExplorationDisplay>();
+        ClearActiveQuestInfo();
     }
 
     private void LoadSnippetUI()
     {
         SnippetPanel = Instantiate(SnippetPanelPrefab, this.transform);
         UI_SNIPPET = SnippetPanel.GetComponent<UI_SnippetDisplay>();
+
+        LockAllSnippets();
+        FullCheckUnlockNewSnippets();
     }
 
     private void LoadDialoguePanel()
     {
         DialoguePanel = Instantiate(DialoguePanelPrefab, this.transform);
+    }
+
+    private void UnloadExplorationUI()
+    {
+        Destroy(ExplorationPanel);
+        SceneRequiresExplorationPanel = false;
+    }
+
+    private void UnloadSnippetUI()
+    {
+        Destroy(SnippetPanel);
+        SceneRequiresSnippetPanel = false;
+    }
+
+    private void UnloadDialoguePanel()
+    {
+        Destroy(DialoguePanel);
+        SceneRequiresDialoguePanel = false;
+    }
+
+    private void UnloadAllHUD()
+    {
+        UnloadExplorationUI();
+        UnloadSnippetUI();
+        UnloadDialoguePanel();
     }
 
     //----------Spawn a new Snippet Obtained Prefab
@@ -335,20 +395,27 @@ public class UIController : MonoBehaviour
     //Does a full scan of each snippet in player's inventory and unlocks associated buttons
     public void FullCheckUnlockNewSnippets()
     {
-        foreach (SnippetLoaderButton s in UI_SNIPPET.picrossButtons)
+        try
         {
-            if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
-                s.TurnOn();
+            foreach (SnippetLoaderButton s in UI_SNIPPET.picrossButtons)
+            {
+                if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
+                    s.TurnOn();
+            }
+            foreach (SnippetLoaderButton s in UI_SNIPPET.futoshikiButtons)
+            {
+                if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
+                    s.TurnOn();
+            }
+            foreach (SnippetLoaderButton s in UI_SNIPPET.crosswordButtons)
+            {
+                if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
+                    s.TurnOn();
+            }
         }
-        foreach (SnippetLoaderButton s in UI_SNIPPET.futoshikiButtons)
+        catch
         {
-            if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
-                s.TurnOn();
-        }
-        foreach (SnippetLoaderButton s in UI_SNIPPET.crosswordButtons)
-        {
-            if (InventoryController.Instance.PlayerSnippetsSlugs.Contains(s.snippetSlug))
-                s.TurnOn();
+            Debug.LogWarning("The Snippet HUD was not able to be accessed!");
         }
     }
 

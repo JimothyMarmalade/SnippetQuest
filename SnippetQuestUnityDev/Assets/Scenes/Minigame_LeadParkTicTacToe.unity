@@ -2336,7 +2336,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2030069414}
         m_TargetAssemblyTypeName: TicTacToeController, Assembly-CSharp
-        m_MethodName: ReturnToMainMenu
+        m_MethodName: GoToLeadPark
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -219,7 +219,7 @@ public class CrosswordSnippetBoard : MonoBehaviour
     {
         Debug.Log("OnPuzzleSolved ran in CrosswordSnippetBoard with slug: " + crosswordPuzzleData.snippetSlug);
 
-        AudioManager.Instance.Play("SnippetSolved");
+        AudioManager.Instance.PlaySound("SFX_SnippetSolved");
         SnippetEvents.Instance.SnippetSolved(crosswordPuzzleData.snippetSlug);
     }
 
