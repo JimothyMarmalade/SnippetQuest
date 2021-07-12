@@ -35,7 +35,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 0.45
-    meshCompression: 0
+    meshCompression: 2
     addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
@@ -85,7 +85,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0045
+    globalScale: 0.45
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

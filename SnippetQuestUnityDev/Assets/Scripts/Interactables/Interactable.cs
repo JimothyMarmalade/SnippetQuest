@@ -13,6 +13,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    [Header("Interaction Prompt Reference")]
     public GameObject interactionPrompt;
 
     private bool showingInteractionPrompt = false;

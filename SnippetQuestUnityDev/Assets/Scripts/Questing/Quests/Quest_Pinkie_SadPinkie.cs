@@ -11,7 +11,7 @@ public class Quest_Pinkie_SadPinkie : Quest
         SnippetReward = null;
 
         givePlayerQuestDialogue.speakerName = "Pinkie";
-        givePlayerQuestDialogue.sentences = new string[]{
+        givePlayerQuestDialogue.dialogLine = new string[]{
             "You really want to lend a hand, huh? Well, I guess I can't stop you...",
             "I wish I could see a nice, smiling face. Something that would tell me things are alright in the world."
         };
@@ -19,7 +19,7 @@ public class Quest_Pinkie_SadPinkie : Quest
         givePlayerQuestDialogue.mouthExpression = ExpressionController.MouthExpression.Sad;
         //-------------------------------------------------------------------
         inProgressDialogue.speakerName = "Pinkie";
-        inProgressDialogue.sentences = new string[]
+        inProgressDialogue.dialogLine = new string[]
         {
             "No luck so far, huh?",
             "It's okay. Maybe I'll just be sad forever..."
@@ -28,7 +28,7 @@ public class Quest_Pinkie_SadPinkie : Quest
         inProgressDialogue.mouthExpression = ExpressionController.MouthExpression.Sad;
         //-------------------------------------------------------------------
         rewardDialogue.speakerName = "Pinkie";
-        rewardDialogue.sentences = new string[]
+        rewardDialogue.dialogLine = new string[]
         {
             "Wha...what? Why, look at that! It's a cute little face!",
             "Thanks, sweetie. I think I'm going to be okay for now."

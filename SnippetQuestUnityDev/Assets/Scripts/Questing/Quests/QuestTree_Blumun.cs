@@ -19,7 +19,7 @@ public class QuestTree_Blumun : QuestTree
     {
         
         FirstEncounterDialogue.speakerName = "Blumun";
-        FirstEncounterDialogue.sentences = new string[]{
+        FirstEncounterDialogue.dialogLine = new string[]{
             "Howdy there, pardner! Mah name's Blumun!",
             "You may notice how I got that name due to my incurable hypothermia. That's a tale, I tell you what.",
             "But hey, you don't wanna hear all that. For now, why don't you interact with that bench over there and try to solve that Picross puzzle I gave you?",
@@ -30,7 +30,7 @@ public class QuestTree_Blumun : QuestTree
         
         //-------------------------------------------------------------------
         AllQuestsCompleteDialogue.speakerName = "Blumun";
-        AllQuestsCompleteDialogue.sentences = new string[]
+        AllQuestsCompleteDialogue.dialogLine = new string[]
         {
             "Congrats again on figuring those puzzles out. You're pretty good at this!"
         };

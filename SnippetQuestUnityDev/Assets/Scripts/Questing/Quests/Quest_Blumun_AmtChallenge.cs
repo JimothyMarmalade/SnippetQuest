@@ -13,7 +13,7 @@ public class Quest_Blumun_AmtChallenge : Quest
         SnippetReward.Add("Picross_Leaf");
 
         givePlayerQuestDialogue.speakerName = "Blumun";
-        givePlayerQuestDialogue.sentences = new string[]{
+        givePlayerQuestDialogue.dialogLine = new string[]{
             "Ready for something else, huh? Well then, alright...",
             "How about you go ahead and complete two Picross puzzles and a Futoshiki puzzle?",
             "That should give you a healthy challenge."
@@ -22,7 +22,7 @@ public class Quest_Blumun_AmtChallenge : Quest
         givePlayerQuestDialogue.mouthExpression = ExpressionController.MouthExpression.Happy;
         //-------------------------------------------------------------------
         inProgressDialogue.speakerName = "Blumun";
-        inProgressDialogue.sentences = new string[] 
+        inProgressDialogue.dialogLine = new string[] 
         {"You haven't completed the quest yet! Keep solving.",
         "It's fine if you complete puzzles you've already solved, too."
         };
@@ -30,7 +30,7 @@ public class Quest_Blumun_AmtChallenge : Quest
         inProgressDialogue.mouthExpression = ExpressionController.MouthExpression.Open_O;
         //-------------------------------------------------------------------
         rewardDialogue.speakerName = "Blumun";
-        rewardDialogue.sentences = new string[]
+        rewardDialogue.dialogLine = new string[]
         {
             "Hey, look at that! You did all my challenges! Great job!",
             "Here's another Picross puzzle I found, and one of those Futo-whatzits. You really seem to know what you're doing!"

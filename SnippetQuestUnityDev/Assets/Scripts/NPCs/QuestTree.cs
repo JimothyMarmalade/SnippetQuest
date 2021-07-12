@@ -20,8 +20,8 @@ public class QuestTree : MonoBehaviour
     public int questPointer = -1;
     public string ActiveQuestType;
 
-    public Dialogue FirstEncounterDialogue = new Dialogue();
-    public Dialogue AllQuestsCompleteDialogue = new Dialogue();
+    public Dialog FirstEncounterDialogue = new Dialog();
+    public Dialog AllQuestsCompleteDialogue = new Dialog();
 
 
     //Method for shifting the reference for the active quest to the next quest in the list

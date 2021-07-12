@@ -13,7 +13,7 @@ public class Quest_Blumun_Test : Quest
         SnippetReward.Add("Picross_SmileyFace");
 
         givePlayerQuestDialogue.speakerName = "Blumun";
-        givePlayerQuestDialogue.sentences = new string[]{
+        givePlayerQuestDialogue.dialogLine = new string[]{
             "Alright, it's time for your first quest!",
             "Why don't you interact with that bench over there and try to solve that Picross puzzle I gave you?",
             "I just labeled it as \"Picross 1.\" Take a seat and give 'er a try."
@@ -22,7 +22,7 @@ public class Quest_Blumun_Test : Quest
         givePlayerQuestDialogue.mouthExpression = ExpressionController.MouthExpression.MessageBox;
         //-------------------------------------------------------------------
         inProgressDialogue.speakerName = "Blumun";
-        inProgressDialogue.sentences = new string[] 
+        inProgressDialogue.dialogLine = new string[] 
         {"Still working on it, huh? Don't worry. What's important is that you take your time and " +
             "figure it out on your own. That's where the real reward is."
         };
@@ -30,7 +30,7 @@ public class Quest_Blumun_Test : Quest
         inProgressDialogue.mouthExpression = ExpressionController.MouthExpression.Curious;
         //-------------------------------------------------------------------
         rewardDialogue.speakerName = "Blumun";
-        rewardDialogue.sentences = new string[]
+        rewardDialogue.dialogLine = new string[]
         {
             "Hey, look at that! You did it! Great job!",
             "You should probably take this. You're looking for more of these little puzzles, right? I don't have much use for it.",

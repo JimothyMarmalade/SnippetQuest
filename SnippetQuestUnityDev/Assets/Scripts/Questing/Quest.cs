@@ -30,11 +30,11 @@ public class Quest : MonoBehaviour
 
     public bool IsCompleted;
 
-    public Dialogue givePlayerQuestDialogue = new Dialogue();
+    public Dialog givePlayerQuestDialogue = new Dialog();
 
-    public Dialogue inProgressDialogue = new Dialogue();
+    public Dialog inProgressDialogue = new Dialog();
 
-    public Dialogue rewardDialogue = new Dialogue();
+    public Dialog rewardDialogue = new Dialog();
 
 
     private void Start()

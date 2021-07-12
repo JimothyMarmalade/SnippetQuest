@@ -11,7 +11,7 @@ public class Quest_Alice_FindPyoHeadgear : Quest
         SnippetReward = new List<string>();
 
         givePlayerQuestDialogue.speakerName = "Alice";
-        givePlayerQuestDialogue.sentences = new string[]{
+        givePlayerQuestDialogue.dialogLine = new string[]{
             "You want to help? Oh! Well, in that case...",
             "My sister lost a helmet she made. It has a very powerful artillery cannon strapped to the front of it. She fired it without fastening it first," +
             " and...well, it just flew off.",
@@ -22,7 +22,7 @@ public class Quest_Alice_FindPyoHeadgear : Quest
         givePlayerQuestDialogue.mouthExpression = ExpressionController.MouthExpression.None;
         //-------------------------------------------------------------------
         inProgressDialogue.speakerName = "Alice";
-        inProgressDialogue.sentences = new string[]
+        inProgressDialogue.dialogLine = new string[]
         {
             "...oh, still no luck finding it? That's okay. I think I can keep her calmed down until you track it down.",
             "Like I said, I think it flew off somewhere towards the mountain."
@@ -31,7 +31,7 @@ public class Quest_Alice_FindPyoHeadgear : Quest
         inProgressDialogue.mouthExpression = ExpressionController.MouthExpression.None;
         //-------------------------------------------------------------------
         rewardDialogue.speakerName = "Alice";
-        rewardDialogue.sentences = new string[]
+        rewardDialogue.dialogLine = new string[]
         {
             "Oh! Oh, you actually found it! That's amazing!",
             "Thank you so much! Here, you can have this scrap of newspaper I found earlier.",
