@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Name: LP_Alice_QuestAccepted_Q001Accepted_001
+  m_EditorClassIdentifier: 
+  dialogIdentifier: LP_Alice_QuestAccepted_Q001Accepted_001
+  speakerName: Alice
+  eyesExpression: 4
+  mouthExpression: 4
+  bodyAnimation: 
+  dialogLine:
+  - Really? Oh, thank you, you're a lifesaver. My name is Alice, and this is my sister
+    El-
+  NextDialog: {fileID: 11400000, guid: 365bb4b72498cc34485250028c1e39e2, type: 2}

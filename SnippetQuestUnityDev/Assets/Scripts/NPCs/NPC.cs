@@ -54,6 +54,11 @@ public class NPC : Interactable
         }
     }
 
+    public void ActivateDialog(string dialogPath)
+    {
+        DT.TriggerDialog(ConversationStarters.Find(item => item.dialogIdentifier == dialogPath), NPCFace);
+    }
+
     #region Conversion in progress
 
     /*

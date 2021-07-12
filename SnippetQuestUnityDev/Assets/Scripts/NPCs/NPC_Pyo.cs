@@ -17,13 +17,17 @@ public class NPC_Pyo : NPC
 {
     public override void Interact()
     {
-        base.Interact();
         Debug.Log("Running Interact for NPC_Pyo...");
+        PyoDialogTree();
+        MetPlayer = true;
+    }
 
+    private void PyoDialogTree()
+    {
         if (!MetPlayer)
         {
-            Debug.Log("This is the first time meeting the Player.");
             MetPlayer = true;
+            Debug.Log("This is the first time meeting the Player.");
         }
         else if (MetPlayer)
         {

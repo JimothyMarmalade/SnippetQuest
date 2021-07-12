@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Name: LP_Alice_QuestAccepted_Q001Accepted_006
+  m_EditorClassIdentifier: 
+  dialogIdentifier: LP_Alice_QuestAccepted_Q001Accepted_006
+  speakerName: Alice
+  eyesExpression: 0
+  mouthExpression: 2
+  bodyAnimation: 
+  dialogLine:
+  - I think the safety straps on it came loose while we were playing war games and
+    the force of firing it blew it off her head. It flew off towards the mountain,
+    but I can't leave her alone and she's too distraught to go looking for it.
+  NextDialog: {fileID: 11400000, guid: d637f2f5c53f427468b5c33b93e9017e, type: 2}

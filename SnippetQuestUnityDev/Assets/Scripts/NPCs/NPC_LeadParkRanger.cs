@@ -22,12 +22,12 @@ public class NPC_LeadParkRanger : NPC
         if (!MetPlayer)
         {
             //Say the opening Welcome to SnippetQuest Text
-            DT.TriggerDialog(ConversationStarters.Find(item => item.dialogIdentifier == "LP_LeadParkGreeter_Interaction_001-1"), NPCFace);
+            ActivateDialog("LP_LeadParkGreeter_Interaction_001-1");
         }
         else if (MetPlayer)
         {
             //Tell the player how many snippets are left to find in the stage.
-            DT.TriggerDialog(ConversationStarters.Find(item => item.dialogIdentifier == "LP_LeadParkGreeter_Interaction_002-1"), NPCFace);
+            ActivateDialog("LP_LeadParkGreeter_Interaction_002-1");
         }
 
         MetPlayer = true;

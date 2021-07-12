@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Name: LP_Alice_Q001Rejected_001
+  m_EditorClassIdentifier: 
+  dialogIdentifier: LP_Alice_Q001Rejected_001
+  speakerName: Alice
+  eyesExpression: 2
+  mouthExpression: 2
+  bodyAnimation: 
+  dialogLine:
+  - Oh, uh...right. Sorry to trouble you. Don't worry about me! I'll...figure something
+    out.
+  NextDialog: {fileID: 0}

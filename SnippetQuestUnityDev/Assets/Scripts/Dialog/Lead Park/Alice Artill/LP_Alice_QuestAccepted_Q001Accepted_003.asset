@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Name: LP_Alice_QuestAccepted_Q001Accepted_003
+  m_EditorClassIdentifier: 
+  dialogIdentifier: LP_Alice_QuestAccepted_Q001Accepted_003
+  speakerName: Alice
+  eyesExpression: 0
+  mouthExpression: 6
+  bodyAnimation: 
+  dialogLine:
+  - Uh...she prefers Pyo.
+  NextDialog: {fileID: 11400000, guid: f5e39864ae276d943a6bc6ccf6195315, type: 2}

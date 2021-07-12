@@ -35,5 +35,6 @@ public class Dialog: ScriptableObject
     [TextArea(3, 10)]
     public string[] dialogLine;
 
+    //Reference to the next dialog in the chain
     public Dialog NextDialog;
 }
