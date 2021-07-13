@@ -7548,7 +7548,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-63750
+  m_Name: pb_Mesh-4904
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8584,27 +8584,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5356981706852782492, guid: 5d1a14cc6da91944b915fb6dc30dc1cb, type: 3}
   m_PrefabInstance: {fileID: 1042193153}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1122135820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4474418331714750061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea24581230dc4374983d014ba874d3f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QuestName: GIRL, 7, LOSES HOMEMADE ARTILLERY CANNON
-  Description: 
-  Goals: []
-  SnippetReward: []
-  IsInProgress: 0
-  IsCompleted: 0
-  givePlayerQuestDialogue: {fileID: 0}
-  inProgressDialogue: {fileID: 0}
-  rewardDialogue: {fileID: 0}
 --- !u!1001 &1134611386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11829,7 +11808,6 @@ GameObject:
   - component: {fileID: 4474418331714750060}
   - component: {fileID: 4474418331714750067}
   - component: {fileID: 4474418331714750062}
-  - component: {fileID: 1122135820}
   m_Layer: 9
   m_Name: QuestGiver - Alice
   m_TagString: NPC

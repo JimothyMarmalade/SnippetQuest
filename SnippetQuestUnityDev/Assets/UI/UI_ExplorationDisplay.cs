@@ -80,7 +80,7 @@ public class UI_ExplorationDisplay : MonoBehaviour
         }
 
         StrikethroughObjectives(q);
-        if (q.IsCompleted)
+        if (q.CurrentState == Quest.QuestState.Completed) 
             ShowCompleteText();
         else
             HideCompleteText();

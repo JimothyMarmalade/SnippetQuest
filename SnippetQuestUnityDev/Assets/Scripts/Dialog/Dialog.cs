@@ -33,7 +33,7 @@ public class Dialog: ScriptableObject
 
     //The sentences that will be spoken
     [TextArea(3, 10)]
-    public string[] dialogLine;
+    public string dialogLine;
 
     //Reference to the next dialog in the chain
     public Dialog NextDialog;

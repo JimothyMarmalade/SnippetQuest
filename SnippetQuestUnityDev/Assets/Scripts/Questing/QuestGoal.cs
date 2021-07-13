@@ -11,19 +11,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class QuestGoal
+[CreateAssetMenu(fileName = "New QuestGoal", menuName = "Quests/New QuestGoal")]
+public class QuestGoal : ScriptableObject
 {
-    public Quest AssignedQuest { get; set; }
-    public string Description { get; set; }
-    public bool Completed { get; set; }
-    public int CurrentAmount { get; set; }
-    public int RequiredAmount { get; set; }
+    public Quest AssignedQuest;
+    public string Description;
+    public bool Completed;
+    public int CurrentAmount;
+    public int RequiredAmount;
 
-    public virtual void Init()
+    public virtual void Init(Quest q)
     {
         //default initialization dealies
-
+        SetQuest(q);
     }
 
     public bool Evaluate()
@@ -45,6 +45,11 @@ public class QuestGoal
 
         //Send Notification to UI to update quest objective display
         QuestLog.Instance.CheckUpdateAQID(this);
+    }
+
+    public void SetQuest(Quest q)
+    {
+        AssignedQuest = q;
     }
 
 

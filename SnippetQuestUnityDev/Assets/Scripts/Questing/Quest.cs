@@ -14,28 +14,24 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 
-[System.Serializable]
-public class Quest : MonoBehaviour
+[CreateAssetMenu(fileName = "New Quest", menuName = "Quests/New Quest")]
+public class Quest : ScriptableObject
 {
-
+    //Name of the Quest
     public string QuestName;
 
+    //The Quest's Current Description
     public string Description;
 
+    //All goals needed to be completed for the quest to be ready to turn in
     public List<QuestGoal> Goals = new List<QuestGoal>();
 
+    //The Snippet(s) awarded upon completion
     public List<string> SnippetReward;
 
-    public bool IsInProgress;
-
-    public bool IsCompleted;
-
-    public Dialog givePlayerQuestDialogue = new Dialog();
-
-    public Dialog inProgressDialogue = new Dialog();
-
-    public Dialog rewardDialogue = new Dialog();
-
+    //Tracks the current state of the Quest
+    public enum QuestState {Unaccepted, Accepted, ReadyForTurnIn, Completed }
+    public QuestState CurrentState = QuestState.Unaccepted;
 
     private void Start()
     {
@@ -49,17 +45,21 @@ public class Quest : MonoBehaviour
 
     public virtual void ActivateQuest()
     {
-        //Turn on quest goals and listeners here
+        foreach (QuestGoal goal in Goals)
+        {
+            goal.Init(this);
+        }
     }
 
     public void CheckGoals()
     {
         //Checks to see if all goals are completed
-        IsCompleted = Goals.All(g => g.Completed);
+        if (Goals.All(g => g.Completed))
+            CurrentState = QuestState.ReadyForTurnIn;
 
-        if (IsCompleted)
+        if (CurrentState == QuestState.ReadyForTurnIn)
         {
-            Debug.Log("Quest \"" + QuestName + "\" completed.");
+            Debug.Log("All goals for Quest \"" + QuestName + "\" completed.");
         }
     }
 
@@ -81,12 +81,12 @@ public class Quest : MonoBehaviour
         }
     }
 
-    public void SetQuestInProgress()
+    public void AcceptQuest()
     {
         Debug.Log("Running SetQuestInProgress() in Quest.cs");
         ActivateQuest();
 
-        IsInProgress = true;
+        CurrentState = QuestState.Accepted;
 
         Debug.Log("Quest name is: " + QuestName);
         Debug.Log("Goals count is: " + Goals.Count);
@@ -96,8 +96,7 @@ public class Quest : MonoBehaviour
 
     public void SetQuestCompleted()
     {
-        IsInProgress = false;
-        IsCompleted = true;
+        CurrentState = QuestState.Completed;
     }
 
 

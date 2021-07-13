@@ -71,12 +71,10 @@ public class DialogTrigger : MonoBehaviour
             DialogManager.Instance.StartDialog(d, charFace);
         }
 
-        //Begin facial animations
-        //charFace.ChangeExpression(d.eyesExpression, d.mouthExpression);
-
         //Begin music changes
         AudioManager.Instance.BGMFocusActivity(1.5f);
     }
+    
     /*
     public void TriggerDialog(DialogChoice d, ExpressionController charFace)
     {

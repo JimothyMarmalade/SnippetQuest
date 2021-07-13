@@ -9,14 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab1d759d65419914a947152a4a2b4d0c, type: 3}
-  m_Name: LP_Alice_QuestAccepted_Q001Accepted_001
+  m_Script: {fileID: 11500000, guid: 767a8140409408447a890dbef15a6dd2, type: 3}
+  m_Name: Q001 ItemGoal1
   m_EditorClassIdentifier: 
-  dialogIdentifier: LP_Alice_QuestAccepted_Q001Accepted_001
-  speakerName: 
-  eyesExpression: 0
-  mouthExpression: 0
-  bodyAnimation: 
-  dialogLine: []
-  NextDialog: {fileID: 0}
   AssignedQuest: {fileID: 0}
+  Description: Find Pyo's Helmet
+  Completed: 0
+  CurrentAmount: 0
+  RequiredAmount: 1
+  ItemSlug: Pyos_Headgear

@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New ItemCollectedGoal", menuName = "Quests/New ItemCollectedGoal")]
 public class ItemCollectedGoal : QuestGoal
 {
     //Refers to the slug of the item this goal is concerned with
@@ -25,9 +26,9 @@ public class ItemCollectedGoal : QuestGoal
         this.RequiredAmount = requiredAmount;
     }
 
-    public override void Init()
+    public override void Init(Quest q)
     {
-        base.Init();
+        base.Init(q);
 
         //Evaluate to see if the player has the required amount already.
         this.CurrentAmount = InventoryController.Instance.ItemAmountInInventory(this.ItemSlug);

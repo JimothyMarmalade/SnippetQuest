@@ -23,9 +23,9 @@ public class AmountSolvedGoal : QuestGoal
         this.CurrentAmount = currentAmount;
         this.RequiredAmount = requiredAmount;
     }
-    public override void Init()
+    public override void Init(Quest q)
     {
-        base.Init();
+        base.Init(q);
         SnippetEvents.OnSnippetSolved += SnippetTypeSolved;
     }
 

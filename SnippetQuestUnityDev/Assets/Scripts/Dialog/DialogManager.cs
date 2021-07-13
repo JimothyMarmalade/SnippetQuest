@@ -47,7 +47,7 @@ public class DialogManager : MonoBehaviour
     [Header("Animator Reference")]
     public Animator animator;
 
-    //private Queue<string> sentences;
+
     private Dialog currentDialog;
     private DialogChoice currentDialogChoice;
     private ExpressionController focusedCharacterFace;
@@ -69,7 +69,7 @@ public class DialogManager : MonoBehaviour
         currentDialog = dialog;
         nameText.text = currentDialog.speakerName;
 
-        string sentence = currentDialog.dialogLine[0];
+        string sentence = currentDialog.dialogLine;
         //Debug.Log(sentence);
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
@@ -89,7 +89,7 @@ public class DialogManager : MonoBehaviour
 
 
         nameText.text = currentDialog.speakerName;
-        string sentence = currentDialog.dialogLine[0];
+        string sentence = currentDialog.dialogLine;
         //Debug.Log(sentence);
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
@@ -109,7 +109,7 @@ public class DialogManager : MonoBehaviour
             nameText.text = currentDialog.speakerName;
             ShowNextButton();
 
-            string sentence = currentDialog.dialogLine[0];
+            string sentence = currentDialog.dialogLine;
             //Debug.Log(sentence);
             StopAllCoroutines();
             StartCoroutine(TypeSentence(sentence));
@@ -135,7 +135,7 @@ public class DialogManager : MonoBehaviour
         focusedCharacterFace = face;
         nameText.text = currentDialogChoice.speakerName;
 
-        string sentence = currentDialogChoice.dialogLine[0];
+        string sentence = currentDialogChoice.dialogLine;
 
 
         ShowOptionsButtons();
@@ -166,7 +166,7 @@ public class DialogManager : MonoBehaviour
         currentDialog = dialog;
         nameText.text = currentDialog.speakerName;
 
-        string sentence = currentDialog.dialogLine[0];
+        string sentence = currentDialog.dialogLine;
         //Debug.Log(sentence);
         ShowNextButton();
         StopAllCoroutines();
@@ -179,7 +179,33 @@ public class DialogManager : MonoBehaviour
 
     #endregion
 
+    #region DialogQuest
 
+    public void StartDialogQuestLine(DialogQuest dialog, ExpressionController face)
+    {
+        //Debug.Log("Starting conversation with " + dialog.speakerName);
+        animator.SetBool("IsOpen", true);
+
+        DEBUGDialogMenuNametag.SetActive(true);
+
+        ShowNextButton();
+
+        currentDialog = (Dialog)dialog;
+        focusedCharacterFace = face;
+
+        //Turn on listeners for the quest
+        dialog.AssignedQuest.ActivateQuest();
+        QuestLog.Instance.AddQuestToIPQ(dialog.AssignedQuest);
+
+        nameText.text = currentDialog.speakerName;
+        string sentence = currentDialog.dialogLine;
+        //Debug.Log(sentence);
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence));
+        focusedCharacterFace.ChangeExpression(currentDialog.eyesExpression, currentDialog.mouthExpression);
+    }
+
+    #endregion
 
     IEnumerator TypeSentence(string sentence)
     {
