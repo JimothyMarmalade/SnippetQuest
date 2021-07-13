@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871162931bb023e4e85ad2dd04616c14, type: 3}
   m_Name: Q001 - G7LHAC
   m_EditorClassIdentifier: 
+  QuestID: Q001
   QuestName: GIRL, 7, LOSES HOMEMADE ARTILLERY CANNON
   Description: Help Alice find her sister's missing artillery helmet.
   Goals:
   - {fileID: 11400000, guid: 3f7d13839538e5747b71bee28561d737, type: 2}
-  SnippetReward:
-  - 
-  CurrentState: 0
+  SnippetReward: []
+  CurrentState: 2

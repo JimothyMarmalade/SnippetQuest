@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
-  m_Name: LP_Alice_QuestAccepted_Q001Accepted_002
+  m_Name: LP_Alice_AllQuestsComplete_002
   m_EditorClassIdentifier: 
-  dialogIdentifier: LP_Alice_QuestAccepted_Q001Accepted_002
+  dialogIdentifier: LP_Alice_AllQuestsComplete_002
   speakerName: Pyo
   eyesExpression: 0
-  mouthExpression: 5
+  mouthExpression: 6
   bodyAnimation: 
   dialogLine: Pyo!
-  NextDialog: {fileID: 11400000, guid: ce356b1307c1c1a4ba5c67f17b97d10d, type: 2}
+  NextDialog: {fileID: 0}

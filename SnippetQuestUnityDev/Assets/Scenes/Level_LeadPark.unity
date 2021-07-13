@@ -4719,7 +4719,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-5604
+  m_Name: pb_Mesh-82682
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7548,7 +7548,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-4904
+  m_Name: pb_Mesh-195954
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8070,15 +8070,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab841da0587449944aa326c7cc7f84da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  QuestID: 
   QuestName: 
   Description: 
   Goals: []
   SnippetReward: []
-  IsInProgress: 0
-  IsCompleted: 0
-  givePlayerQuestDialogue: {fileID: 0}
-  inProgressDialogue: {fileID: 0}
-  rewardDialogue: {fileID: 0}
+  CurrentState: 0
 --- !u!1001 &994944999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11833,6 +11830,9 @@ MonoBehaviour:
   NPCFace: {fileID: 4474418331795709955}
   ConversationStarters:
   - {fileID: 11400000, guid: 9cf20087df3cb36469c224841c3b2e6c, type: 2}
+  - {fileID: 11400000, guid: 26e9583ac5995834d9de6911a58b8bdf, type: 2}
+  - {fileID: 11400000, guid: eeb2e861064b7724eb6255ba4bd073e4, type: 2}
+  - {fileID: 11400000, guid: 772bc95befbecce45bd4fe50288625ba, type: 2}
 --- !u!114 &4474418331714750067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11845,7 +11845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52301c903bdfb2a46887179e6f154df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultDialog: {fileID: 11400000, guid: df37d75a51b02c749b760a1353ecbc53, type: 2}
+  defaultDialog: {fileID: 11400000, guid: e5849bcb9ecf3f94cb1c7d2745f51737, type: 2}
 --- !u!1001 &4474418331795709954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12609,7 +12609,7 @@ MonoBehaviour:
   MetPlayer: 0
   NPCFace: {fileID: 111628795}
   ConversationStarters:
-  - {fileID: 11400000, guid: 9f92fdf27dcd03940b77f6a6887c7d1a, type: 2}
+  - {fileID: 11400000, guid: 415d67053938a6f4f9c6ecdbdf16d00a, type: 2}
   - {fileID: 11400000, guid: 54350b52b612c4843b72364b27ef1d95, type: 2}
 --- !u!114 &6505772840686993693
 MonoBehaviour:
@@ -12623,7 +12623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52301c903bdfb2a46887179e6f154df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultDialog: {fileID: 11400000, guid: df37d75a51b02c749b760a1353ecbc53, type: 2}
+  defaultDialog: {fileID: 11400000, guid: e5849bcb9ecf3f94cb1c7d2745f51737, type: 2}
 --- !u!4 &6505772840686993694
 Transform:
   m_ObjectHideFlags: 0

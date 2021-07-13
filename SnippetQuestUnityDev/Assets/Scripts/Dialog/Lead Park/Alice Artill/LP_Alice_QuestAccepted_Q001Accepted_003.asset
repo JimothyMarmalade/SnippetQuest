@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
   m_Name: LP_Alice_QuestAccepted_Q001Accepted_003
   m_EditorClassIdentifier: 
   dialogIdentifier: LP_Alice_QuestAccepted_Q001Accepted_003
@@ -17,6 +17,5 @@ MonoBehaviour:
   eyesExpression: 0
   mouthExpression: 6
   bodyAnimation: 
-  dialogLine:
-  - Uh...she prefers Pyo.
-  NextDialog: {fileID: 11400000, guid: f5e39864ae276d943a6bc6ccf6195315, type: 2}
+  dialogLine: Uh...she prefers Pyo.
+  NextDialog: {fileID: 11400000, guid: f0c3146c692c4dc4d9f584ac793cb927, type: 2}

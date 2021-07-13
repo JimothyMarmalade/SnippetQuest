@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
-  m_Name: LP_Alice_QuestAccepted_Q001Accepted_002
+  m_Name: LP_Alice_QuestComplete_Q001Accepted_005
   m_EditorClassIdentifier: 
-  dialogIdentifier: LP_Alice_QuestAccepted_Q001Accepted_002
-  speakerName: Pyo
+  dialogIdentifier: LP_Alice_QuestComplete_Q001Accepted_005
+  speakerName: Alice
   eyesExpression: 0
-  mouthExpression: 5
+  mouthExpression: 6
   bodyAnimation: 
-  dialogLine: Pyo!
-  NextDialog: {fileID: 11400000, guid: ce356b1307c1c1a4ba5c67f17b97d10d, type: 2}
+  dialogLine: 'Aw, look how excited she is...thank you so much for finding the helmet
+    for us. I know it''s not much, but here: take this puzzle I found earlier. I
+    think it''s from the LC Times.'
+  NextDialog: {fileID: 0}

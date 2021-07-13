@@ -17,10 +17,8 @@ MonoBehaviour:
   eyesExpression: 0
   mouthExpression: 6
   bodyAnimation: 
-  dialogLine:
-  - Hey there! Are you confident in your Snippet collecting abilities?
-  NextDialog: {fileID: 0}
+  dialogLine: Hey there! Are you confident in your Snippet collecting abilities?
   PlayerReaction1: Yes!
-  DialogChoice1: {fileID: 11400000, guid: 5a312c8e984ad4640854663363b744bd, type: 2}
+  DialogChoice1: {fileID: 11400000, guid: fcee718adb6d626459c91ebec51547c0, type: 2}
   PlayerReaction2: No...
-  DialogChoice2: {fileID: 11400000, guid: b6bc1ac34280055489f7ea75d2f489e8, type: 2}
+  DialogChoice2: {fileID: 11400000, guid: 50f0462d1ab6ee54785b061f6b19d565, type: 2}

@@ -47,9 +47,9 @@ public class DialogManager : MonoBehaviour
     [Header("Animator Reference")]
     public Animator animator;
 
-
-    private Dialog currentDialog;
-    private DialogChoice currentDialogChoice;
+    private Dialog nextDialog;
+    private Dialog Choice1;
+    private Dialog Choice2;
     private ExpressionController focusedCharacterFace;
 
     private void Start()
@@ -58,154 +58,80 @@ public class DialogManager : MonoBehaviour
         ShowNextButton();
     }
 
-    public void StartDialog(Dialog dialog)
+    public void DisplayDialogNormal(Dialog d)
     {
-        //Debug.Log("Starting conversation with " + dialog.speakerName);
         animator.SetBool("IsOpen", true);
-
-        DEBUGDialogMenuNametag.SetActive(true);
-
-
-        currentDialog = dialog;
-        nameText.text = currentDialog.speakerName;
-
-        string sentence = currentDialog.dialogLine;
-        //Debug.Log(sentence);
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
-    }
-
-    public void StartDialog(Dialog dialog, ExpressionController face)
-    {
-        //Debug.Log("Starting conversation with " + dialog.speakerName);
-        animator.SetBool("IsOpen", true);
-
         DEBUGDialogMenuNametag.SetActive(true);
 
         ShowNextButton();
 
-        currentDialog = dialog;
-        focusedCharacterFace = face;
 
+        nameText.text = d.speakerName;
+        if (focusedCharacterFace != null)
+        {
+            focusedCharacterFace.ChangeExpression(d.eyesExpression, d.mouthExpression);
+        }
+        StopAllCoroutines(); 
+        StartCoroutine(TypeSentence(d.dialogLine));
+    }
 
-        nameText.text = currentDialog.speakerName;
-        string sentence = currentDialog.dialogLine;
-        //Debug.Log(sentence);
+    public void DisplayDialogChoices(Dialog d, string playerChoice1, string playerChoice2)
+    {
+        animator.SetBool("IsOpen", true);
+        DEBUGDialogMenuNametag.SetActive(true);
+
+        ShowOptionsButtons();
+
+        nameText.text = d.speakerName;
+        Op1Button.GetComponentInChildren<TMP_Text>().text = playerChoice1;
+
+        Op2Button.GetComponentInChildren<TMP_Text>().text = playerChoice2;
+
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
-        focusedCharacterFace.ChangeExpression(currentDialog.eyesExpression, currentDialog.mouthExpression);
+        StartCoroutine(TypeSentence(d.dialogLine));
+    }
+
+    public void SetNextDialog(Dialog d)
+    {
+        nextDialog = d;
+    }
+
+    public void SetPlayerChoices(Dialog d1, Dialog d2)
+    {
+        Choice1 = d1;
+        Choice2 = d2;
+    }
+
+    public void SetCharacterFace(ExpressionController exc)
+    {
+        focusedCharacterFace = exc;
     }
 
     public void DisplayNextDialogLine()
     {
-        if (currentDialog.NextDialog == null)
+        if (nextDialog == null)
         {
             EndDialog();
             return;
         }
         else
         {
-            currentDialog = currentDialog.NextDialog;
-            nameText.text = currentDialog.speakerName;
-            ShowNextButton();
-
-            string sentence = currentDialog.dialogLine;
-            //Debug.Log(sentence);
-            StopAllCoroutines();
-            StartCoroutine(TypeSentence(sentence));
-            if (focusedCharacterFace != null)
-            {
-                focusedCharacterFace.ChangeExpression(currentDialog.eyesExpression, currentDialog.mouthExpression);
-            }
+            nextDialog.DisplayDialog();
         }
     }
-
-
-    #region Dialog with Player Choices
-
-    public void StartDialogChoice(DialogChoice d, ExpressionController face)
-    {
-        //Debug.Log("Starting conversation with " + dialog.speakerName);
-        animator.SetBool("IsOpen", true);
-
-        DEBUGDialogMenuNametag.SetActive(true);
-
-
-        currentDialogChoice = d;
-        focusedCharacterFace = face;
-        nameText.text = currentDialogChoice.speakerName;
-
-        string sentence = currentDialogChoice.dialogLine;
-
-
-        ShowOptionsButtons();
-        Op1Button.GetComponentInChildren<TMP_Text>().text = currentDialogChoice.PlayerReaction1;
-
-        Op2Button.GetComponentInChildren<TMP_Text>().text = currentDialogChoice.PlayerReaction2;
-
-
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
-    }
-
     public void MakePlayerDecision(bool choice)
     {
         if (choice)
         {
-            DisplayNextDialogLine(currentDialogChoice.DialogChoice1);
+            Choice1.DisplayDialog();
         }
         //if choice is false, player selected the lower option (option 2)
         else if (!choice)
         {
-            DisplayNextDialogLine(currentDialogChoice.DialogChoice2);
+            Choice2.DisplayDialog();
         }
     }
 
-    public void DisplayNextDialogLine(Dialog dialog)
-    {
-        currentDialog = dialog;
-        nameText.text = currentDialog.speakerName;
-
-        string sentence = currentDialog.dialogLine;
-        //Debug.Log(sentence);
-        ShowNextButton();
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
-        if (focusedCharacterFace != null)
-        {
-            focusedCharacterFace.ChangeExpression(currentDialog.eyesExpression, currentDialog.mouthExpression);
-        }
-    }
-
-    #endregion
-
-    #region DialogQuest
-
-    public void StartDialogQuestLine(DialogQuest dialog, ExpressionController face)
-    {
-        //Debug.Log("Starting conversation with " + dialog.speakerName);
-        animator.SetBool("IsOpen", true);
-
-        DEBUGDialogMenuNametag.SetActive(true);
-
-        ShowNextButton();
-
-        currentDialog = (Dialog)dialog;
-        focusedCharacterFace = face;
-
-        //Turn on listeners for the quest
-        dialog.AssignedQuest.ActivateQuest();
-        QuestLog.Instance.AddQuestToIPQ(dialog.AssignedQuest);
-
-        nameText.text = currentDialog.speakerName;
-        string sentence = currentDialog.dialogLine;
-        //Debug.Log(sentence);
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
-        focusedCharacterFace.ChangeExpression(currentDialog.eyesExpression, currentDialog.mouthExpression);
-    }
-
-    #endregion
 
     IEnumerator TypeSentence(string sentence)
     {
@@ -222,9 +148,11 @@ public class DialogManager : MonoBehaviour
         //Debug.Log("End of Conversation");
         animator.SetBool("IsOpen", false);
         DEBUGDialogMenuNametag.SetActive(false);
-        currentDialog = null;
-        currentDialogChoice = null;
-        focusedCharacterFace.ClearExpression();
+        nextDialog = null;
+        Choice2 = null;
+        Choice1 = null;
+        if (focusedCharacterFace != null)
+            focusedCharacterFace.ClearExpression();
         focusedCharacterFace = null;
 
         if (OnDialogOver != null)

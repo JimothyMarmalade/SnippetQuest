@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
   m_Name: LP_LeadParkGreeter_Interaction_001-2
   m_EditorClassIdentifier: 
   dialogIdentifier: LP_LeadParkGreeter_Interaction_001-2
@@ -17,7 +17,6 @@ MonoBehaviour:
   eyesExpression: 0
   mouthExpression: 6
   bodyAnimation: 
-  dialogLine:
-  - There are several Snippets lost around the park, and people who could use a helping
-    hand.
-  NextDialog: {fileID: 11400000, guid: 803a3052b9d72cc4fb569ce63c58aef9, type: 2}
+  dialogLine: There are several Snippets lost around the park, and people who could
+    use a helping hand.
+  NextDialog: {fileID: 11400000, guid: 3047bae5ee75a134a8822688319aa45c, type: 2}

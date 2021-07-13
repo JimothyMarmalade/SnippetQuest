@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: LP_Alice_QuestAccepted_Q001Accepted_001
   m_EditorClassIdentifier: 
   dialogIdentifier: LP_Alice_QuestAccepted_Q001Accepted_001
-  speakerName: 
-  eyesExpression: 0
-  mouthExpression: 0
+  speakerName: Alice
+  eyesExpression: 4
+  mouthExpression: 4
   bodyAnimation: 
-  dialogLine: []
-  NextDialog: {fileID: 0}
-  AssignedQuest: {fileID: 0}
+  dialogLine: Really? Oh, thank you, you're a lifesaver. My name is Alice, and this
+    is my sister El-
+  NextDialog: {fileID: 11400000, guid: e26fc8c6f5c56f04cb010a951e73ccbb, type: 2}
+  AssignedQuest: {fileID: 11400000, guid: 8cc1c2b0bcad4cf41a2c3a77a10c25bb, type: 2}

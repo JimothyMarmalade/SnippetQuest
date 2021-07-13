@@ -17,6 +17,9 @@ using System.Linq;
 [CreateAssetMenu(fileName = "New Quest", menuName = "Quests/New Quest")]
 public class Quest : ScriptableObject
 {
+    //Quest ID for easy lookup in the Log
+    public string QuestID;
+
     //Name of the Quest
     public string QuestName;
 
@@ -45,10 +48,18 @@ public class Quest : ScriptableObject
 
     public virtual void ActivateQuest()
     {
+        ResetValues();
+
         foreach (QuestGoal goal in Goals)
         {
             goal.Init(this);
         }
+    }
+
+    //Resets Values so the ScriptableObject cannot carry data between sessions.
+    public void ResetValues()
+    {
+        CurrentState = QuestState.Unaccepted;
     }
 
     public void CheckGoals()
@@ -71,8 +82,15 @@ public class Quest : ScriptableObject
             //Give the snippet to the player by inserting it in the inventory
             foreach (string s in SnippetReward)
             {
-                InventoryController.Instance.AddSnippet(s);
-                Debug.Log("Added Snippet with slug " + s + "to player Inventory");
+                try
+                {
+                    InventoryController.Instance.AddSnippet(s);
+                    Debug.Log("Added Snippet with slug " + s + "to player Inventory");
+                }
+                catch
+                {
+                    Debug.LogError("Something went hella wrong");
+                }
             }
         }
         else

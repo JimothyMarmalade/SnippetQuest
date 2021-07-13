@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
   m_Name: DEBUG_DialogNotImplemented
   m_EditorClassIdentifier: 
   dialogIdentifier: DEBUG_DialogNotImplemented
-  speakerName: Error
+  speakerName: ERROR
   eyesExpression: 0
   mouthExpression: 0
   bodyAnimation: 
-  dialogLine:
-  - This message should not be visible. Double-check this NPC's scripting and check
-    for incorrect dialog tags.
+  dialogLine: '[[[Warning!! This Dialog Line should not be displayed. Scripted dialog
+    may not be available.]]]'
   NextDialog: {fileID: 0}

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
   m_Name: LP_LeadParkGreeter_Interaction_002-3
   m_EditorClassIdentifier: 
   dialogIdentifier: LP_LeadParkGreeter_Interaction_002-3
@@ -17,7 +17,6 @@ MonoBehaviour:
   eyesExpression: 0
   mouthExpression: 2
   bodyAnimation: 
-  dialogLine:
-  - I'm sorry to hear that, but don't be discouraged! Try talking to people to see
-    if anyone needs help. Be sure to look everywhere you can think of!
+  dialogLine: I'm sorry to hear that, but don't be discouraged! Try talking to people
+    to see if anyone needs help. Be sure to look everywhere you can think of!
   NextDialog: {fileID: 0}

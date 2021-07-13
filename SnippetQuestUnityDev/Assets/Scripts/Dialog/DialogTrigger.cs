@@ -26,7 +26,7 @@ public class DialogTrigger : MonoBehaviour
         PlayerController.Instance.DisableAllMovement();
 
         //Begin dialog
-        DialogManager.Instance.StartDialog(defaultDialog);
+        defaultDialog.DisplayDialog();
 
         //Begin facial animations
         //faceReference.ChangeExpression(defaultDialog.eyesExpression, defaultDialog.mouthExpression);
@@ -35,6 +35,7 @@ public class DialogTrigger : MonoBehaviour
         AudioManager.Instance.BGMFocusActivity(1.5f);
     }
 
+    /*
     public void TriggerDialog(Dialog d)
     {
         //Add methods to OndialogOver to restore control after conversation
@@ -52,6 +53,7 @@ public class DialogTrigger : MonoBehaviour
         //Begin music changes
         AudioManager.Instance.BGMFocusActivity(1.5f);
     }
+    */
 
     public void TriggerDialog(Dialog d, ExpressionController charFace)
     {
@@ -61,15 +63,8 @@ public class DialogTrigger : MonoBehaviour
         //Disable player movement
         PlayerController.Instance.DisableAllMovement();
 
-        //Begin dialog
-        if (d is DialogChoice)
-        {
-            DialogManager.Instance.StartDialogChoice((DialogChoice)d, charFace);
-        }
-        else
-        {
-            DialogManager.Instance.StartDialog(d, charFace);
-        }
+        DialogManager.Instance.SetCharacterFace(faceReference);
+        d.DisplayDialog();
 
         //Begin music changes
         AudioManager.Instance.BGMFocusActivity(1.5f);

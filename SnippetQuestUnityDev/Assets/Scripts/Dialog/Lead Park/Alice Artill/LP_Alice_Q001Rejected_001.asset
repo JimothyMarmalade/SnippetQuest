@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
   m_Name: LP_Alice_Q001Rejected_001
   m_EditorClassIdentifier: 
   dialogIdentifier: LP_Alice_Q001Rejected_001
@@ -17,7 +17,6 @@ MonoBehaviour:
   eyesExpression: 2
   mouthExpression: 2
   bodyAnimation: 
-  dialogLine:
-  - Oh, uh...right. Sorry to trouble you. Don't worry about me! I'll...figure something
+  dialogLine: Oh, uh...right, sorry. Don't worry about me! I'll...figure something
     out.
   NextDialog: {fileID: 0}

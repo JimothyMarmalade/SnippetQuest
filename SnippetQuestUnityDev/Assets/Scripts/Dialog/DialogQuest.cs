@@ -13,9 +13,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New DialogQuest", menuName = "Dialog/New Empty DialogQuest")]
-public class DialogQuest : Dialog
+[CreateAssetMenu(fileName = "New DialogQuest", menuName = "Dialog/New DialogQuest")]
+public class DialogQuest : DialogNormal
 {
     [Header("Assigned Quest")]
     public Quest AssignedQuest;
+
+    public override void DisplayDialog()
+    {
+        //Turn on listeners for the quest
+        AssignedQuest.ActivateQuest();
+        QuestLog.Instance.AddToPlayerAcceptedQuests(AssignedQuest);
+        
+        base.DisplayDialog();
+    }
 }

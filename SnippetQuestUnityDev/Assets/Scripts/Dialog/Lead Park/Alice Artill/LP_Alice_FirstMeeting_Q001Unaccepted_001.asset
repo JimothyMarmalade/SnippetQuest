@@ -17,11 +17,9 @@ MonoBehaviour:
   eyesExpression: 0
   mouthExpression: 2
   bodyAnimation: 
-  dialogLine:
-  - ...Oh! Hello! Could I ask a favor of you? My sister and I have lost a very special
-    helmet.
-  NextDialog: {fileID: 0}
+  dialogLine: ...Oh! Hello! Could I ask a favor of you? My sister and I have lost
+    a very special helmet.
   PlayerReaction1: Sorry, I'm busy.
-  DialogChoice1: {fileID: 11400000, guid: ec80bccabef9cde45875702522961c25, type: 2}
+  DialogChoice1: {fileID: 11400000, guid: f78d2316f977fdd42b918dac8e968342, type: 2}
   PlayerReaction2: Sure, I can help.
-  DialogChoice2: {fileID: 11400000, guid: b083057042b1a7146b673dd407c3401b, type: 2}
+  DialogChoice2: {fileID: 11400000, guid: 99e1acedf4a435d4dad029468e37c874, type: 2}

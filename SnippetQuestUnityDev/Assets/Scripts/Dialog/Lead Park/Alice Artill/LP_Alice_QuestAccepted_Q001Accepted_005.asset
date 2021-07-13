@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
   m_Name: LP_Alice_QuestAccepted_Q001Accepted_005
   m_EditorClassIdentifier: 
   dialogIdentifier: LP_Alice_QuestAccepted_Q001Accepted_005
@@ -17,7 +17,7 @@ MonoBehaviour:
   eyesExpression: 0
   mouthExpression: 0
   bodyAnimation: 
-  dialogLine:
-  - 'You see, this helmet is one of a kind. It''s not just any helmet: it''s a personal
-    artillery cannon. I designed it myself and helped her build it.'
-  NextDialog: {fileID: 11400000, guid: 6a3e4adb22b80114ea6f2546c10f2504, type: 2}
+  dialogLine: 'You see, this helmet is one of a kind. It''s not just any helmet:
+    it''s a personal artillery cannon. I designed it myself and helped her build
+    it.'
+  NextDialog: {fileID: 11400000, guid: cb1dcc39af6cc684ab19730502501772, type: 2}

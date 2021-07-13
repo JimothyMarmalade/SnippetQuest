@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767a8140409408447a890dbef15a6dd2, type: 3}
   m_Name: Q001 ItemGoal1
   m_EditorClassIdentifier: 
-  AssignedQuest: {fileID: 0}
-  Description: Find Pyo's Helmet
+  AssignedQuest: {fileID: 11400000, guid: 8cc1c2b0bcad4cf41a2c3a77a10c25bb, type: 2}
+  Description: Find Pyo's Missing Helmet
   Completed: 0
   CurrentAmount: 0
+  DEFAULTCurrentAmount: 0
   RequiredAmount: 1
   ItemSlug: Pyos_Headgear

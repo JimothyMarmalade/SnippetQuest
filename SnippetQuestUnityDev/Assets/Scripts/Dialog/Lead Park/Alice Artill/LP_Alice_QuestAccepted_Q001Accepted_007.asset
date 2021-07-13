@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff14866fd84a904180a52a3dc5b1562, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
   m_Name: LP_Alice_QuestAccepted_Q001Accepted_007
   m_EditorClassIdentifier: 
   dialogIdentifier: LP_Alice_QuestAccepted_Q001Accepted_007
@@ -17,8 +17,7 @@ MonoBehaviour:
   eyesExpression: 0
   mouthExpression: 0
   bodyAnimation: 
-  dialogLine:
-  - 'It''s brown, with a rigid barrel mounted to the front. It''s camoflauged and
-    may be difficult to locate, but if you can find it and bring it back here, I''ll
-    reward you for your trouble.  '
+  dialogLine: 'It''s brown, with a rigid barrel mounted to the front. It''s camoflauged
+    and may be difficult to locate, but if you can find it and bring it back here,
+    I''ll reward you for your trouble.  '
   NextDialog: {fileID: 0}

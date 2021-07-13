@@ -15,14 +15,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "New DialogChoice", menuName = "Dialog/New Empty DialogChoice")]
+[CreateAssetMenu(fileName = "New DialogChoice", menuName = "Dialog/New DialogChoice")]
 
 public class DialogChoice : Dialog
 {
-
     [Header("Multiple Choice Dialog Paths")]
     public string PlayerReaction1;
     public Dialog DialogChoice1;
     public string PlayerReaction2;
     public Dialog DialogChoice2;
+
+    public override void DisplayDialog()
+    {
+        DialogManager.Instance.SetPlayerChoices(DialogChoice1, DialogChoice2);
+        DialogManager.Instance.DisplayDialogChoices(this, PlayerReaction1, PlayerReaction2);
+
+    }
 }

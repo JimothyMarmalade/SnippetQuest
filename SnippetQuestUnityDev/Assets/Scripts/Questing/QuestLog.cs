@@ -15,9 +15,12 @@ public class QuestLog : MonoBehaviour
 {
     public static QuestLog Instance { get; set; }
 
+    //ActiveQuest is a reference to the player's current active quest (on the HUD)
     public Quest activeQuest;
-    public List<Quest> inProgressQuests = new List<Quest>();
-    public List<Quest> completedQuests = new List<Quest>();
+    //playerAcceptedQuests holds all quests accepted by the player in whatever state they're in.
+    public List<Quest> playerAcceptedQuests = new List<Quest>();
+    //public List<Quest> inProgressQuests = new List<Quest>();
+    //public List<Quest> completedQuests = new List<Quest>();
 
     private void Awake()
     {
@@ -38,9 +41,9 @@ public class QuestLog : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightBracket))
         {
             //Debug -- Change the current active quest.
-            foreach(Quest q in inProgressQuests)
+            foreach(Quest q in playerAcceptedQuests)
             {
-                if (activeQuest != q)
+                if (activeQuest != q && q.CurrentState != Quest.QuestState.Completed)
                 {
                     SetActiveQuest(q);
                     break;
@@ -58,13 +61,6 @@ public class QuestLog : MonoBehaviour
         }
     }
 
-
-    //Copies the quest component into the questmanager and deletes the original instance
-    public void AddQuestToManager(Quest q)
-    {
-
-    }
-
     public void SetActiveQuest(Quest q)
     {
 
@@ -72,62 +68,97 @@ public class QuestLog : MonoBehaviour
         UIController.Instance.UpdateActiveQuestInfo(q);
     }
 
-    public void ArchiveQuest(Quest q)
+    //Moves a Quest from InProgressQuests to CompletedQuests
+    public void MarkQuestAsComplete(Quest q)
     {
-        RemoveQuestFromIPQ(q);
+        q.CurrentState = Quest.QuestState.Completed;
+        q.GiveRewards();
 
         if (activeQuest == q)
             activeQuest = null;
 
-        AddQuestToCompleted(q);
 
-        if (inProgressQuests.Count != 0)
-            SetActiveQuest(inProgressQuests[0]);
-        else
-            UIController.Instance.ClearActiveQuestInfo();
+
+        foreach (Quest newAQ in playerAcceptedQuests)
+        {
+            if (activeQuest != newAQ && newAQ.CurrentState != Quest.QuestState.Completed)
+            {
+                SetActiveQuest(newAQ);
+                break;
+            }
+            else
+                UIController.Instance.ClearActiveQuestInfo();
+        }
 
     }
 
-    public void AddQuestToIPQ(Quest q)
+    public void MarkQuestAsComplete(string QuestID)
     {
-        inProgressQuests.Add(q);
+        Quest q = playerAcceptedQuests.Find(item => item.QuestID == QuestID);
+
+        q.CurrentState = Quest.QuestState.Completed;
+
+        q.GiveRewards();
+
+        if (activeQuest == q)
+            activeQuest = null;
+
+
+        foreach (Quest newAQ in playerAcceptedQuests)
+        {
+            if (activeQuest != newAQ && newAQ.CurrentState != Quest.QuestState.Completed)
+            {
+                SetActiveQuest(newAQ);
+                break;
+            }
+            else
+                UIController.Instance.ClearActiveQuestInfo();
+        }
+
+    }
+
+    public void AddToPlayerAcceptedQuests(Quest q)
+    {
+        playerAcceptedQuests.Add(q);
         if (activeQuest == null)
             SetActiveQuest(q);
     }
 
-    public void RemoveQuestFromIPQ(Quest q)
+    /*public void RemoveFromPlayerAcceptedQuests(Quest q)
     {
-        foreach (Quest quest in inProgressQuests)
+        foreach (Quest quest in playerAcceptedQuests)
         {
             if (quest == q)
             {
                 Debug.Log("Found Quest, removing from log");
-                inProgressQuests.Remove(quest);
-                inProgressQuests.RemoveAll(item => item == null);
+                playerAcceptedQuests.Remove(quest);
+                playerAcceptedQuests.RemoveAll(item => item == null);
                 return;
             }
         }
         Debug.LogError("Could not find Quest \"" + q.name + "\" in InProgressQuests");
     }
+    */
 
-    public void AddQuestToCompleted(Quest q)
+    //Returns true or false depending on wether the player has accepted the input quest.
+    public bool CheckIfQuestAccepted(string QuestID)
     {
-        completedQuests.Add(q);
-    }
-
-    public void RemoveQuestFromCompleted(Quest q)
-    {
-        foreach (Quest quest in completedQuests)
+        if (playerAcceptedQuests.Find(item => item.QuestID == QuestID))
         {
-            if (quest == q)
-            {
-                Debug.Log("Found Quest in completedQuests, removing from list");
-                completedQuests.Remove(quest);
-                completedQuests.RemoveAll(item => item == null);
-                return;
-            }
+            return true;
         }
-        Debug.LogError("Could not find Quest \"" + q.name + "\" in completedQuests");
+        else
+            return false;
     }
+
+    //Returns the current state of the quest
+    public Quest.QuestState GetQuestState(string QuestID)
+    {
+        Quest q = playerAcceptedQuests.Find(item => item.QuestID == QuestID);
+        if (q == null)
+            q = playerAcceptedQuests.Find(item => item.QuestID == QuestID);
+        return q.CurrentState;
+    }
+
 
 }

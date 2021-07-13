@@ -18,12 +18,16 @@ public class QuestGoal : ScriptableObject
     public string Description;
     public bool Completed;
     public int CurrentAmount;
+    public int DEFAULTCurrentAmount;
     public int RequiredAmount;
+
+
 
     public virtual void Init(Quest q)
     {
         //default initialization dealies
         SetQuest(q);
+        ResetValues();
     }
 
     public bool Evaluate()
@@ -52,5 +56,11 @@ public class QuestGoal : ScriptableObject
         AssignedQuest = q;
     }
 
+    //ResetValues ensures questgoals don't have leftover data from previous builds.
+    public virtual void ResetValues()
+    {
+        Completed = false;
+        CurrentAmount = DEFAULTCurrentAmount;
+    }
 
 }
