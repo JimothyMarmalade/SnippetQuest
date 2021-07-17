@@ -10347,6 +10347,10 @@ PrefabInstance:
       value: Pyo's Headgear
       objectReference: {fileID: 0}
     - target: {fileID: 3476755841872098875, guid: 07b87340099213d4eaa0448fe48cea1c, type: 3}
+      propertyPath: sfxName
+      value: SFX_ItemCollected
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476755841872098875, guid: 07b87340099213d4eaa0448fe48cea1c, type: 3}
       propertyPath: itemSlug
       value: Pyos_Headgear
       objectReference: {fileID: 0}

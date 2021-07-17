@@ -18,6 +18,7 @@ using UnityEngine.UI;
 public class CrosswordSnippet : Snippet 
 {
     [Header("Crossword Readability Data")]
+
     //currentSolution is a FEN-esque notation string used to hold the player's current in-progress solution.
     public string currentSolution;
     //Description is a short blurb about what the crossword is themed around

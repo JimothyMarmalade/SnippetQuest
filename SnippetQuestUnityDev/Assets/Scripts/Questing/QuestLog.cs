@@ -1,6 +1,6 @@
 /*
  * Created by Logan Edmund, 4/21/21
- * Last Modified by Logan Edmund, 5/16/21
+ * Last Modified by Logan Edmund, 7/17/21
  * 
  * Acts as the player's journal and stores information about all quests the player has taken on, completed or in-progress.
  * Also stores notes and other important information.
@@ -17,10 +17,10 @@ public class QuestLog : MonoBehaviour
 
     //ActiveQuest is a reference to the player's current active quest (on the HUD)
     public Quest activeQuest;
+
+
     //playerAcceptedQuests holds all quests accepted by the player in whatever state they're in.
-    public List<Quest> playerAcceptedQuests = new List<Quest>();
-    //public List<Quest> inProgressQuests = new List<Quest>();
-    //public List<Quest> completedQuests = new List<Quest>();
+    public List<Quest> acceptedQuests = new List<Quest>();
 
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class QuestLog : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightBracket))
         {
             //Debug -- Change the current active quest.
-            foreach(Quest q in playerAcceptedQuests)
+            foreach(Quest q in acceptedQuests)
             {
                 if (activeQuest != q && q.CurrentState != Quest.QuestState.Completed)
                 {
@@ -61,6 +61,7 @@ public class QuestLog : MonoBehaviour
         }
     }
 
+    //Sets the activeQuest displayed on the HUD to the input quest and updates UI accordingly.
     public void SetActiveQuest(Quest q)
     {
 
@@ -69,17 +70,18 @@ public class QuestLog : MonoBehaviour
     }
 
     //Moves a Quest from InProgressQuests to CompletedQuests
-    public void MarkQuestAsComplete(Quest q)
+    public void CompleteQuestAndGiveRewards(string QuestID)
     {
+        Quest q = GetQuestReference(QuestID);
+
         q.CurrentState = Quest.QuestState.Completed;
+
         q.GiveRewards();
 
         if (activeQuest == q)
             activeQuest = null;
 
-
-
-        foreach (Quest newAQ in playerAcceptedQuests)
+        foreach (Quest newAQ in acceptedQuests)
         {
             if (activeQuest != newAQ && newAQ.CurrentState != Quest.QuestState.Completed)
             {
@@ -92,73 +94,51 @@ public class QuestLog : MonoBehaviour
 
     }
 
-    public void MarkQuestAsComplete(string QuestID)
+    public void AddToAcceptedQuests(Quest q)
     {
-        Quest q = playerAcceptedQuests.Find(item => item.QuestID == QuestID);
-
-        q.CurrentState = Quest.QuestState.Completed;
-
-        q.GiveRewards();
-
-        if (activeQuest == q)
-            activeQuest = null;
-
-
-        foreach (Quest newAQ in playerAcceptedQuests)
-        {
-            if (activeQuest != newAQ && newAQ.CurrentState != Quest.QuestState.Completed)
-            {
-                SetActiveQuest(newAQ);
-                break;
-            }
-            else
-                UIController.Instance.ClearActiveQuestInfo();
-        }
-
-    }
-
-    public void AddToPlayerAcceptedQuests(Quest q)
-    {
-        playerAcceptedQuests.Add(q);
+        acceptedQuests.Add(q);
         if (activeQuest == null)
             SetActiveQuest(q);
     }
 
-    /*public void RemoveFromPlayerAcceptedQuests(Quest q)
-    {
-        foreach (Quest quest in playerAcceptedQuests)
-        {
-            if (quest == q)
-            {
-                Debug.Log("Found Quest, removing from log");
-                playerAcceptedQuests.Remove(quest);
-                playerAcceptedQuests.RemoveAll(item => item == null);
-                return;
-            }
-        }
-        Debug.LogError("Could not find Quest \"" + q.name + "\" in InProgressQuests");
-    }
-    */
 
-    //Returns true or false depending on wether the player has accepted the input quest.
+    #region Quest Reference and Information Lookup
+
+    //Given the Quest's ID string, returns a reference to the ScriptableObject currently in the log.
+    public Quest GetQuestReference(string QuestID)
+    {
+        Quest q = acceptedQuests.Find(item => item.QuestID == QuestID);
+        if (q != null)
+            return q;
+
+        return null;
+    }
+
     public bool CheckIfQuestAccepted(string QuestID)
     {
-        if (playerAcceptedQuests.Find(item => item.QuestID == QuestID))
-        {
-            return true;
-        }
-        else
+        if (GetQuestReference(QuestID) == null)
             return false;
+        else return true;
     }
 
     //Returns the current state of the quest
     public Quest.QuestState GetQuestState(string QuestID)
     {
-        Quest q = playerAcceptedQuests.Find(item => item.QuestID == QuestID);
-        if (q == null)
-            q = playerAcceptedQuests.Find(item => item.QuestID == QuestID);
-        return q.CurrentState;
+        Quest q = GetQuestReference(QuestID);
+
+        if (q != null)
+            return q.CurrentState;
+
+        else return Quest.QuestState.Unaccepted;
     }
+
+    #endregion
+
+
+
+
+
+
 
 
 }

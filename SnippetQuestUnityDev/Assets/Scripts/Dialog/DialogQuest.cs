@@ -23,7 +23,7 @@ public class DialogQuest : DialogNormal
     {
         //Turn on listeners for the quest
         AssignedQuest.ActivateQuest();
-        QuestLog.Instance.AddToPlayerAcceptedQuests(AssignedQuest);
+        QuestLog.Instance.AddToAcceptedQuests(AssignedQuest);
         
         base.DisplayDialog();
     }

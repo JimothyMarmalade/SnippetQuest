@@ -2,6 +2,9 @@
 - Removed the QuestGiver.cs class. Individual NPCs will now inherit from the NPC.cs class to have individual and unique behaviors.
 - Modified Dialog.cs into a scriptable object and added a shortcut to create dialogs in the asset menu.
 - Added DialogChoice.cs, allowing for basic decisions to be made during conversations
+- Added DialogQuest.cs, allowing for a message box to assign the player a quest when activated.
+
+- Turned Quests and QuestGoals into ScriptableObjects.
 ------------------------------------------------------------------------------------------------------------------------
 7/10/21 Update
 - Added the base Leadite model asset into the project.

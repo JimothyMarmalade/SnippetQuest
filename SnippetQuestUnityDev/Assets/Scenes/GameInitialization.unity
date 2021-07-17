@@ -595,6 +595,7 @@ MonoBehaviour:
   GeneralSFX:
   - {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
   - {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  - {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
   LeadParkBGM:
   - {fileID: 8300000, guid: cdb9165b3bbea6f47a34bb38d23741c5, type: 3}
   - {fileID: 8300000, guid: 88ce83d8fe1978b4da5efe637768dc52, type: 3}
@@ -602,6 +603,7 @@ MonoBehaviour:
   LeadParkSFX: []
   loadedSounds: []
   currentSoundCollection: 0
+  BGMPlaying: 0
   focusedBGM: 0
   levelExplorationBGM:
     name: 
@@ -681,6 +683,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a598c499fdab3dc4b8e71b9025745d2c, type: 2}
   - {fileID: 11400000, guid: 70a5cc282b5208d4d9afe13b1fb0c012, type: 2}
   - {fileID: 11400000, guid: 225b16c9da16db64f9402ff9e9010557, type: 2}
+  - {fileID: 11400000, guid: 8bb3ff555e38b484bbc3218519a7cbdf, type: 2}
   PicrossSnippets: []
   FutoshikiSnippets: []
   CrosswordSnippets: []
@@ -710,8 +713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeQuest: {fileID: 0}
-  inProgressQuests: []
-  completedQuests: []
+  acceptedQuests: []
 --- !u!1 &5262241702741871141
 GameObject:
   m_ObjectHideFlags: 0

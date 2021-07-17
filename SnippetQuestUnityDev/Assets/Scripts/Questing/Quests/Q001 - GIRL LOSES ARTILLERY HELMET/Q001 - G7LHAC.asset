@@ -17,5 +17,6 @@ MonoBehaviour:
   Description: Help Alice find her sister's missing artillery helmet.
   Goals:
   - {fileID: 11400000, guid: 3f7d13839538e5747b71bee28561d737, type: 2}
-  SnippetReward: []
-  CurrentState: 2
+  SnippetReward:
+  - Crossword_TankAnatomy
+  CurrentState: 3

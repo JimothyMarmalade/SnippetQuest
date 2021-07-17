@@ -23,7 +23,7 @@ public class NPC_AliceArtill : NPC
             if (QuestLog.Instance.GetQuestState("Q001") == Quest.QuestState.ReadyForTurnIn)
             {
                 ActivateDialog("LP_Alice_QuestComplete_Q001Accepted_001");
-                QuestLog.Instance.MarkQuestAsComplete("Q001");
+                QuestLog.Instance.CompleteQuestAndGiveRewards("Q001");
             }
             //Else if the Quest isn't ready to turn in
             else

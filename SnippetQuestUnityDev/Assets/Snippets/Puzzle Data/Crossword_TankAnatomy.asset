@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d5b047a63594f4ea7afa798f6de8e6, type: 3}
+  m_Name: Crossword_TankAnatomy
+  m_EditorClassIdentifier: 
+  snippetSlug: Crossword_TankAnatomy
+  snippetType: 3
+  snippetName: Tank Anatomy
+  masterID: 0
+  typeID: 0
+  snippetSolved: 0
+  numTimesSolved: 0
+  bestTime: 0
+  currentSolution: NO CURRENT SOLUTION
+  PuzzleDescription: Learn about the Parts of a combat tank
+  gridSize: 17
+  WordsAcross:
+  - Ammunition
+  - Hull
+  - Track
+  - Periscope
+  - Gun
+  CluesAcross:
+  - Charges used when firing the tank's weapon
+  - The body of the tank
+  - Rows of wheels that allow the tank to maneuver
+  - A specialized viewport that allows visibility from inside the tank.
+  - The barrel that serves as the tank's primary weapon
+  WordsAcrossLoc:
+  - {x: 0, y: 3}
+  - {x: 1, y: 5}
+  - {x: 1, y: 7}
+  - {x: 0, y: 11}
+  - {x: 8, y: 13}
+  WordsDown:
+  - Radio
+  - FuelTank
+  - Turret
+  - Engine
+  CluesDown:
+  - A device used to communicate with allies while in combat.
+  - Drum used to store fuel (two words)
+  - The "head" of the tank where the weapon is mounted.
+  - The machine used to power and propel the tank.
+  WordsDownLoc:
+  - {x: 5, y: 0}
+  - {x: 3, y: 2}
+  - {x: 1, y: 7}
+  - {x: 8, y: 11}
