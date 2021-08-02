@@ -21,6 +21,8 @@ public class _CrosswordSquare : MonoBehaviour
     public int WordNum;
     public int AcrossWordNum;
     public int DownWordNum;
+    public int AcrossClueRef = -1;
+    public int DownClueRef = -1;
 
     private bool DontThinkTwice = false;
 
@@ -122,7 +124,7 @@ public class _CrosswordSquare : MonoBehaviour
 
     public void OnSelect()
     {
-        CrosswordPuzzleReference.DisplayClues(AcrossWordNum, DownWordNum);
+        CrosswordPuzzleReference.DisplayClues(AcrossClueRef, DownClueRef);
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

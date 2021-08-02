@@ -17,6 +17,12 @@ public class CrosswordWord
 {
     public string Word;
     public string Clue;
-    public Vector2 Location;
+    public Vector2Int Location;
+    public int Num;
     public bool VisibleAtStart;
+
+    public void Capitalize()
+    {
+        Word = Word.ToUpper();
+    }
 }

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
+  m_Name: LP_Blumun_Interaction_Q002Accepted_001
+  m_EditorClassIdentifier: 
+  dialogIdentifier: LP_Blumun_Interaction_Q002Accepted_001
+  speakerName: Blumun
+  eyesExpression: 0
+  mouthExpression: 3
+  bodyAnimation: 
+  dialogLine: Still working on it? 'Eaahhhhh, don't stress yourself.
+  NextDialog: {fileID: 11400000, guid: de8389a434b105641a9a59c76f40bb61, type: 2}

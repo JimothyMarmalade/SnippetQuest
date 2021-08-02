@@ -14,7 +14,7 @@ using TMPro;
 
 public class InteractionPrompt : MonoBehaviour
 {
-    public string Interaction;
+    public string Interaction = "Interact";
 
     public TMP_Text InteractionText;
 

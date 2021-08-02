@@ -22,37 +22,52 @@ MonoBehaviour:
   bestTime: 0
   currentSolution: NO CURRENT SOLUTION
   PuzzleDescription: Learn about the Parts of a combat tank
-  gridSize: 17
-  WordsAcross:
-  - Ammunition
-  - Hull
-  - Track
-  - Periscope
-  - Gun
-  CluesAcross:
-  - Charges used when firing the tank's weapon
-  - The body of the tank
-  - Rows of wheels that allow the tank to maneuver
-  - A specialized viewport that allows visibility from inside the tank.
-  - The barrel that serves as the tank's primary weapon
-  WordsAcrossLoc:
-  - {x: 0, y: 3}
-  - {x: 1, y: 5}
-  - {x: 1, y: 7}
-  - {x: 0, y: 11}
-  - {x: 8, y: 13}
-  WordsDown:
-  - Radio
-  - FuelTank
-  - Turret
-  - Engine
-  CluesDown:
-  - A device used to communicate with allies while in combat.
-  - Drum used to store fuel (two words)
-  - The "head" of the tank where the weapon is mounted.
-  - The machine used to power and propel the tank.
-  WordsDownLoc:
-  - {x: 5, y: 0}
-  - {x: 3, y: 2}
-  - {x: 1, y: 7}
-  - {x: 8, y: 11}
+  gridSizeHorizontal: 11
+  gridSizeVertical: 17
+  HorizontalWords:
+  - Word: AMMUNITION
+    Clue: Charges used when firing the tank's weapon
+    Location: {x: 0, y: 3}
+    Num: 3
+    VisibleAtStart: 1
+  - Word: HULL
+    Clue: The body of the tank
+    Location: {x: 1, y: 5}
+    Num: 4
+    VisibleAtStart: 0
+  - Word: TRACK
+    Clue: Rows of wheels that allow the tank to maneuver
+    Location: {x: 1, y: 7}
+    Num: 5
+    VisibleAtStart: 0
+  - Word: PERISCOPE
+    Clue: A specialized viewport that allows visibility from inside the tank.
+    Location: {x: 0, y: 11}
+    Num: 6
+    VisibleAtStart: 0
+  - Word: GUN
+    Clue: The barrel that serves as the tank's primary weapon
+    Location: {x: 8, y: 13}
+    Num: 0
+    VisibleAtStart: 0
+  VerticalWords:
+  - Word: RADIO
+    Clue: A device used to communicate with allies while in combat.
+    Location: {x: 5, y: 0}
+    Num: 1
+    VisibleAtStart: 0
+  - Word: FUELTANK
+    Clue: Drum used to store fuel (two words)
+    Location: {x: 3, y: 2}
+    Num: 2
+    VisibleAtStart: 0
+  - Word: TURRET
+    Clue: The "head" of the tank where the weapon is mounted.
+    Location: {x: 1, y: 7}
+    Num: 5
+    VisibleAtStart: 1
+  - Word: ENGINE
+    Clue: The machine used to power and propel the tank.
+    Location: {x: 8, y: 11}
+    Num: 7
+    VisibleAtStart: 0

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1d759d65419914a947152a4a2b4d0c, type: 3}
+  m_Name: LP_Blumun_QuestAccepted_Q002Accepted_001
+  m_EditorClassIdentifier: 
+  dialogIdentifier: LP_Blumun_QuestAccepted_Q002Accepted_001
+  speakerName: Blumun
+  eyesExpression: 6
+  mouthExpression: 6
+  bodyAnimation: 
+  dialogLine: ...heh. Well, alright. S'pose there's no harm in giving you a look.
+    I've got the schematics right here.
+  NextDialog: {fileID: 11400000, guid: 83824a93ede670f45834613bdb6c1eb4, type: 2}
+  AssignedQuest: {fileID: 11400000, guid: 4c7b3dfcd02008f4bb06fec0f2882b94, type: 2}

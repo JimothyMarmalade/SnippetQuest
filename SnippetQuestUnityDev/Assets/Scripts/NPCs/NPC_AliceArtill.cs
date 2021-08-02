@@ -34,7 +34,5 @@ public class NPC_AliceArtill : NPC
         }
         else if (QuestLog.Instance.GetQuestState("Q001") == Quest.QuestState.Completed)
             ActivateDialog("LP_Alice_AllQuestsComplete_001");
-
-
     }
 }

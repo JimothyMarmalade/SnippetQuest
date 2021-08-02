@@ -27,16 +27,20 @@ public class CrosswordSnippetBoard : MonoBehaviour
     [Header("Puzzle Handling Variables")]
     private List<string> cluesDown;
     private List<string> cluesAcross;
-    private GameObject[,] inputs;
+    private GameObject[] inputs;
 
     private CrosswordSnippet CurrentSnippetData;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
+        {
             foreach (GameObject g in inputs)
                 if (g != null && g.GetComponent<_CrosswordSquare>() != null)
                     g.GetComponent<_CrosswordSquare>().AutoAnswer();
+
+            CheckForCorrectAnswer();
+        }
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,139 +65,137 @@ public class CrosswordSnippetBoard : MonoBehaviour
 
     public void BuildCrosswordBoard()
     {
-        //First, the board defines the size of crosswordGridButtons based on the input data.
-        float totalsize = gridPanel.sizeDelta.x;
-        Debug.Log("gridPanel TotalSize: " + totalsize);
-        float inputSize = totalsize/crosswordPuzzleData.gridSize;
-        Debug.Log("inputSize: " + inputSize);
+
+        //First, the input board defines the size of the crosswordGridButtons.
+        float boardSizeHor = gridPanel.sizeDelta.x;
+        float boardSizeVert = gridPanel.sizeDelta.y;
+
+        float inputSizeHor = boardSizeHor / crosswordPuzzleData.gridSizeHorizontal;
+        float inputSizeVert = boardSizeVert / crosswordPuzzleData.gridSizeVertical;
+
 
         //With that done, we can now generate prefab buttons to fill the grid.
-        inputs = new GameObject[crosswordPuzzleData.gridSize, crosswordPuzzleData.gridSize];
+        inputs = new GameObject[crosswordPuzzleData.gridSizeHorizontal * crosswordPuzzleData.gridSizeVertical];
 
-        float startLocX = inputSize/2;
-        float startLocY = inputSize/2;
-        Debug.Log("startLocX = -" + totalsize + "/2 + " + inputSize + "/2");
+        float startLocX = inputSizeHor/2;
+        float startLocY = inputSizeVert/2;
 
-
+        int arrayNum = 0;
         //Build all needed input spaces, place them on the board, and assign them to the array
-        for (int row = 0; row < crosswordPuzzleData.gridSize; row++)
+        for (int row = 0; row < crosswordPuzzleData.gridSizeHorizontal; row++)
         {
-            for (int col = 0; col < crosswordPuzzleData.gridSize; col++)
+            for (int col = 0; col < crosswordPuzzleData.gridSizeVertical; col++)
             {
                 //Calculate the Y value for the row
                 GameObject a = Instantiate(crosswordGridSpacePrefab);
                 //Set the button as a child of the grid, NOT the overall board
                 a.transform.SetParent(gridPanel.transform, false);
                 //Set the size and position of the button
-                a.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(inputSize, inputSize);
+                a.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(inputSizeHor, inputSizeVert);
 
-                a.transform.localPosition = new Vector2((col * inputSize) + (inputSize / 2),
-                                                        (totalsize / 2) - (row * inputSize) - (inputSize / 2));
+                a.transform.localPosition = new Vector2((row * inputSizeHor) + (inputSizeHor / 2),
+                                                        (boardSizeVert / 2) - (col * inputSizeVert) - (inputSizeVert/ 2));
 
                 a.GetComponent<_CrosswordSquare>().SetPuzzleControllerReference(this);
                 a.GetComponent<_CrosswordSquare>().NumCheck();
 
-                inputs[col, row] = a;
+                inputs[arrayNum] = a;
+                arrayNum++;
             }
         }
+
         //With the buttons made, we can begin setting those used in the puzzle with correct answers.
         //Scrub through the WordsAcross array to get words, location on board, size of word, etc..
-        for (int i = 0; i < crosswordPuzzleData.WordsAcross.Length; i++)
-        {
-            string word = crosswordPuzzleData.WordsAcross[i];
-            int locx = crosswordPuzzleData.WordsAcrossLoc[i].x;
-            int locy = crosswordPuzzleData.WordsAcrossLoc[i].y;
 
-            int wordLength = word.Length;
-            //Starting at the startLoc and going right, the input correct answers are assigned the letters given
-            for (int s = 0; s < wordLength; s++)
+        arrayNum = 0;
+        cluesAcross = new List<string>();
+        foreach (CrosswordWord word in crosswordPuzzleData.HorizontalWords)
+        {
+            word.Capitalize();
+            int locX = word.Location.x;
+            int locY = word.Location.y;
+            int vert = crosswordPuzzleData.gridSizeVertical;
+            for (int s = 0; s < word.Word.Length; s++)
             {
-                _CrosswordSquare iLogic = inputs[locx+s, locy].GetComponent<_CrosswordSquare>();
-                iLogic.SetAnswerChar(word[s]);
-                iLogic.SetAcrossWordNum(i+1);
+                Debug.Log("Position: " + ((locX * vert) + locY + (s*vert)));
+                _CrosswordSquare square = inputs[(locX * vert) + locY + (s * vert)].GetComponent<_CrosswordSquare>();
+                square.SetAnswerChar(word.Word[s]);
+                square.SetAcrossWordNum(word.Num);
+                square.AcrossClueRef = arrayNum;
 
                 if (s == 0)
-                    iLogic.SetIsWordStart(true);
-
+                    square.SetIsWordStart(true);
             }
+
+            //Add this word's clue into the clue list.
+            cluesAcross.Add(word.Clue);
         }
-        //All across words are set. Now do a double check with down words to ensure compatibility
-        for (int i = 0; i < crosswordPuzzleData.WordsDown.Length; i++)
+        //All across words are set. Now do down words to ensure compatibility
+        arrayNum = 0;
+
+        cluesDown = new List<string>();
+        foreach (CrosswordWord word in crosswordPuzzleData.VerticalWords)
         {
-            string word = crosswordPuzzleData.WordsDown[i];
-            int locx = crosswordPuzzleData.WordsDownLoc[i].x;
-            int locy = crosswordPuzzleData.WordsDownLoc[i].y;
+            word.Capitalize();
+            int locX = word.Location.x;
+            int locY = word.Location.y;
+            int vert = crosswordPuzzleData.gridSizeVertical;
 
-            int wordLength = word.Length;
-            //Starting at the startLoc and going down, the input correct answers are assigned the letters given
-            for (int s = 0; s < wordLength; s++)
+            for (int s = 0; s < word.Word.Length; s++)
             {
-                _CrosswordSquare iLogic = inputs[locx, locy+s].GetComponent<_CrosswordSquare>();
-                if (iLogic.GetAnswerChar() != word[s])
-                {
-                    Debug.Log("Very bad error! Crossword puzzle has conflicting answers at" + locx + "," + (locy+s));
-                }
-                else
-                {
-                    iLogic.SetDownWordNum(i+1);
-                    if (s == 0)
-                        iLogic.SetIsWordStart(true);
-                }
+                Debug.Log("Position: " + ((locX * vert) + locY));
+                _CrosswordSquare square = inputs[(locX * vert) + locY + s].GetComponent<_CrosswordSquare>();
+                square.SetAnswerChar(word.Word[s]);
+                square.SetDownWordNum(word.Num);
+                square.DownClueRef = arrayNum;
+
+
+                if (s == 0)
+                    square.SetIsWordStart(true);
             }
+
+            //Add this word's clue into the clue list.
+            cluesDown.Add(word.Clue);
         }
+
+
         //With all the buttons set, it's time to tidy up the board by removing inputs with no clues and
         //placing the appropriate clue numbers on inputs that need them.
-        int clueNum = 1;
-        for (int i = 0; i < crosswordPuzzleData.gridSize; i++)
+        int num = 1;
+        foreach (GameObject g in inputs)
         {
-            for (int j = 0; j < crosswordPuzzleData.gridSize; j++)
+            _CrosswordSquare iLogic = g.GetComponent<_CrosswordSquare>();
+
+
+            if (iLogic.GetAnswerChar() == '\0')
+                Destroy(g);
+            else
             {
-                _CrosswordSquare iLogic = inputs[j, i].GetComponent<_CrosswordSquare>();
-                if (iLogic.GetAnswerChar() == '\0')
-                    Destroy(iLogic.gameObject);
-                else
+                if (iLogic.GetIsWordStart())
                 {
-                    if (iLogic.GetIsWordStart())
-                    {
-                        iLogic.SetWordNum(clueNum);
-                        clueNum++;
-                    }
-                }      
+                    iLogic.SetWordNum(num);
+                    num++;
+                }
             }
         }
+
         //After the cleanup, the initial building of the board is complete.
         TitleText.text = crosswordPuzzleData.snippetName;
-
-
-        //Offload the puzzle's clues into the local arrays
-        string[] cap = SnippetDatabase.Instance.GetCrosswordSnippet(crosswordSlug).CluesAcross;
-        string[] cdp = SnippetDatabase.Instance.GetCrosswordSnippet(crosswordSlug).CluesDown;
-        cluesAcross = new List<string>();
-        cluesDown = new List<string>();
-
-        for (int z = 0; z < cap.Length; z++)
-            cluesAcross.Add(cap[z]);
-
-
-        for (int z = 0; z < cdp.Length; z++)
-            cluesDown.Add(cdp[z]);
     }
 
     public void CheckForCorrectAnswer()
     {
         //Run through every space and, if all have the correct char, mark puzzle as complete.
+        Debug.Log("Running CheckForCorrectanswer()");
         bool PuzzleSolved = true;
-        _CrosswordSquare iLogic = null;
-        for (int i = 0; i < crosswordPuzzleData.gridSize; i++)
+        _CrosswordSquare space = null;
+        foreach (GameObject g in inputs)
         {
-            for (int j = 0; j < crosswordPuzzleData.gridSize; j++)
+            if (g != null)
             {
-                if (inputs[j, i] != null)
-                {
-                    iLogic = inputs[j, i].GetComponent<_CrosswordSquare>();
-                    if (iLogic.GetAnswerChar() != iLogic.GetCurrentChar())
-                        PuzzleSolved = false;
-                }
+                space = g.GetComponent<_CrosswordSquare>();
+                if (space.GetAnswerChar() != space.GetCurrentChar())
+                    PuzzleSolved = false;
             }
         }
         if (PuzzleSolved)
@@ -202,8 +204,16 @@ public class CrosswordSnippetBoard : MonoBehaviour
 
     public void DisplayClues(int across, int down)
     {
-        AcrossClueText.text = "Across: " + cluesAcross[across-1];
-        DownClueText.text = "Down: " + cluesDown[down-1];
+        if (across >= 0)
+            AcrossClueText.text = "Across: " + cluesAcross[across];
+        else
+            AcrossClueText.text = "Across: ";
+
+
+        if (down >= 0)
+            DownClueText.text = "Down: " + cluesDown[down];
+        else
+            DownClueText.text = "Down: ";
     }
 
     public void EndGame()

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
+  m_Name: LP_Blumun_QuestAccepted_Q002Accepted_002
+  m_EditorClassIdentifier: 
+  dialogIdentifier: LP_Blumun_QuestAccepted_Q002Accepted_002
+  speakerName: Blumun
+  eyesExpression: 0
+  mouthExpression: 0
+  bodyAnimation: 
+  dialogLine: Ya see, my boat's old motor died the other day. I bought a replacement
+    for cheap, but I didn't realize I had to assemble it myself!
+  NextDialog: {fileID: 11400000, guid: 711190237899af6478447bb511dd8242, type: 2}

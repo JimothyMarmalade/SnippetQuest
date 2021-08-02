@@ -18,7 +18,6 @@ using UnityEngine.UI;
 public class CrosswordSnippet : Snippet 
 {
     [Header("Crossword Readability Data")]
-
     //currentSolution is a FEN-esque notation string used to hold the player's current in-progress solution.
     public string currentSolution;
     //Description is a short blurb about what the crossword is themed around
@@ -26,21 +25,18 @@ public class CrosswordSnippet : Snippet
 
     //GridLength stores the puzzle's size. Crosswords are square.
     [Header("Crossword Build Data")]
-    public int gridSize;
+    public int gridSizeHorizontal;
+    public int gridSizeVertical;
 
     //WordsAcross holds all the horizontal words in the puzzle, and Clues holds all clues for those words.
     //WordsAcrossLoc holds all the starting locations of the words.
     [Header("Crossword Answers/Clues Across")]
-    public string[] WordsAcross;
-    public string[] CluesAcross;
-    public Vector2Int[] WordsAcrossLoc;
+    public CrosswordWord[] HorizontalWords;
 
     //WordsDown holds all the horizontal words in the puzzle, and Clues holds all clues for those words.
     //WordsDownLoc holds all the starting locations of the words.
     [Header("Crossword Answers/Clues Down")]
-    public string[] WordsDown;
-    public string[] CluesDown;
-    public Vector2Int[] WordsDownLoc;
+    public CrosswordWord[] VerticalWords;
 
     public CrosswordSnippet()
     {
@@ -55,7 +51,9 @@ public class CrosswordSnippet : Snippet
 
         this.currentSolution = "NO CURRENT SOLUTION";
         this.PuzzleDescription = "NO DESCRIPTION";
-        this.gridSize = -10;
+        this.gridSizeHorizontal = -10;
+        this.gridSizeVertical = -10;
+
     }
 
 

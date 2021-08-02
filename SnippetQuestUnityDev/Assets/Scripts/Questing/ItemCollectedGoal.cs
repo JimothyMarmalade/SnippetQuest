@@ -14,6 +14,7 @@ using UnityEngine;
 public class ItemCollectedGoal : QuestGoal
 {
     //Refers to the slug of the item this goal is concerned with
+    [Header("Item to Find")]
     public string ItemSlug;
 
     public ItemCollectedGoal(Quest quest, string itemSlug, string description, bool completed, int requiredAmount)

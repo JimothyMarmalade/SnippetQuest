@@ -22,8 +22,15 @@ public class DialogQuest : DialogNormal
     public override void DisplayDialog()
     {
         //Turn on listeners for the quest
-        AssignedQuest.ActivateQuest();
-        QuestLog.Instance.AddToAcceptedQuests(AssignedQuest);
+        if (AssignedQuest != null)
+        {
+            AssignedQuest.ActivateQuest();
+            QuestLog.Instance.AddToAcceptedQuests(AssignedQuest);
+        }
+        else
+        {
+            Debug.LogError("Warning! A quest has not been assigned to this dialog.");
+        }
         
         base.DisplayDialog();
     }

@@ -11,11 +11,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New QuestGoal", menuName = "Quests/New QuestGoal")]
 public class QuestGoal : ScriptableObject
 {
+    [Header("QuestGoal Values")]
     public Quest AssignedQuest;
     public string Description;
+
+    [Header("Completion Status")]
     public bool Completed;
     public int CurrentAmount;
     public int DEFAULTCurrentAmount;
