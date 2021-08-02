@@ -83,6 +83,11 @@ public class DialogManager : MonoBehaviour
         ShowOptionsButtons();
 
         nameText.text = d.speakerName;
+        if (focusedCharacterFace != null)
+        {
+            focusedCharacterFace.ChangeExpression(d.eyesExpression, d.mouthExpression);
+        }
+
         Op1Button.GetComponentInChildren<TMP_Text>().text = playerChoice1;
 
         Op2Button.GetComponentInChildren<TMP_Text>().text = playerChoice2;

@@ -45,7 +45,14 @@ public class TicTacToeController : MonoBehaviour
 
     public void Start()
     {
-        AudioManager.Instance.BGMFocusActivity(2);
+        try
+        {
+            AudioManager.Instance.BGMFocusActivity(2);
+        }
+        catch
+        {
+            Debug.LogError("Error occured attempting to access AudioManager.");
+        }
 
         //Set up transforms
         for (int i = 0; i < 5; i++)
