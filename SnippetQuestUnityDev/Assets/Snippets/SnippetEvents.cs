@@ -19,6 +19,10 @@ public class SnippetEvents : MonoBehaviour
     public static event SnippetEvent OnSnippetCompleted;
     public static event SnippetEvent OnSnippetSolved;
 
+    //Create a new type of delegate event, SPEvent, that is given the ID of a serene place when the player accesses it
+    public delegate void SPEvent(int SPID);
+    public static event SPEvent OnSPAccessed;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -62,8 +66,19 @@ public class SnippetEvents : MonoBehaviour
         }
         else
         {
-            Debug.Log("OnSnippetCompleted event listener had no active events and did not run");
+            Debug.Log("OnSnippetCompleted event listener had no active events.");
         }
+    }
+
+    //SerenePlaceAccessed runs when a serene place is being activated by the player
+    public void SerenePlaceAccessed(int SPID)
+    {
+        Debug.Log("SnippetEvents: Running SerenePlaceAccessed");
+
+        if (OnSPAccessed != null)
+            OnSPAccessed(SPID);
+        else
+            Debug.Log("ONSPAccessed event listener had no active events.");
     }
 
 

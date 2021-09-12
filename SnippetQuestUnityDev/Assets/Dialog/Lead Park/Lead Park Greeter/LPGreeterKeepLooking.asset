@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
-  m_Name: LP_LeadParkGreeter_Interaction_002-3
+  m_Name: LPGreeterKeepLooking
   m_EditorClassIdentifier: 
-  dialogIdentifier: LP_LeadParkGreeter_Interaction_002-3
+  dialogIdentifier: LPGreeterKeepLooking
   speakerName: Lead Park Greeter
   eyesExpression: 0
-  mouthExpression: 2
+  mouthExpression: 6
   bodyAnimation: 
-  dialogLine: I'm sorry to hear that, but don't be discouraged! Try talking to people
-    to see if anyone needs help. Be sure to look everywhere you can think of!
+  dialogLine: Stay on the lookout for those spots I told you about!
   NextDialog: {fileID: 0}

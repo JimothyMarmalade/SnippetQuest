@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
-  m_Name: LP_LeadParkGreeter_Interaction_001-3
+  m_Name: LPTreehouseGuy004
   m_EditorClassIdentifier: 
-  dialogIdentifier: LP_LeadParkGreeter_Interaction_001-3
-  speakerName: Lead Park Greeter
+  dialogIdentifier: LPTreehouseGuy004
+  speakerName: Treehouse Enthusiast
   eyesExpression: 6
   mouthExpression: 6
   bodyAnimation: 
-  dialogLine: Do your best to explore the map and collect all [total number] snippets.
-    Have fun!
-  NextDialog: {fileID: 0}
+  dialogLine: Hello again. Hope you're appreciating the treehouse life like I am!
+  NextDialog: {fileID: 11400000, guid: 870b9243772e88b44b8b059914f3141b, type: 2}

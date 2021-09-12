@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 530310ab7124b3a429275a31c49a3be7, type: 3}
-  m_Name: LP_LeadParkGreeter_Interaction_002-1
+  m_Name: LPGreeterConfidentAsk
   m_EditorClassIdentifier: 
-  dialogIdentifier: LP_LeadParkGreeter_Interaction_002-1
+  dialogIdentifier: LPGreeterConfidentAsk
   speakerName: Lead Park Greeter
   eyesExpression: 0
   mouthExpression: 6

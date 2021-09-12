@@ -31,6 +31,7 @@ public class SnippetSolvedGoal : QuestGoal
         SnippetEvents.OnSnippetSolved += SnippetSolved;
     }
 
+    //The method called/accessed in SnippetEvents whenever a puzzle has been completed
     void SnippetSolved(string snippetSlug)
     {
         if (snippetSlug == this.SnippetSlug)

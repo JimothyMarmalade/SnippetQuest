@@ -14,6 +14,9 @@ using UnityEngine;
 
 public class SerenePlace : Interactable
 {
+    //The ID for the Serene Place
+    public int SPID = -1;
+
     //Interact runs when the player approaches an NPC and makes a conscious choice to interact with them by pressing the Use button.
     public override void Interact()
     {
@@ -31,6 +34,9 @@ public class SerenePlace : Interactable
 
         //Change music to Snippet Music
         AudioManager.Instance.BGMFocusSnippet(1.5f);
+
+        //Access the SerenePlaceAccessed event in SnippetEvents
+        SnippetEvents.Instance.SerenePlaceAccessed(SPID);
 
 
     }

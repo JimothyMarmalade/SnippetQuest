@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
-  m_Name: LP_LeadParkGreeter_Interaction_001-2
+  m_Name: LPTreehouseGuy002
   m_EditorClassIdentifier: 
-  dialogIdentifier: LP_LeadParkGreeter_Interaction_001-2
-  speakerName: Lead Park Greeter
-  eyesExpression: 0
-  mouthExpression: 6
+  dialogIdentifier: LPTreehouseGuy002
+  speakerName: Treehouse Enthusiast
+  eyesExpression: 4
+  mouthExpression: 0
   bodyAnimation: 
-  dialogLine: There are several Snippets lost around the park, and people who could
-    use a helping hand.
-  NextDialog: {fileID: 11400000, guid: 3047bae5ee75a134a8822688319aa45c, type: 2}
+  dialogLine: I know the way up here is a little...unsafe...but for a lover of the
+    high life like myself, any climb is worth it.
+  NextDialog: {fileID: 11400000, guid: 8d255f267b9dfde46b815bbe50f8bd7d, type: 2}

@@ -64,7 +64,14 @@ public class DialogTrigger : MonoBehaviour
         PlayerController.Instance.DisableAllMovement();
 
         DialogManager.Instance.SetCharacterFace(faceReference);
-        d.DisplayDialog();
+        try
+        {
+            d.DisplayDialog();
+        }
+        catch
+        {
+            Debug.LogWarning("Could not display Dialog.");
+        }
 
         //Begin music changes
         AudioManager.Instance.BGMFocusActivity(1.5f);

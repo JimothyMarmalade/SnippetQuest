@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f25cea662335d242aa900cdc3ca8a33, type: 3}
-  m_Name: LP_LeadParkGreeter_Interaction_002-2
+  m_Name: LPGreeterQ003Completion01
   m_EditorClassIdentifier: 
-  dialogIdentifier: LP_LeadParkGreeter_Interaction_002-2
+  dialogIdentifier: LPGreeterQ003Completion01
   speakerName: Lead Park Greeter
-  eyesExpression: 6
+  eyesExpression: 0
   mouthExpression: 6
   bodyAnimation: 
-  dialogLine: Wonderful! Keep up the good work.
-  NextDialog: {fileID: 0}
+  dialogLine: Congratulations! Here is your reward.
+  NextDialog: {fileID: 11400000, guid: 5f2b3b9aa618afa4f9c43b56ddb314e6, type: 2}
